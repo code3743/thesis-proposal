@@ -1,0 +1,67 @@
+# ============================
+#  LaTeX / TeX build files
+# ============================
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# Intermediate PDFs (keep only the final one if needed)
+*.pdf
+!main.pdf   # <-- Guarda solo tu PDF final si lo necesitas
+
+# Latexmk and TeXShop/TeXworks
+*.dvi
+*.ps
+*.idx
+*.ilg
+*.ind
+*.gz
+*.thm
+*.upa
+*.upb
+
+# ============================
+#  VS Code files
+# ============================
+.vscode/
+*.code-workspace
+
+# ============================
+#  macOS / system files
+# ============================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+Thumbs.db
+
+# ============================
+#  Output or temp folders
+# ============================
+output/
+build/
+latex.out/
+*.bak
+*.tmp
+*.old
+
+# ============================
+#  Logs and auxiliary folders
+# ============================
+logs/
+*.synctex(busy)
+*.synctex.gz(busy)
