@@ -21,7 +21,7 @@
 
 # Intermediate PDFs (keep only the final one if needed)
 *.pdf
-!main.pdf   # <-- Guarda solo tu PDF final si lo necesitas
+!main.pdf 
 
 # Latexmk and TeXShop/TeXworks
 *.dvi
