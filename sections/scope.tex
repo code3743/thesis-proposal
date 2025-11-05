@@ -1,9 +1,79 @@
 \section{Alcance del Proyecto}
 
 \subsection{Declaración del Alcance}
-El proyecto se centrará en el diseño, desarrollo y evaluación de XYZ para mejorar los procesos de ABC.
+El presente proyecto tiene como alcance el diseño, desarrollo y evaluación de una herramienta interactiva orientada a facilitar la comprensión de conceptos fundamentales de interpretación y compilación de lenguajes de programación, específicamente como apoyo al proceso de enseñanza-aprendizaje en la asignatura \textit{Fundamentos de Interpretación y Compilación de LP} de la Universidad del Valle.
+
+\subsubsection{Alcance del Producto}
+
+\begin{itemize}
+    \item Definición y análisis de gramáticas que describan la sintaxis de lenguajes orientados por sintaxis.
+    \item Representación visual de estructuras sintácticas derivadas de programas escritos por el usuario.
+    \item Ejecución controlada e interactiva de programas, mostrando el proceso de evaluación paso a paso.
+    \item Interfaz accesible y didáctica que promueva la exploración y el aprendizaje autónomo.
+    \item Inclusión de ejemplos predefinidos que ilustren conceptos centrales de la asignatura.
+    \item Posibilidad de guardar y reutilizar gramáticas o programas definidos dentro del entorno, mediante almacenamiento local o mecanismos equivalentes.
+\end{itemize}
+
+\subsubsection{Alcance del Proyecto}
+
+\begin{itemize}
+    \item \textbf{Análisis:} identificación de las principales dificultades que enfrentan los estudiantes, revisión de herramientas similares y definición de requisitos funcionales y no funcionales.
+    \item \textbf{Diseño:} elaboración de la arquitectura del sistema, interfaces de usuario y de las estrategias de visualización de procesos.
+    \item \textbf{Implementación:} desarrollo del prototipo funcional de la herramienta con base en los requisitos definidos.
+    \item \textbf{Evaluación:} validación técnica y de usabilidad mediante pruebas con estudiantes y el docente de la asignatura.
+\end{itemize}
+
+\subsubsection{Fuera del Alcance}
+
+\begin{itemize}
+    \item Compilación a código ejecutable o generación de binarios.
+    \item Optimización de programas o análisis de rendimiento.
+    \item Estudios experimentales que midan impacto en el aprendizaje a largo plazo.
+    \item Sistema de gestión de usuarios, autenticación o colaboración multiusuario.
+    \item Infraestructura de despliegue de tipo productivo o con alta disponibilidad.
+\end{itemize}
+
+\subsubsection{Criterios de Aceptación}
+
+\begin{itemize}
+    \item La herramienta permite definir y analizar gramáticas de manera funcional y comprensible.
+    \item Se generan visualizaciones coherentes de estructuras sintácticas y del proceso de evaluación.
+    \item Los estudiantes y el docente reconocen su utilidad como recurso complementario de aprendizaje.
+    \item Se entrega documentación suficiente que describa el diseño, uso y resultados del proyecto.
+\end{itemize}
+
+\subsubsection{Entregables del Proyecto}
+
+\begin{enumerate}
+    \item \textbf{Herramienta interactiva funcional:} Sistema desplegado y funcional que implementa las capacidades especificadas en el alcance del producto.
+    \item \textbf{Casos de ejemplo:} Conjunto de gramáticas y programas de ejemplo que ilustren conceptos de la asignatura.
+    \item \textbf{Documentación técnica:} Descripción de la arquitectura, tecnologías utilizadas, decisiones de diseño y guía de instalación/despliegue.
+    \item \textbf{Manual de usuario:} Guía de uso de la herramienta orientada a estudiantes y docentes.
+    \item \textbf{Informe de evaluación:} Documento con resultados de las pruebas técnicas y de usabilidad, incluyendo retroalimentación de usuarios.
+    \item \textbf{Código fuente:} Repositorio con el código completo del sistema, debidamente documentado y versionado.
+\end{enumerate}
 
 \subsection{Objetivos}
+
+El planteamiento de los objetivos de este proyecto se apoya en la elaboración de un árbol de objetivos (Figura~\ref{fig:arbol_objetivos}), el cual permite representar la relación jerárquica entre los fines y medios que orientan la propuesta. 
+
+En el centro del esquema se encuentra el propósito general: el desarrollo de una herramienta interactiva que facilite la comprensión y aplicación de los contenidos de la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación}. 
+
+A partir de este fin se derivan tres ejes de acción: 
+\begin{itemize}
+    \item La visualización de procesos internos de interpretación y compilación, que se vincula con el diseño e implementación de mecanismos que representen gráficamente la estructura sintáctica de los programas y la evolución de los entornos de ejecución.  
+    \item El apoyo visual y didáctico para la comprensión de conceptos abstractos, mediante estrategias que promuevan la exploración y comparación de los procesos de interpretación y compilación.  
+    \item El fortalecimiento del aprendizaje autónomo, favorecido por el uso de laboratorios interactivos, ejemplos progresivos y recursos digitales que estimulen la autoevaluación.  
+\end{itemize}
+
+Estos ejes contribuyen a metas como la autonomía y motivación de los estudiantes, el fortalecimiento de la comprensión aplicada de los contenidos y el mejor desempeño en cursos posteriores que dependen de estos fundamentos. En conjunto, el árbol de objetivos orienta la estructura de diseño y desarrollo del proyecto, articulando los objetivos específicos con las metas pedagógicas del programa académico.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\columnwidth]{figures/objective_tree.drawio.png}
+    \caption{Árbol de objetivos del proyecto.}
+    \label{fig:arbol_objetivos}
+\end{figure}
 
 \subsubsection{Objetivo General}
 Desarrollar una herramienta interactiva que facilite la comprensión y aplicación de los contenidos de la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación (LP)} de la Universidad del Valle, mediante la visualización de procesos internos y la generación de lenguajes orientados por sintaxis.
@@ -18,4 +88,60 @@ Desarrollar una herramienta interactiva que facilite la comprensión y aplicaci�
 \end{itemize}
 
 \subsubsection{Restricciones y Supuestos}
-El desarrollo del proyecto se limitará a DEF, bajo el supuesto de que GHI permanecerá constante durante la ejecución.
+
+\paragraph{Restricciones temporales}
+\begin{itemize}
+    \item El proyecto debe completarse en el tiempo estipulado para un trabajo de grado, lo que limita el alcance de las funcionalidades y el tiempo para la validación del sistema.
+    \item La evaluación con estudiantes debe realizarse dentro de un período académico específico coordinado con el calendario de la asignatura.
+\end{itemize}
+
+\paragraph{Restricciones de recursos humanos}
+\begin{itemize}
+    \item El desarrollo será realizado por un equipo de dos estudiantes de trabajo de grado, lo cual limita la complejidad y cantidad de características que pueden implementarse.
+    \item La disponibilidad de estudiantes para las pruebas dependerá del ciclo académico y de su participación voluntaria.
+\end{itemize}
+
+\paragraph{Restricciones tecnológicas}
+\begin{itemize}
+    \item La herramienta debe ser accesible sin requerir instalación de software especializado por parte de los usuarios finales, priorizando plataformas web o de fácil acceso.
+    \item El sistema deberá funcionar en equipos con recursos computacionales estándar utilizados por los estudiantes universitarios y el docente.
+    \item No se dispone de infraestructura de servidores institucionales garantizada, por lo que el despliegue se limitará a servicios gratuitos o de bajo costo.
+\end{itemize}
+
+\paragraph{Restricciones de alcance funcional}
+\begin{itemize}
+    \item El sistema se enfocará en la interpretación de lenguajes orientados por sintaxis, sin incluir procesos de compilación avanzada ni optimización de código.
+    \item El sistema soportará un subconjunto representativo de características de lenguajes de programación, sin pretender ser un entorno de desarrollo completo.
+    \item La visualización se centrará en los conceptos fundamentales de la asignatura, sin abarcar todos los temas del curso.
+\end{itemize}
+
+\paragraph{Restricciones de evaluación}
+\begin{itemize}
+    \item No se podrá medir el impacto en el aprendizaje a largo plazo, debido a que ello requeriría estudios longitudinales fuera del alcance temporal del proyecto.
+    \item La evaluación se centrará en aspectos de funcionalidad técnica, usabilidad y percepción de utilidad por parte de los estudiantes y el docente.
+\end{itemize}
+
+\paragraph{Supuestos del contexto educativo}
+\begin{itemize}
+    \item Los estudiantes cuentan con conocimientos básicos en programación y lenguajes de programación.
+    \item Existe interés y disposición por parte de los estudiantes en el uso de herramientas complementarias para el aprendizaje.
+    \item El docente de la asignatura está dispuesto a colaborar en la evaluación de la herramienta y facilitar su uso con estudiantes.
+\end{itemize}
+
+\paragraph{Supuestos técnicos}
+\begin{itemize}
+    \item Las tecnologías seleccionadas permitirán desarrollar visualizaciones dinámicas y comprensibles para los usuarios.
+\end{itemize}
+
+\paragraph{Supuestos de recursos y disponibilidad}
+\begin{itemize}
+    \item Se contará con acceso a los estudiantes y al material didáctico de la asignatura durante al menos un período académico.
+    \item Existirán recursos mínimos de infraestructura para desplegar la herramienta durante la evaluación.
+\end{itemize}
+
+\paragraph{Supuestos sobre el problema y la evaluación}
+\begin{itemize}
+    \item La visualización de procesos internos aporta valor pedagógico y refuerza la comprensión teórica.
+    \item Los criterios de funcionalidad, usabilidad y percepción de utilidad son indicadores válidos para evaluar la calidad del prototipo.
+\end{itemize}
+
