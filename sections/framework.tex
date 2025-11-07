@@ -40,4 +40,17 @@ Se analizan las principales investigaciones, proyectos y desarrollos previos que
 Se describen experiencias y estudios previos relevantes que sirven como punto de partida para este anteproyecto.
 
 \subsection{Marco Conceptual}
-En este apartado se definen los términos y conceptos clave utilizados a lo largo del proyecto.
+
+\subsubsection{Proceso de Interpretación}
+
+La interpretación de lenguajes de programación constituye un proceso central en la ejecución de programas, integrando varios niveles de abstracción. Comienza con la definición formal de la sintaxis mediante gramáticas libres de contexto, las cuales determinan qué secuencias de símbolos forman programas válidos \cite{10.5555/1177220}. Estas gramáticas, compuestas por reglas de producción entre símbolos terminales y no terminales, garantizan precisión y evitan ambigüedades que puedan afectar la interpretación del código.
+
+El análisis sintáctico transforma el código fuente en un árbol de sintaxis abstracta (AST), es decir, en una representación estructural que revela la jerarquía semántica del programa \cite{10.5555/1177220}. Este modelo facilita la comprensión de cómo las expresiones se componen y relacionan, aportando al aprendizaje de compiladores e intérpretes.
+
+La interpretación consiste en recorrer el AST ejecutando las operaciones definidas en sus nodos \cite{10.5555/1378240}. Para ello, se mantienen ambientes de ejecución que asocian identificadores con valores, modelando fenómenos como el alcance léxico y las clausuras. La estructura jerárquica de estos ambientes explica la organización de variables locales y globales, el paso de parámetros y la recursión, aspectos esenciales para comprender el comportamiento del intérprete.
+
+\subsubsection{Lenguajes Orientados por Sintaxis como Paradigma Educativo}
+
+Los lenguajes orientados por sintaxis definen la semántica del programa en función de su estructura sintáctica mediante atributos asociados a los símbolos de la gramática \cite{10.5555/1177220}. Este enfoque, formalizado en las definiciones dirigidas por sintaxis, establece cómo se deriva el significado de cada construcción a partir de sus componentes.
+
+En el ámbito educativo, este paradigma permite visualizar la relación entre la forma del código y su comportamiento. Los atributos sintetizados y heredados representan distintos flujos de información dentro del árbol sintáctico, desde las partes hacia el todo o desde el contexto hacia las partes, facilitando la comprensión de la evaluación y traducción de programas.
