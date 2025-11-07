@@ -1,7 +1,37 @@
 \section{Marco de Referencia}
 
 \subsection{Marco Teórico}
-Se presentan los fundamentos conceptuales y teóricos relacionados con el área de estudio.
+El proyecto se fundamenta en tres áreas de conocimiento: teoría de lenguajes formales y compiladores que proporcionan los fundamentos técnicos; teorías del aprendizaje aplicadas a la educación en ciencias de la computación que informan sobre el diseño pedagógico y determinan las estrategias de representación; y principios de usabilidad e interactividad en herramientas educativas que orientan las decisiones de diseño de interfaz.
+
+\subsubsection{Fundamentos de Lenguajes Formales y Teoría de Compiladores}
+
+Los lenguajes de programación se definen formalmente mediante gramáticas libres de contexto (Context-Free Grammars, CFG), clasificadas por Chomsky en el tipo dos de su jerarquía de lenguajes formales \cite{1056813}. Estas gramáticas establecen reglas de producción que determinan cómo los símbolos no terminales pueden reemplazarse por secuencias de símbolos terminales y no terminales, proporcionando una descripción precisa y estructurada de la sintaxis de un lenguaje.
+
+El análisis sintáctico (parsing) verifica si una cadena pertenece al lenguaje definido por la gramática y construye una representación estructural del código fuente. Este proceso genera el árbol de sintaxis abstracta (AST), el cual pasa por alto detalles superficiales y conserva la estructura semántica esencial del programa \cite{10.5555/1177220}. El AST actúa como puente entre la sintaxis y las etapas posteriores del compilador, facilitando el análisis semántico, la optimización y la generación de código.
+
+La interpretación constituye una forma de ejecución en la cual un intérprete recorre el AST evaluando cada nodo según reglas semánticas y utilizando entornos de ejecución (environments) que asocian identificadores con valores \cite{10.5555/1378240}. Finalmente, los lenguajes orientados por sintaxis (syntax-directed languages) establecen una relación formal entre la estructura gramatical y el significado del programa mediante definiciones y esquemas de traducción dirigidos por la sintaxis (Syntax-Directed Definitions y Syntax-Directed Translation Schemes) \cite{10.5555/1177220}. 
+
+En conjunto, estos fundamentos constituyen la base técnica sobre la cual se estructura la enseñanza de los compiladores, permitiendo que los estudiantes comprendan el proceso de traducción y ejecución desde una perspectiva formal y visual.
+
+\subsubsection{Teorías del Aprendizaje Aplicadas a la Educación en Computación}
+
+El diseño pedagógico de este proyecto se fundamenta en teorías del aprendizaje que promueven una enseñanza activa y significativa. El constructivismo, propuesto por Piaget y Vygotsky, plantea que el conocimiento se construye a través de la interacción con el entorno y la reflexión sobre la experiencia \cite{Piaget+1970,ef4d7fb0-848f-3480-8634-d49a5f5c57df}. En la educación en computación, esto se traduce en metodologías centradas en la experimentación y la creación de artefactos funcionales, donde los estudiantes comprenden mejor los conceptos de compiladores al definir gramáticas, implementar intérpretes y observar los resultados de sus decisiones.
+
+Complementariamente, la teoría de la carga cognitiva, propuesta por Sweller, plantea que la memoria de trabajo posee una capacidad limitada para procesar nueva información \cite{SWELLER1988257}. Distingue entre carga cognitiva intrínseca (complejidad del contenido), extrínseca (forma de presentación) y germana (procesos mentales que favorecen el aprendizaje). En el caso de herramientas educativas para compiladores, la carga intrínseca es alta debido a la abstracción del contenido. Por ello, es fundamental que el diseño reduzca la carga extrínseca mediante interfaces claras y visualizaciones que actúen como apoyo externo a la memoria de trabajo.
+
+Asimismo, el enfoque del aprendizaje por descubrimiento guiado, propuesto por Bruner, sostiene que los estudiantes adquieren conocimientos de manera más duradera cuando los descubren por sí mismos bajo una guía estructurada \cite{Bruner1961}. En el contexto de una herramienta educativa, esto implica permitir la exploración controlada mediante ejemplos incrementales, plantillas predefinidas y retroalimentación constante, facilitando que los estudiantes comprendan los efectos de sus decisiones al modificar gramáticas o estructuras sintácticas.
+
+Finalmente, la teoría del aprendizaje multimedia de Mayer establece principios sobre cómo combinar texto, imágenes y elementos interactivos para optimizar la comprensión \cite{Mayer_2009}. Entre ellos se destacan la modalidad (usar canales visuales y verbales complementarios), la contigüidad (presentar simultáneamente información relacionada), la coherencia (eliminar elementos irrelevantes) y la señalización (resaltar lo esencial). Estos principios orientan el diseño de visualizaciones didácticas manteniendo una correspondencia clara entre acciones y efectos.
+
+\subsubsection{Principios de Diseño de Herramientas Educativas Interactivas}
+
+El desarrollo de herramientas educativas interactivas requiere integrar criterios de usabilidad, interactividad y progresión pedagógica. La usabilidad, entendida como la capacidad de un sistema para ser utilizado de forma efectiva, eficiente y satisfactoria, resulta fundamental en entornos de aprendizaje digital. 
+
+Investigaciones recientes destacan que la usabilidad no solo incide en la eficiencia técnica, sino también en la motivación y la retención del aprendizaje, al permitir que los usuarios concentren sus recursos cognitivos en la comprensión del contenido y no en la manipulación de la interfaz \cite{Lu2022}. En este sentido, una interfaz clara, accesible y coherente contribuye a reducir la carga cognitiva extrínseca y a fomentar la autonomía en el aprendizaje.
+
+La interactividad se concibe como un proceso de acción, retroalimentación y reflexión en el que el usuario explora y construye conocimiento activamente \cite{Bruner1961}. Las herramientas que proporcionan retroalimentación mediante la visualización del estado de un programa o la señalización de errores en tiempo real favorecen la corrección autónoma y el aprendizaje autorregulado.
+
+Por último, la progresión y el andamiaje, derivados del constructivismo social de Vygotsky, enfatizan el apoyo temporal que se ofrece al estudiante durante el aprendizaje, el cual se retira gradualmente a medida que alcanza una comprensión más profunda \cite{ef4d7fb0-848f-3480-8634-d49a5f5c57df}. En una herramienta para la enseñanza de intérpretes, estos principios pueden materializarse mediante ejemplos guiados, ejercicios incrementales y restricciones adaptativas, promoviendo un aprendizaje autónomo y sostenido.
 
 \subsection{Estado del Arte}
 Se analizan las principales investigaciones, proyectos y desarrollos previos que abordan el mismo problema o similares.
@@ -10,4 +40,17 @@ Se analizan las principales investigaciones, proyectos y desarrollos previos que
 Se describen experiencias y estudios previos relevantes que sirven como punto de partida para este anteproyecto.
 
 \subsection{Marco Conceptual}
-En este apartado se definen los términos y conceptos clave utilizados a lo largo del proyecto.
+
+\subsubsection{Proceso de Interpretación}
+
+La interpretación de lenguajes de programación constituye un proceso central en la ejecución de programas, integrando varios niveles de abstracción. Comienza con la definición formal de la sintaxis mediante gramáticas libres de contexto, las cuales determinan qué secuencias de símbolos forman programas válidos \cite{10.5555/1177220}. Estas gramáticas, compuestas por reglas de producción entre símbolos terminales y no terminales, garantizan precisión y evitan ambigüedades que puedan afectar la interpretación del código.
+
+El análisis sintáctico transforma el código fuente en un árbol de sintaxis abstracta (AST), es decir, en una representación estructural que revela la jerarquía semántica del programa \cite{10.5555/1177220}. Este modelo facilita la comprensión de cómo las expresiones se componen y relacionan, aportando al aprendizaje de compiladores e intérpretes.
+
+La interpretación consiste en recorrer el AST ejecutando las operaciones definidas en sus nodos \cite{10.5555/1378240}. Para ello, se mantienen ambientes de ejecución que asocian identificadores con valores, modelando fenómenos como el alcance léxico y las clausuras. La estructura jerárquica de estos ambientes explica la organización de variables locales y globales, el paso de parámetros y la recursión, aspectos esenciales para comprender el comportamiento del intérprete.
+
+\subsubsection{Lenguajes Orientados por Sintaxis como Paradigma Educativo}
+
+Los lenguajes orientados por sintaxis definen la semántica del programa en función de su estructura sintáctica mediante atributos asociados a los símbolos de la gramática \cite{10.5555/1177220}. Este enfoque, formalizado en las definiciones dirigidas por sintaxis, establece cómo se deriva el significado de cada construcción a partir de sus componentes.
+
+En el ámbito educativo, este paradigma permite visualizar la relación entre la forma del código y su comportamiento. Los atributos sintetizados y heredados representan distintos flujos de información dentro del árbol sintáctico, desde las partes hacia el todo o desde el contexto hacia las partes, facilitando la comprensión de la evaluación y traducción de programas.
