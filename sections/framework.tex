@@ -1,7 +1,24 @@
 \section{Marco de Referencia}
 
 \subsection{Marco Teórico}
-Se presentan los fundamentos conceptuales y teóricos relacionados con el área de estudio.
+El proyecto se fundamenta en cuatro áreas de conocimiento: teoría de lenguajes formales y compiladores que proporcionan los fundamentos técnicos; teorías del aprendizaje aplicadas a la educación en ciencias de la computación que informan sobre el diseño pedagógico; visualización educativa de procesos computacionales que determinan las estrategias de representación; y principios de usabilidad e interactividad en herramientas educativas que orientan las decisiones de diseño de interfaz.
+
+\subsubsection{Fundamentos de Lenguajes Formales y Teoría de Compiladores}
+
+Los lenguajes de programación se definen formalmente mediante gramáticas libres de contexto (Context-Free Grammars, CFG), clasificadas por Chomsky en el tipo dos de su jerarquía de lenguajes formales \cite{1056813}. Estas gramáticas establecen reglas de producción que determinan cómo los símbolos no terminales pueden reemplazarse por secuencias de símbolos terminales y no terminales, proporcionando una descripción precisa y estructurada de la sintaxis de un lenguaje.
+
+El análisis sintáctico (parsing) verifica si una cadena pertenece al lenguaje definido por la gramática y construye una representación estructural del código fuente. Este proceso genera el árbol de sintaxis abstracta (AST), el cual pasa por alto detalles superficiales y conserva la estructura semántica esencial del programa \cite{10.5555/1177220}. El AST actúa como puente entre la sintaxis y las etapas posteriores del compilador, facilitando el análisis semántico, la optimización y la generación de código.
+
+La interpretación constituye una forma de ejecución en la cual un intérprete recorre el AST evaluando cada nodo según reglas semánticas y utilizando entornos de ejecución (environments) que asocian identificadores con valores \cite{10.5555/1378240}. Finalmente, los lenguajes orientados por sintaxis (syntax-directed languages) establecen una relación formal entre la estructura gramatical y el significado del programa mediante definiciones y esquemas de traducción dirigidos por la sintaxis (Syntax-Directed Definitions y Syntax-Directed Translation Schemes) \cite{10.5555/1177220}. 
+
+En conjunto, estos fundamentos constituyen la base técnica sobre la cual se estructura la enseñanza de los compiladores, permitiendo que los estudiantes comprendan el proceso de traducción y ejecución desde una perspectiva formal y visual.
+
+\subsubsection{Teorías del Aprendizaje Aplicadas a la Educación en Computación}
+
+\subsubsection{Visualización Educativa en Ciencias de la Computación}
+
+\subsubsection{Principios de Diseño de Herramientas Educativas Interactivas}
+
 
 \subsection{Estado del Arte}
 Se analizan las principales investigaciones, proyectos y desarrollos previos que abordan el mismo problema o similares.
