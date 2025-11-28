@@ -1,46 +1,27 @@
 \section{Alcance del Proyecto}
 
 \subsection{Declaración del Alcance}
-El presente proyecto tiene como alcance el diseño, desarrollo y evaluación de usabilidad de una herramienta interactiva orientada a facilitar la comprensión de conceptos fundamentales de interpretación y compilación de lenguajes de programación, específicamente como apoyo al proceso de enseñanza-aprendizaje dentro de la asignatura.
+El presente proyecto tiene como alcance el diseño, desarrollo y evaluación de usabilidad de una herramienta interactiva orientada a facilitar la comprensión de conceptos fundamentales de interpretación y compilación de lenguajes de programación, específicamente como apoyo al proceso de enseñanza-aprendizaje dentro de la asignatura \textit{Fundamentos de Interpretación y Compilación de LP} de la Universidad del Valle. 
 
 \subsubsection{Alcance del Producto}
+La herramienta permitirá la definición y análisis de gramáticas que describan la estructura formal de lenguajes orientados por sintaxis. Asimismo, integrará la representación visual de las estructuras sintácticas (AST) derivadas de los programas escritos por el usuario, con el fin de facilitar la comprensión de su organización interna.
 
-\begin{itemize}
-    \item Definición y análisis de gramáticas que describan la sintaxis de lenguajes orientados por sintaxis.
-    \item Representación visual de estructuras sintácticas derivadas de programas escritos por el usuario.
-    \item Interfaz accesible que promueva la exploración y el aprendizaje autónomo.
-    \item Inclusión de ejemplos predefinidos que ilustren conceptos centrales de la asignatura.
-    \item Almacenamiento local de gramáticas y programas definidos por el usuario para su reutilización.
-\end{itemize}
+La interfaz será accesible y promoverá la exploración autónoma mediante ejemplos predefinidos que ilustren conceptos centrales de la asignatura. Finalmente, se habilitará el almacenamiento local de gramáticas y programas definidos por el usuario, permitiendo su consulta y reutilización en sesiones posteriores.
 
 \subsubsection{Alcance del Proyecto}
+El proyecto se estructura en cuatro fases principales que se ejecutarán dentro del período de ocho meses establecido. La fase de análisis comprende la revisión de literatura relevante, la consulta con el docente de la asignatura y la identificación de los requisitos funcionales y no funcionales del sistema. Esta fase incluye también el reconocimiento de las dificultades más comunes que enfrentan los estudiantes, con el fin de orientar la selección y construcción de ejemplos que acompañarán la herramienta, teniendo en cuenta que las funcionalidades principales como la visualización del AST y el manejo de lenguajes orientados por sintaxis no dependen de fuentes externas adicionales.
 
-\begin{itemize}
-    \item \textbf{Análisis:} identificación de las principales dificultades que enfrentan los estudiantes, revisión de herramientas similares y definición de requisitos funcionales y no funcionales.
-    \item \textbf{Diseño:} elaboración de la arquitectura del sistema, interfaces de usuario y de las estrategias de visualización de procesos.
-    \item \textbf{Implementación:} desarrollo del prototipo funcional de la herramienta con base en los requisitos definidos.
-    \item \textbf{Evaluación:} validación de usabilidad mediante pruebas con estudiantes y el docente de la asignatura.
-\end{itemize}
+La fase de diseño abarca la elaboración de la arquitectura del sistema, el diseño de interfaces de usuario mediante prototipos y la definición de estrategias de visualización adecuadas para explicar conceptos abstractos. Esta fase considerará explícitamente la curva de aprendizaje asociada con las tecnologías seleccionadas, dedicando tiempo suficiente para que el equipo desarrolle competencia técnica antes de proceder a la implementación.
+
+La fase de implementación consiste en el desarrollo del prototipo funcional con base en los requisitos y diseños establecidos, integrando el análisis de gramáticas, la generación de árboles sintácticos abstractos (AST), la interfaz de usuario y los mecanismos de visualización interactiva.
+
+La fase de evaluación comprende la validación de usabilidad mediante pruebas con estudiantes y el docente de la asignatura. Dada la restricción temporal y la necesidad de coordinar con el calendario académico, la evaluación se realizará durante un período académico específico. Se hará a través de cuestionarios de usabilidad y observación de uso con una muestra estimada entre 10 y 20 estudiantes. Esto es suficiente para identificar problemas de interacción y oportunidades de mejora sin pretender medir el impacto en el aprendizaje formal.
 
 \subsubsection{Fuera del Alcance}
 
-\begin{itemize}
-    \item Compilación a código ejecutable o generación de binarios.
-    \item Optimización de programas o análisis de rendimiento.
-    \item Estudios experimentales que midan impacto en el aprendizaje a largo plazo.
-    \item Sistema de gestión de usuarios, autenticación o colaboración multiusuario.
-    \item Visualización del proceso de evaluación de programas paso a paso.
-    \item Infraestructura de despliegue de tipo productivo o con alta disponibilidad.
-\end{itemize}
+El proyecto no contempla la compilación a código ejecutable o generación de binarios. No se incluirán mecanismos de optimización de programas ni análisis de rendimiento de código. Debido a las restricciones temporales del proyecto, no será posible realizar estudios experimentales que midan el impacto en el aprendizaje a largo plazo, ya que estos requieren de seguimiento durante múltiples períodos académicos.
 
-\subsubsection{Criterios de Aceptación}
-
-\begin{itemize}
-    \item La herramienta permite definir y analizar gramáticas de manera funcional y comprensible.
-    \item Se generan visualizaciones coherentes de estructuras sintácticas.
-    \item Los estudiantes y el docente reconocen su utilidad como recurso complementario de aprendizaje.
-    \item Se entrega documentación suficiente que describa el diseño, uso y resultados del proyecto.
-\end{itemize}
+No se implementará un sistema de gestión de usuarios con autenticación o capacidades de colaboración multiusuario, optándose por almacenamiento local para simplificar el desarrollo y reducir requisitos de infraestructura. La visualización del proceso de evaluación de programas paso a paso, queda fuera del alcance debido a su complejidad de implementación. Finalmente, no se contempla infraestructura de despliegue de tipo productivo con alta disponibilidad, limitando el despliegue a un entorno de pruebas suficiente para la evaluación con estudiantes.
 
 \subsubsection{Entregables del Proyecto}
 
@@ -48,79 +29,100 @@ El presente proyecto tiene como alcance el diseño, desarrollo y evaluación de 
     \item \textbf{Herramienta interactiva funcional:} Sistema desplegado en un entorno de pruebas que implementa las capacidades especificadas en el alcance del producto.
     \item \textbf{Documentación técnica:} Descripción de la arquitectura, tecnologías utilizadas, decisiones de diseño y guía de instalación/despliegue.
     \item \textbf{Manual de usuario:} Guía de uso de la herramienta orientada a estudiantes y docentes.
-    \item \textbf{Informe de evaluación:} Documento con resultados de las pruebas de usabilidad, incluyendo retroalimentación de usuarios.
+    \item \textbf{Informe de evaluación:} Documento con resultados de las pruebas de usabilidad.
     \item \textbf{Código fuente:} Repositorio con el código completo del sistema, debidamente documentado y versionado.
 \end{enumerate}
 
 \subsection{Objetivos}
 
 \subsubsection{Objetivo General}
-Desarrollar una herramienta interactiva que facilite la comprensión y aplicación de los contenidos de la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación (LP)} de la Universidad del Valle, mediante la visualización de procesos internos y la generación de lenguajes orientados por sintaxis.
+Desarrollar una herramienta interactiva que facilite la comprensión y aplicación de los contenidos de la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación (LP)} de la Universidad del Valle, mediante la visualización de estructuras internas y el uso de lenguajes orientados por sintaxis definidos mediante gramáticas.
 
 \subsubsection{Objetivos Específicos}
 \begin{enumerate}
-  \item Identificar las dificultades conceptuales y metodológicas que enfrentan los estudiantes en la asignatura.
-  \item Caracterizar los elementos teóricos y técnicos necesarios para la construcción de intérpretes orientados por sintaxis que favorezcan su aplicación en contextos pedagógicos.
-  \item Diseñar una estrategia arquitectónica para la construcción de intérpretes orientados por sintaxis, integrando representaciones visuales y mecanismos de interacción que promuevan el aprendizaje autónomo.
-  \item Implementar una herramienta interactiva que permita definir gramáticas, visualizar la estructura sintáctica de programas y el seguimiento de su evaluación en sus procesos internos.
-  \item Evaluar la funcionalidad técnica y la usabilidad de la herramienta desarrollada mediante pruebas con estudiantes y el docente de la asignatura.
+  \item Identificar las dificultades conceptuales más comunes que enfrentan los estudiantes en la asignatura, con el fin de orientar la selección y construcción de ejemplos.
+  \item Caracterizar los elementos teóricos y técnicos necesarios para la definición y análisis de gramáticas, así como para la generación de AST en el contexto de lenguajes orientados por sintaxis.
+  \item Diseñar la arquitectura del sistema y las interfaces de usuario, integrando estrategias de visualización que favorezcan la comprensión de estructuras sintácticas.
+  \item Implementar una herramienta interactiva que permita definir gramáticas y visualizar las estructuras sintácticas de programas, incorporando ejemplos y mecanismos de interacción accesibles.
+  \item Evaluar la funcionalidad técnica y la usabilidad de la herramienta mediante pruebas con estudiantes y el docente de la asignatura.
 \end{enumerate}
 
 \subsubsection{Restricciones y Supuestos}
 
 \paragraph{Restricciones temporales}
-\begin{itemize}
-    \item El proyecto debe completarse en el tiempo estipulado para un trabajo de grado, lo que limita el alcance de las funcionalidades y el tiempo para la validación del sistema.
-    \item La evaluación con estudiantes debe realizarse dentro de un período académico específico coordinado con el calendario de la asignatura.
-\end{itemize}
+
+El proyecto debe completarse en un período total de ocho meses, lo cual limita el alcance de las funcionalidades a implementar y la profundidad de la evaluación. Este tiempo incluye todas las fases: análisis, diseño incluyendo la curva de aprendizaje de tecnologías, implementación y evaluación con estudiantes.
 
 \paragraph{Restricciones de recursos humanos}
-\begin{itemize}
-    \item El desarrollo será realizado por un equipo de dos estudiantes de trabajo de grado, lo cual limita la complejidad y cantidad de características que pueden implementarse.
-    \item La disponibilidad de estudiantes para las pruebas dependerá del ciclo académico y de su participación voluntaria.
-\end{itemize}
+
+El desarrollo estará a cargo de dos estudiantes de trabajo de grado, lo que restringe la complejidad y cantidad de características que pueden incorporarse. La participación de estudiantes en las pruebas de usabilidad depende del calendario académico y de su disponibilidad voluntaria durante el período de evaluación.
 
 \paragraph{Restricciones tecnológicas}
-\begin{itemize}
-    \item La herramienta debe ser accesible sin requerir instalación de software especializado por parte de los usuarios finales, priorizando plataformas web o de fácil acceso.
-    \item El sistema deberá funcionar en equipos con recursos computacionales estándar utilizados por los estudiantes universitarios y el docente.
-    \item No se dispone de infraestructura de servidores institucionales garantizada, por lo que el despliegue se limitará a servicios gratuitos o de bajo costo.
-\end{itemize}
+
+La herramienta debe ser accesible sin requerir instalación de software especializado, priorizando una implementación web funcional en equipos de uso común entre estudiantes universitarios. No se cuenta con infraestructura institucional garantizada para el despliegue, por lo que este se limitará a servicios gratuitos o de bajo costo. La selección tecnológica debe considerar la curva de aprendizaje del equipo y privilegiar herramientas con documentación amplia y comunidades activas.
 
 \paragraph{Restricciones de alcance funcional}
-\begin{itemize}
-    \item El sistema se enfocará en la interpretación de lenguajes orientados por sintaxis, sin incluir procesos de compilación avanzada ni optimización de código.
-    \item El sistema soportará un subconjunto representativo de características de lenguajes de programación, sin pretender ser un entorno de desarrollo completo.
-    \item La visualización se centrará en los conceptos fundamentales de la asignatura, sin abarcar todos los temas del curso.
-\end{itemize}
+
+El sistema se enfocará exclusivamente en la interpretación de lenguajes orientados por sintaxis, excluyendo generación de código, compilación a ejecutables, construcción de código intermedio y optimización. Solo se soportará un subconjunto representativo de características de lenguajes de programación, sin pretender construir un entorno de desarrollo completo. La visualización se concentrará en la representación de AST y validación de gramáticas, excluyendo la visualización paso a paso del proceso de evaluación.
 
 \paragraph{Restricciones de evaluación}
-\begin{itemize}
-    \item No se podrá medir el impacto en el aprendizaje a largo plazo, debido a que ello requeriría estudios longitudinales fuera del alcance temporal del proyecto.
-    \item La evaluación se centrará en aspectos de funcionalidad técnica, usabilidad y percepción de utilidad por parte de los estudiantes y el docente.
-\end{itemize}
+
+No es posible medir el impacto en el aprendizaje a largo plazo debido a la necesidad de estudios experimentales prolongados, con grupos de control y seguimiento por varios semestres. La evaluación se restringirá a funcionalidad técnica y usabilidad, mediante cuestionarios o herramientas similares, y se prevé una muestra entre 10 y 20 estudiantes, suficiente para identificar problemas de interacción pero no para análisis estadísticos sobre efectividad pedagógica.
 
 \paragraph{Supuestos del contexto educativo}
-\begin{itemize}
-    \item Los estudiantes cuentan con conocimientos básicos en programación y lenguajes de programación.
-    \item Existe interés y disposición por parte de los estudiantes en el uso de herramientas complementarias para el aprendizaje.
-    \item El docente de la asignatura está dispuesto a colaborar en la evaluación de la herramienta y facilitar su uso con estudiantes.
-\end{itemize}
+
+Se asume que los estudiantes cuentan con conocimientos básicos de programación y estructuras de datos. También se supone la disposición de un grupo de estudiantes para participar voluntariamente en las pruebas, así como la colaboración del docente para facilitar acceso a la asignatura y permitir la presentación del prototipo.
 
 \paragraph{Supuestos técnicos}
-\begin{itemize}
-    \item Las tecnologías seleccionadas permitirán desarrollar visualizaciones dinámicas y comprensibles para los usuarios.
-\end{itemize}
 
-\paragraph{Supuestos de recursos y disponibilidad}
-\begin{itemize}
-    \item Se contará con acceso a los estudiantes y al material didáctico de la asignatura durante al menos un período académico.
-    \item Existirán recursos mínimos de infraestructura para desplegar la herramienta durante la evaluación.
-\end{itemize}
+Se asume la viabilidad técnica de implementar un parser para gramáticas libres de contexto y un generador de AST con rendimiento adecuado para uso interactivo. Se presupone que las tecnologías web modernas permitirán desarrollar visualizaciones dinámicas sin dependencias externas ni instalación adicional en el navegador.
+
+\paragraph{Supuestos sobre recursos y disponibilidad}
+
+Se asume que será posible acceder a estudiantes de un período académico durante la fase de evaluación. También se presupone que el docente proporcionará material didáctico relevante para orientar el diseño de la herramienta. Asimismo, se considera que existirán servicios de alojamiento gratuitos o de bajo costo suficientes para desplegar el prototipo durante la etapa de pruebas.
 
 \paragraph{Supuestos sobre el problema y la evaluación}
-\begin{itemize}
-    \item La visualización de procesos internos aporta valor pedagógico y refuerza la comprensión teórica.
-    \item Los criterios de funcionalidad, usabilidad y percepción de utilidad son indicadores válidos para evaluar la calidad del prototipo.
-\end{itemize}
 
+Se asume que las dificultades conceptuales identificadas en la literatura y en la consulta con el docente reflejan los obstáculos reales que enfrentan los estudiantes. También se presupone que la visualización de estructuras sintácticas (AST) aporta un valor pedagógico potencial, aun cuando este no se mida formalmente. Finalmente, se asume que los criterios de funcionalidad técnica y de usabilidad constituyen indicadores válidos y suficientes para evaluar el prototipo dentro del marco temporal del proyecto, aun cuando no sustituyen estudios de impacto en el aprendizaje.
+
+\subsubsection{Resultados Esperados}
+
+\paragraph{Resultados del Objetivo Específico 1}
+
+\textit{Identificar las dificultades conceptuales más comunes que enfrentan los estudiantes en la asignatura, con el fin de orientar la selección y construcción de ejemplos.}
+
+Como principal resultado de esta fase se espera obtener una caracterización documentada de las dificultades conceptuales que enfrentan los estudiantes, mediante revisión de literatura y análisis de material académico disponible, con el propósito de orientar la construcción de ejemplos pedagógicos y no como insumo para el desarrollo de las funcionalidades principales de la herramienta, logrando identificar al menos cinco conceptos que servirán como base para la biblioteca de casos predefinidos que se incluirá en el sistema.
+
+\paragraph{Resultados del Objetivo Específico 2}
+
+\textit{Caracterizar los elementos teóricos y técnicos necesarios para la definición y análisis de gramáticas, así como para la generación de AST en el contexto de lenguajes orientados por sintaxis.}
+
+Como resultado, se definirá y documentará un conjunto priorizado de entre 8 y 12 requisitos funcionales del sistema y entre 5 y 8 requisitos no funcionales acompañados de criterios de aceptación específicos que permitan verificar su cumplimiento.
+
+\paragraph{Resultados del Objetivo Específico 3}
+
+\textit{Diseñar la arquitectura del sistema y las interfaces de usuario, integrando estrategias de visualización que favorezcan la comprensión de estructuras sintácticas.}
+
+Se obtendrá un documento de arquitectura del sistema que especifique los componentes principales, sus responsabilidades, las interfaces entre componentes, y el flujo de datos a través del sistema. Además, se producirán prototipos de interfaz de usuario y se documentarán las estrategias de visualización seleccionadas, incluyendo bocetos o diagramas ilustrativos.
+
+Como resultado de este objetivo, se habrá realizado la selección de tecnologías específicas a utilizar justificando cada elección en términos de la curva de aprendizaje del equipo, disponibilidad de documentación, viabilidad de implementar las funcionalidades requeridas, y compatibilidad entre tecnologías seleccionadas.
+
+\paragraph{Resultados del Objetivo Específico 4}
+
+\textit{Implementar una herramienta interactiva que permita definir gramáticas y visualizar las estructuras sintácticas de programas, incorporando ejemplos y mecanismos de interacción accesibles.}
+
+Se obtendrá una herramienta funcional desplegada en un entorno de pruebas, que no requiera instalación de software adicional e implementará todas las funcionalidades especificadas en el alcance del producto y cumplirá con los requisitos funcionales definidos en el objetivo específico 2.
+
+El código fuente estará alojado en un repositorio Git con historial de commits, debidamente documentado y acompañado de archivo README con instrucciones de instalación y ejecución, incluyendo pruebas para casos criticos.
+
+\paragraph{Resultados del Objetivo Específico 5}
+
+\textit{Evaluar la funcionalidad técnica y la usabilidad de la herramienta mediante pruebas con estudiantes y el docente de la asignatura.}
+
+Como resultado de esta fase se obtendrá un informe de evaluación que presentará una verificación básica del funcionamiento técnico del sistema y una valoración preliminar de su usabilidad. El informe incluirá los resultados de un conjunto limitado de pruebas que permitan confirmar que la herramienta ejecuta correctamente sus funciones principales.
+
+Además, se obtendrá una percepción inicial de uso por parte del docente y de un grupo reducido de estudiantes, reflejada en un conjunto de observaciones sobre la claridad de la interfaz, la facilidad para completar tareas básicas y los aspectos que resulten más útiles o que requieran mejora.
+
+\paragraph{Resultados adicionales de documentación}
+
+Documento final de trabajo de grado que presenta el problema, los objetivos planteados, el marco teórico y conceptual, el diseño y la implementación de la solución, los resultados de la evaluación, las conclusiones y el trabajo futuro, cumpliendo con los requisitos de formato y contenido establecidos por la Universidad para trabajos de grado del programa de Ingeniería de Sistemas.
