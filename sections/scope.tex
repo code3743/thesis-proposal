@@ -1,24 +1,27 @@
-\section{Alcance del Proyecto}
+\section{Alcance del proyecto}
 
 Este proyecto comprende el diseño y desarrollo de un \textit{prototipo web educativo} orientado a apoyar la comprensión de conceptos fundamentales de interpretación y compilación de lenguajes de programación. El alcance técnico incluye: (1) la definición y edición de \textit{gramáticas con sintaxis configurable} por el usuario, (2) la visualización de \textit{árboles de sintaxis abstracta (AST)} generados a partir de dichas gramáticas, y (3) la representación de los \textit{cambios en el ambiente} durante la evaluación de programas escritos bajo la gramática definida.
 
+\subsection{Declaración del alcance}
+
 El prototipo se limita a funcionalidades demostrativas orientadas al aprendizaje, sin la intención de soportar un lenguaje completo de propósito general ni mecanismos avanzados de ejecución.
 
-La investigación se desarrolla en el contexto de la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación} del programa de Ingeniería de Sistemas de la Universidad del Valle, sede Tuluá. La población de estudio está compuesta por los estudiantes matriculados en la asignatura y el docente responsable; no obstante, la evaluación del prototipo se llevará a cabo con un grupo reducido de entre 10 y 20 estudiantes, quienes participarán en pruebas de funcionalidad, usabilidad y retroalimentación cualitativa.
+La investigación se desarrolla en el contexto de la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación} del programa de Ingeniería de Sistemas de la Universidad del Valle, sede Tuluá, con una población de estudio compuesta por los estudiantes matriculados en la asignatura y el docente responsable, no obstante, la evaluación del prototipo se llevará a cabo con un grupo reducido de entre 10 y 20 estudiantes, quienes participarán en pruebas de funcionalidad, usabilidad y retroalimentación cualitativa.
 
-El proyecto adopta un enfoque \textit{experimental y evaluativo}, que comprende el análisis documental, el diseño e implementación del prototipo web y la realización de pruebas cualitativas centradas en la comprensión conceptual y la experiencia de uso. Todas las actividades se desarrollarán dentro del periodo académico establecido para el trabajo de grado, garantizando un marco temporal definido.
-
-Quedan fuera del alcance aspectos como la depuración paso a paso, la compilación a código máquina, la autenticación o persistencia de usuarios, el despliegue en infraestructura productiva, la optimización de rendimiento y las evaluaciones pedagógicas de impacto a largo plazo, debido a que exceden los objetivos y recursos previstos y no son necesarios para validar la propuesta educativa.
+El proyecto adopta un enfoque \textit{experimental y evaluativo}, que comprende el análisis documental, el diseño e implementación del prototipo web y la realización de pruebas cualitativas centradas en la comprensión conceptual y la experiencia de uso. Por otro lado, quedan fuera del alcance aspectos como la depuración paso a paso, la compilación a código máquina, la autenticación o persistencia de usuarios, el despliegue en infraestructura productiva, la optimización de rendimiento y las evaluaciones pedagógicas de impacto a largo plazo.
 
 
 \subsubsection{Entregables del Proyecto}
 \begin{enumerate}
-    \item \textbf{Herramienta interactiva funcional:} Sistema desplegado en un entorno de pruebas que implementa las capacidades especificadas en el alcance del producto.
+    \item \textbf{Prototipo web funcional:} Despliegue en un entorno de pruebas, con las capacidades definidas en el alcance.
+
     \item \textbf{Documentación técnica:} Descripción de la arquitectura, tecnologías utilizadas, decisiones de diseño y guía de instalación/despliegue.
-    \item \textbf{Manual de usuario:} Guía de uso de la herramienta orientada a estudiantes y docentes.
-    \item \textbf{Informe de evaluación:} Documento con resultados de las pruebas de usabilidad.
-    \item \textbf{Código fuente:} Repositorio con el código completo del sistema, debidamente documentado y versionado.
+
+    \item \textbf{Manual de usuario:} Guía de uso dirigida a estudiantes y docentes, que explique cómo utilizar las funcionalidades del prototipo.
+
+    \item \textbf{Código fuente:} Repositorio con el código completo, debidamente documentado y versionado.
 \end{enumerate}
+
 
 \subsection{Objetivos}
 
@@ -37,7 +40,7 @@ Desarrollar un prototipo web que apoye la comprensión de los contenidos de la a
 
 \paragraph{Restricciones temporales}
 
-El proyecto debe completarse en un período total de ocho meses, lo cual limita el alcance de las funcionalidades a implementar y la profundidad de la evaluación. Este tiempo incluye todas las fases: análisis, diseño incluyendo la curva de aprendizaje de tecnologías, implementación y evaluación con estudiantes.
+El proyecto debe completarse en un período total de ocho meses, lo cual limita el alcance de las funcionalidades a implementar y la profundidad de la evaluación.
 
 \paragraph{Restricciones de recursos humanos}
 
@@ -45,15 +48,11 @@ El desarrollo estará a cargo de dos estudiantes de trabajo de grado, lo que res
 
 \paragraph{Restricciones tecnológicas}
 
-La herramienta debe ser accesible sin requerir instalación de software especializado, priorizando una implementación web funcional en equipos de uso común entre estudiantes universitarios. No se cuenta con infraestructura institucional garantizada para el despliegue, por lo que este se limitará a servicios gratuitos o de bajo costo. La selección tecnológica debe considerar la curva de aprendizaje del equipo y privilegiar herramientas con documentación amplia y comunidades activas.
-
-\paragraph{Restricciones de alcance funcional}
-
-El sistema se enfocará exclusivamente en la interpretación de lenguajes orientados por sintaxis, excluyendo generación de código, compilación a ejecutables, construcción de código intermedio y optimización. Solo se soportará un subconjunto representativo de características de lenguajes de programación, sin pretender construir un entorno de desarrollo completo. La visualización se concentrará en la representación de AST y validación de gramáticas, excluyendo la visualización paso a paso del proceso de evaluación.
+El prototipo debe funcionar en navegadores web modernos sin requerir instalaciones adicionales, garantizando compatibilidad con los dispositivos comúnmente utilizados por los estudiantes, asimismo, no se cuenta con infraestructura institucional garantizada para el despliegue, por lo que este se limitará a servicios gratuitos o de bajo costo. La selección tecnológica debe considerar la curva de aprendizaje del equipo y privilegiar herramientas con documentación amplia y comunidades activas.
 
 \paragraph{Restricciones de evaluación}
 
-No es posible medir el impacto en el aprendizaje a largo plazo debido a la necesidad de estudios experimentales prolongados, con grupos de control y seguimiento por varios semestres. La evaluación se restringirá a funcionalidad técnica y usabilidad, mediante cuestionarios o herramientas similares, y se prevé una muestra entre 10 y 20 estudiantes, suficiente para identificar problemas de interacción pero no para análisis estadísticos sobre efectividad pedagógica.
+No es posible medir el impacto en el aprendizaje a largo plazo debido a la necesidad de estudios experimentales prolongados, con grupos de control y seguimiento por varios semestres. Por lo tanto, la evaluación se restringirá a funcionalidad técnica y usabilidad, mediante cuestionarios o herramientas similares, y se prevé una muestra entre 10 y 20 estudiantes, para identificar problemas de interacción pero no para análisis estadísticos sobre efectividad pedagógica.
 
 \paragraph{Supuestos del contexto educativo}
 
@@ -75,40 +74,26 @@ Se asume que las dificultades conceptuales identificadas en la literatura y en l
 
 \paragraph{Resultados del Objetivo Específico 1}
 
-\textit{Identificar las dificultades conceptuales más comunes que enfrentan los estudiantes en la asignatura, con el fin de orientar la selección y construcción de ejemplos.}
-
-Como principal resultado de esta fase se espera obtener una caracterización documentada de las dificultades conceptuales que enfrentan los estudiantes, mediante revisión de literatura y análisis de material académico disponible, con el propósito de orientar la construcción de ejemplos pedagógicos y no como insumo para el desarrollo de las funcionalidades principales de la herramienta, logrando identificar al menos cinco conceptos que servirán como base para la biblioteca de casos predefinidos que se incluirá en el sistema.
+Se espera obtener una caracterización documentada de las dificultades conceptuales que enfrentan los estudiantes, mediante revisión de literatura, cuestionarios y análisis de material académico disponible, con el propósito de orientar la construcción de ejemplos pedagógicos, logrando identificar al menos cinco conceptos que servirán como base para la biblioteca de casos predefinidos que se incluirá en el prototipo.
 
 \paragraph{Resultados del Objetivo Específico 2}
 
-\textit{Caracterizar los elementos teóricos y técnicos necesarios para la definición y análisis de gramáticas, así como para la generación de AST en el contexto de lenguajes orientados por sintaxis.}
-
-Como resultado, se definirá y documentará un conjunto priorizado de entre 8 y 12 requisitos funcionales del sistema y entre 5 y 8 requisitos no funcionales acompañados de criterios de aceptación específicos que permitan verificar su cumplimiento.
+Se definirá y documentará un conjunto priorizado de entre 8 y 12 requisitos funcionales del sistema y entre 5 y 8 requisitos no funcionales acompañados de criterios de aceptación específicos que permitan verificar su cumplimiento.
 
 \paragraph{Resultados del Objetivo Específico 3}
 
-\textit{Diseñar la arquitectura del sistema y las interfaces de usuario, integrando estrategias de visualización que favorezcan la comprensión de estructuras sintácticas.}
+Se determinará la arquitectura del prototipo especificando los componentes principales, sus responsabilidades y el flujo de datos a través del sistema. Además, se producirán prototipos de interfaz de usuario y se definirán las estrategias de visualización seleccionadas, incluyendo bocetos o diagramas ilustrativos.
 
-Se obtendrá un documento de arquitectura del sistema que especifique los componentes principales, sus responsabilidades, las interfaces entre componentes, y el flujo de datos a través del sistema. Además, se producirán prototipos de interfaz de usuario y se documentarán las estrategias de visualización seleccionadas, incluyendo bocetos o diagramas ilustrativos.
-
-Como resultado de este objetivo, se habrá realizado la selección de tecnologías específicas a utilizar justificando cada elección en términos de la curva de aprendizaje del equipo, disponibilidad de documentación, viabilidad de implementar las funcionalidades requeridas, y compatibilidad entre tecnologías seleccionadas.
+Igualmente, se realizará la selección de tecnologías a utilizar, justificando cada elección en términos de la curva de aprendizaje del equipo, disponibilidad de documentación, viabilidad de implementar las funcionalidades requeridas, y compatibilidad entre tecnologías seleccionadas.
 
 \paragraph{Resultados del Objetivo Específico 4}
 
-\textit{Implementar una herramienta interactiva que permita definir gramáticas y visualizar las estructuras sintácticas de programas, incorporando ejemplos y mecanismos de interacción accesibles.}
+Se obtendrá un prototipo funcional desplegado en un entorno de pruebas dando cumplimiento a los requisitos funcionales definidos en el \textit{objetivo específico 2}.
 
-Se obtendrá una herramienta funcional desplegada en un entorno de pruebas, que no requiera instalación de software adicional e implementará todas las funcionalidades especificadas en el alcance del producto y cumplirá con los requisitos funcionales definidos en el objetivo específico 2.
-
-El código fuente estará alojado en un repositorio Git con historial de commits, debidamente documentado y acompañado de archivo README con instrucciones de instalación y ejecución, incluyendo pruebas para casos criticos.
+El código fuente estará alojado en un repositorio GitHub con historial de commits, debidamente documentado y acompañado de archivo README con instrucciones de instalación y ejecución.
 
 \paragraph{Resultados del Objetivo Específico 5}
 
-\textit{Evaluar la funcionalidad técnica y la usabilidad de la herramienta mediante pruebas con estudiantes y el docente de la asignatura.}
+Se realizará una verificación básica del funcionamiento técnico y una valoración preliminar de su usabilidad, con un conjunto limitado de pruebas que permitan confirmar que el prototipo se ejecuta correctamente sus funciones principales.
 
-Como resultado de esta fase se obtendrá un informe de evaluación que presentará una verificación básica del funcionamiento técnico del sistema y una valoración preliminar de su usabilidad. El informe incluirá los resultados de un conjunto limitado de pruebas que permitan confirmar que la herramienta ejecuta correctamente sus funciones principales.
-
-Además, se obtendrá una percepción inicial de uso por parte del docente y de un grupo reducido de estudiantes, reflejada en un conjunto de observaciones sobre la claridad de la interfaz, la facilidad para completar tareas básicas y los aspectos que resulten más útiles o que requieran mejora.
-
-\paragraph{Resultados adicionales de documentación}
-
-Documento final de trabajo de grado que presenta el problema, los objetivos planteados, el marco teórico y conceptual, el diseño y la implementación de la solución, los resultados de la evaluación, las conclusiones y el trabajo futuro, cumpliendo con los requisitos de formato y contenido establecidos por la Universidad para trabajos de grado del programa de Ingeniería de Sistemas.
+Además, se obtendrá una percepción inicial de uso por parte del docente y de un grupo reducido de estudiantes, reflejada en un conjunto de observaciones sobre la facilidad para completar tareas básicas y los aspectos que resulten útiles o que requieran mejoras para desarrollos futuros.
