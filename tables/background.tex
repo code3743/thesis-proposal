@@ -1,6 +1,12 @@
 \begin{table}[H]
 \centering
-\setlength{\emergencystretch}{2em}
+
+\vspace{0.5em}
+\label{tab:related_work_comparison}
+\caption{Síntesis comparativa de las principales fuentes utilizadas, incluyendo sus aportes y limitaciones en relación con la enseñanza de compiladores}
+\begin{spacing}{1.0}
+\footnotesize
+
 \begin{tabularx}{\textwidth}{
 |>{\raggedright\arraybackslash}p{3cm}
 |>{\raggedright\arraybackslash}p{4.2cm}
@@ -8,37 +14,42 @@
 |>{\raggedright\arraybackslash}X|
 }
 \hline
-\textbf{Autor / Año} & \textbf{Título} & \textbf{Aporte principal} & \textbf{Limitaciones / Vacíos} \\
+\textbf{Autor / Año} &
+\textbf{Título} &
+\textbf{Aporte principal} &
+\textbf{Limitaciones / Vacíos} \\
 \hline
 
 Jovanović et al. (2021) &
 \textit{ComVIS: A Web-based Tool for Teaching Compiler Construction} &
 Herramienta web para visualizar parsing y AST con orientación didáctica. &
 No permite edición flexible de gramáticas; cubre solo ciertas fases del compilador; carece de un flujo completo integrado. \\
+\hline
 
 Lu et al. (2022) &
 \textit{Usability of Educational Visualization Tools for Programming Languages} &
 Analiza heurísticas de usabilidad educativa para herramientas visuales; aporta criterios de diseño centrado en estudiantes. &
 No aborda compiladores directamente; no ofrece propuestas técnicas integradas; alcance conceptual limitado. \\
+\hline
 
 Del Vado et al. (2023) &
 \textit{Interactive Teaching Tutors for Programming Language Foundations} &
 Tutores interactivos con visualización y apoyo pedagógico explícito. &
 Funcionalidad cerrada; poca flexibilidad técnica; no permite explorar gramáticas ni componentes avanzados. \\
+\hline
 
 Daleman et al. (2024) &
 \textit{ChocoPy: A Pedagogical Python Subset for Compiler Courses} &
 Lenguaje educativo con herramientas para mostrar AST, análisis y ejecución. &
 No está diseñado como entorno guiado; limitado para principiantes; visualización no centrada en andamiaje pedagógico. \\
+\hline
 
 Ortin et al. (2022) &
 \textit{Teaching Compiler Construction with ANTLR and Modern Tools} &
 Buenas prácticas para enseñar compiladores usando herramientas profesionales. &
 Curva de aprendizaje alta; herramientas muy complejas para novatos; escasa interactividad visual pedagógica. \\
-
 \hline
+
 \end{tabularx}
-\vspace{2pt}
-\caption{Síntesis comparativa de las principales fuentes utilizadas, incluyendo sus aportes y limitaciones en relación con la enseñanza de compiladores. }
-\label{tab:fuentes}
+\end{spacing}
 \end{table}

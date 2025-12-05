@@ -1,57 +1,168 @@
-\documentclass[onecolumn,12pt]{IEEEtran}
+\documentclass[12pt,oneside]{report}
 
-\usepackage{setspace} 
+% --------------------------------------------
+% CONFIGURACIÓN GENERAL ICONTEC
+% --------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{graphicx}
 \usepackage{longtable}
-\renewcommand{\thetable}{\arabic{table}}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{times}
 
-\onehalfspacing  
+% --------------------------------------------
+% CONFIGURACIÓN ICONTEC: Nomenclatura y Numeración de Tablas
+% --------------------------------------------
+\usepackage{caption}
+\usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[justification=raggedright,singlelinecheck=false]{caption}
 
-\input{style/packages}
-\input{style/commands}
-
-\title{Prototipo web para apoyar la enseñanza de Fundamentos de Interpretación y Compilación de Lenguajes de Programación mediante lenguajes orientados por sintaxis}
-\author{
-  \IEEEauthorblockN{Jota Emilio López Ramírez, Esmeralda Rivas Guzmán}
-  \\
-  \IEEEauthorblockA{Universidad del Valle\\
-  Facultad de Ingeniería\\
-  \texttt{jota.lopez@correounivalle.edu.co, esmeralda.rivas@correounivalle.edu.co}}
+\AtBeginDocument{%
+    \ifdef{\tablename}{\renewcommand{\tablename}{Tabla}}{}
+    \ifdef{\figurename}{\renewcommand{\figurename}{Figura}}{}
 }
 
+\counterwithin{table}{chapter} 
+
+\counterwithout{table}{chapter} 
+
+% --------------------------------------------
+
+% MÁRGENES ICONTEC
+\geometry{
+  left=3cm,
+  right=3cm,
+  top=3cm,
+  bottom=3cm
+}
+
+% Interlineado 1.5 ICONTEC
+\onehalfspacing
+
+% --------------------------------------------
+% FORMATO DE TÍTULOS ICONTEC
+% --------------------------------------------
+
+% CAPÍTULO: 1 INTRODUCCIÓN
+% (Centrado, mayúscula sostenida, sin punto final)
+\titleformat{\chapter}[block]
+  {\bfseries\large\centering}
+  {\thechapter}
+  {1em}
+  {\MakeUppercase}
+
+\titlespacing{\chapter}{0pt}{0pt}{2\baselineskip}
+
+% SECCIÓN NIVEL 2 (alineada a la izquierda)
+\titleformat{\section}
+  {\bfseries}
+  {\thesection}
+  {1em}
+  {}
+
+% SUBSECCIÓN NIVEL 3 (mayúscula inicial)
+\titleformat{\subsection}
+  {\normalfont}
+  {\thesubsection}
+  {1em}
+  {}
+
+% --------------------------------------------
+% PORTADA ICONTEC (Univalle)
+% --------------------------------------------
+\newcommand{\portada}{
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+
+{\bfseries\Large Prototipo web para apoyar la enseñanza de Fundamentos de Interpretación y Compilación de Lenguajes de Programación mediante lenguajes orientados por sintaxis}
+
+\vfill\vfill\vfill
+
+{\bfseries Jota Emilio López Ramírez}\\[0.3cm]
+{\bfseries Esmeralda Rivas Guzmán}
+
+\vfill\vfill
+
+{\bfseries Anteproyecto de Trabajo de Grado}
+
+\vfill\vfill
+
+{\bfseries Director}\\
+{\bfseries Carlos Andrés Delgado Saavedra}
+
+\vfill\vfill\vfill\vfill\vfill\vfill
+
+{\bfseries Universidad del Valle}\\
+{\bfseries Escuela de Ingeniería en Sistemas y Computación}\\
+{\bfseries Programa de Ingeniería de Sistemas}\\
+{\bfseries Tuluá}\\
+{\bfseries 2025}
+
+\end{center}
+\end{titlepage}
+}
+
+% --------------------------------------------
 \begin{document}
-\maketitle
 
-\renewcommand{\abstractname}{Resumen}
+\portada
+\pagenumbering{roman}
 
-\begin{abstract}
-El presente anteproyecto propone el diseño y desarrollo de un prototipo web interactivo orientado a facilitar la comprensión de los fundamentos de interpretación y compilación de lenguajes de programación. El prototipo permitirá a los estudiantes definir gramáticas y visualizar tanto las estructuras sintácticas resultantes (como árboles de sintaxis abstracta) como el ambiente y los cambios en el estado durante el proceso de evaluación conceptual de programas, sin incluir mecanismos de ejecución paso a paso ni funcionalidades de depuración.
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
 
-El proyecto se enmarca en principios de usabilidad y en enfoques constructivistas del aprendizaje, y busca funcionar como un recurso complementario para la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación} de la Universidad del Valle, apoyando la comprensión de conceptos clave mediante representaciones gráficas y recursos interactivos.
-\end{abstract}
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
 
-\renewcommand{\IEEEkeywordsname}{Palabras clave}
+\input{sections/abstract}
 
-\begin{IEEEkeywords}
-compiladores, intérpretes, lenguajes formales, tecnología educativa
-\end{IEEEkeywords}
+\vspace{1cm}
 
-\renewcommand{\thesection}{\arabic{section}}
-\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
-\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
-\setcounter{secnumdepth}{4}
-\renewcommand{\theparagraph}{\thesubsubsection.\arabic{paragraph}}
+\textbf{Palabras clave:} compiladores, intérpretes, lenguajes formales, tecnología educativa
 
+\newpage
+
+% --------------------------------------------
+% CAPÍTULOS
+% --------------------------------------------
+
+\chapter{Introducción}
 \input{sections/introduction}
+
+\chapter{Formulación del problema}
 \input{sections/problem_formulation}
+
+\chapter{Marco de referencia}
 \input{sections/framework}
+
+\chapter{Alcance del proyecto}
 \input{sections/scope}
+
+\chapter{Metodología}
 \input{sections/methodology}
-% Sección de cronograma
+
+%\chapter{Cronograma}
+%\input{section/timeline}
+  
+\chapter{Presupuesto}
 \input{sections/estimate}
+
+\chapter{Impacto ambiental}
 \input{sections/environmental}
 
+% --------------------------------------------
+% BIBLIOGRAFÍA
+% --------------------------------------------
 \bibliographystyle{IEEEtran}
 \bibliography{references}
-
 
 \end{document}
