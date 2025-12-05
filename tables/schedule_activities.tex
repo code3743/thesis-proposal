@@ -9,8 +9,11 @@
 \definecolor{docu}{RGB}{200,200,200}
 
 
-\begin{table}[H]
+\begin{table}[ht]
 \centering
+\caption{Cronograma de actividades del proyecto.}
+\label{fig:programa-hitos}
+\scalebox{0.89}{
 \resizebox{\textwidth}{!}{
 \begin{ganttchart}[
     hgrid,
@@ -84,8 +87,5 @@
 \ganttbar[bar/.append style={fill=docu}]{Correcciones y entrega}{32}{32} \\
 
 \end{ganttchart}
-}
-\vspace{2pt}
-\caption{Programa de hitos del proyecto.}
-\label{fig:programa-hitos}
+}}
 \end{table}
