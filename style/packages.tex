@@ -1,47 +1,79 @@
-% ===============================
-% Required packages
-% ===============================
-
-% Codificación
-\usepackage[utf8]{inputenc} % opcional con TeX Live >= 2020
-\usepackage[T1]{fontenc}
-
-% Idioma del documento
+% --------------------------------------------
+% CONFIGURACIÓN GENERAL ICONTEC
+% --------------------------------------------
+\usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
-\selectlanguage{spanish}
-
-% Matemáticas y símbolos
-\usepackage{amsmath, amssymb}
-
-% Gráficos y figuras
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
 \usepackage{graphicx}
-\graphicspath{{figures/}}
-
-% Tablas y formato
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{array}
-\usepackage{tabularx}
+\usepackage{longtable}
 \usepackage{float}
-\usepackage{siunitx} % opcional para números con decimales
-
-% Citas y enlaces
-\usepackage{cite}
-\usepackage{url}
-
-% Colores
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{times}
+\usepackage{pdfpages}
+\usepackage{pgfgantt}
 \usepackage{xcolor}
 
-% Listas personalizadas
-\usepackage{enumitem}
+% --------------------------------------------
+% CONFIGURACIÓN ICONTEC: Nomenclatura y Numeración de Tablas
+% --------------------------------------------
+\usepackage{caption}
+\usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[justification=raggedright,singlelinecheck=false]{caption}
 
-% Enlaces clicables
-\usepackage[hidelinks]{hyperref}
-
-% Ajustar nombres de figuras y tablas al español
-\addto\captionsspanish{%
-  \renewcommand{\figurename}{Figura}
-  \renewcommand{\tablename}{Tabla}
+\AtBeginDocument{%
+    \ifdef{\tablename}{\renewcommand{\tablename}{Tabla}}{}
+    \ifdef{\figurename}{\renewcommand{\figurename}{Figura}}{}
 }
 
-\renewcommand{\arraystretch}{1.6}
+\counterwithin{table}{chapter} 
+
+\counterwithout{table}{chapter} 
+
+% --------------------------------------------
+
+% MÁRGENES ICONTEC
+\geometry{
+  left=3cm,
+  right=3cm,
+  top=3cm,
+  bottom=3cm
+}
+
+% Interlineado 1.5 ICONTEC
+\onehalfspacing
+
+% --------------------------------------------
+% FORMATO DE TÍTULOS ICONTEC
+% --------------------------------------------
+
+% CAPÍTULO: 1 INTRODUCCIÓN
+% (Centrado, mayúscula sostenida, sin punto final)
+\titleformat{\chapter}[block]
+  {\bfseries\large\centering}
+  {\thechapter}
+  {1em}
+  {\MakeUppercase}
+
+\titlespacing{\chapter}{0pt}{0pt}{2\baselineskip}
+
+% SECCIÓN NIVEL 2 (alineada a la izquierda)
+\titleformat{\section}
+  {\bfseries}
+  {\thesection}
+  {1em}
+  {}
+
+% SUBSECCIÓN NIVEL 3 (mayúscula inicial)
+\titleformat{\subsection}
+  {\normalfont}
+  {\thesubsection}
+  {1em}
+  {}
+
+
+% --------------------------------------------

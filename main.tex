@@ -1,116 +1,7 @@
 \documentclass[12pt,oneside]{report}
 
-% --------------------------------------------
-% CONFIGURACIÓN GENERAL ICONTEC
-% --------------------------------------------
-\usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
-\usepackage{setspace}
-\usepackage{geometry}
-\usepackage{hyperref}
-\usepackage{titlesec}
-\usepackage{graphicx}
-\usepackage{longtable}
-\usepackage{float}
-\usepackage{multirow}
-\usepackage{tabularx}
-\usepackage{times}
-
-% --------------------------------------------
-% CONFIGURACIÓN ICONTEC: Nomenclatura y Numeración de Tablas
-% --------------------------------------------
-\usepackage{caption}
-\usepackage{etoolbox}
-\usepackage{chngcntr}
-\usepackage[justification=raggedright,singlelinecheck=false]{caption}
-
-\AtBeginDocument{%
-    \ifdef{\tablename}{\renewcommand{\tablename}{Tabla}}{}
-    \ifdef{\figurename}{\renewcommand{\figurename}{Figura}}{}
-}
-
-\counterwithin{table}{chapter} 
-
-\counterwithout{table}{chapter} 
-
-% --------------------------------------------
-
-% MÁRGENES ICONTEC
-\geometry{
-  left=3cm,
-  right=3cm,
-  top=3cm,
-  bottom=3cm
-}
-
-% Interlineado 1.5 ICONTEC
-\onehalfspacing
-
-% --------------------------------------------
-% FORMATO DE TÍTULOS ICONTEC
-% --------------------------------------------
-
-% CAPÍTULO: 1 INTRODUCCIÓN
-% (Centrado, mayúscula sostenida, sin punto final)
-\titleformat{\chapter}[block]
-  {\bfseries\large\centering}
-  {\thechapter}
-  {1em}
-  {\MakeUppercase}
-
-\titlespacing{\chapter}{0pt}{0pt}{2\baselineskip}
-
-% SECCIÓN NIVEL 2 (alineada a la izquierda)
-\titleformat{\section}
-  {\bfseries}
-  {\thesection}
-  {1em}
-  {}
-
-% SUBSECCIÓN NIVEL 3 (mayúscula inicial)
-\titleformat{\subsection}
-  {\normalfont}
-  {\thesubsection}
-  {1em}
-  {}
-
-% --------------------------------------------
-% PORTADA ICONTEC (Univalle)
-% --------------------------------------------
-\newcommand{\portada}{
-\begin{titlepage}
-\thispagestyle{empty}
-\begin{center}
-
-{\bfseries\Large Prototipo web para apoyar la enseñanza de Fundamentos de Interpretación y Compilación de Lenguajes de Programación mediante lenguajes orientados por sintaxis}
-
-\vfill\vfill\vfill
-
-{\bfseries Jota Emilio López Ramírez}\\[0.3cm]
-{\bfseries Esmeralda Rivas Guzmán}
-
-\vfill\vfill
-
-{\bfseries Anteproyecto de Trabajo de Grado}
-
-\vfill\vfill
-
-{\bfseries Director}\\
-{\bfseries Carlos Andrés Delgado Saavedra}
-
-\vfill\vfill\vfill\vfill\vfill\vfill
-
-{\bfseries Universidad del Valle}\\
-{\bfseries Escuela de Ingeniería en Sistemas y Computación}\\
-{\bfseries Programa de Ingeniería de Sistemas}\\
-{\bfseries Tuluá}\\
-{\bfseries 2025}
-
-\end{center}
-\end{titlepage}
-}
-
-% --------------------------------------------
+\input{style/packages}
+\input{style/commands.tex}
 \begin{document}
 
 \portada
@@ -149,9 +40,8 @@
 
 \chapter{Metodología}
 \input{sections/methodology}
-
-%\chapter{Cronograma}
-%\input{section/timeline}
+\chapter{Programa de hitos}
+\input{sections/milestones_program.tex}
   
 \chapter{Presupuesto}
 \input{sections/estimate}
@@ -164,5 +54,6 @@
 % --------------------------------------------
 \bibliographystyle{IEEEtran}
 \bibliography{references}
+\include{annexes/annexes}
 
 \end{document}
