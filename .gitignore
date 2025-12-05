@@ -19,9 +19,7 @@
 *.vrb
 *.xdv
 
-# Intermediate PDFs (keep only the final one if needed)
-*.pdf
-!main.pdf 
+
 
 # Latexmk and TeXShop/TeXworks
 *.dvi
