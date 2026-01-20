@@ -63,3 +63,5 @@ latex.out/
 logs/
 *.synctex(busy)
 *.synctex.gz(busy)
+
+main.pdf
