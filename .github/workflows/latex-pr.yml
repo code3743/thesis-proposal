@@ -24,7 +24,7 @@ jobs:
         run: |
           mkdir -p preview/pr-${{ github.event.number }}
 
-          cp thesis.pdf preview/pr-${{ github.event.number }}/thesis.pdf
+          cp main.pdf preview/pr-${{ github.event.number }}/thesis.pdf
 
           cat << 'EOF' > preview/pr-${{ github.event.number }}/index.html
           <!DOCTYPE html>
