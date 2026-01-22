@@ -56,7 +56,7 @@ jobs:
         with:
           script: |
             const pr = context.payload.pull_request.number;
-            const url = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-${pr}/`;
+            const url = `https://jotalopez.dev/pr-${pr}/`;
 
             github.rest.issues.createComment({
               owner: context.repo.owner,
@@ -64,3 +64,4 @@ jobs:
               issue_number: pr,
               body: `📄 **Preview del PDF actualizado**:\n\n👉 ${url}`
             });
+
