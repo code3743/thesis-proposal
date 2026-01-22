@@ -55,8 +55,10 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const repo = context.repo.repo;
             const pr = context.payload.pull_request.number;
-            const url = `https://jotalopez.dev/pr-${pr}/`;
+
+            const url = `https://jotalopez.dev/${repo}/pr-${pr}/`;
 
             github.rest.issues.createComment({
               owner: context.repo.owner,
@@ -64,4 +66,5 @@ jobs:
               issue_number: pr,
               body: `📄 **Preview del PDF actualizado**:\n\n👉 ${url}`
             });
+
 
