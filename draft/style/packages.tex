@@ -1,0 +1,80 @@
+% --------------------------------------------
+% CONFIGURACIÓN GENERAL ICONTEC
+% --------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{times}
+\usepackage{pdfpages}
+\usepackage{pgfgantt}
+\usepackage{xcolor}
+
+% --------------------------------------------
+% CONFIGURACIÓN ICONTEC: Nomenclatura y Numeración de Tablas
+% --------------------------------------------
+\usepackage{caption}
+\usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[justification=raggedright,singlelinecheck=false]{caption}
+
+\AtBeginDocument{%
+    \ifdef{\tablename}{\renewcommand{\tablename}{Tabla}}{}
+    \ifdef{\figurename}{\renewcommand{\figurename}{Figura}}{}
+}
+
+\counterwithin{table}{chapter} 
+
+\counterwithout{table}{chapter} 
+
+% --------------------------------------------
+
+% MÁRGENES ICONTEC
+\geometry{
+  left=3cm,
+  right=3cm,
+  top=3cm,
+  bottom=3cm
+}
+
+% Interlineado 1.5 ICONTEC
+\onehalfspacing
+
+% --------------------------------------------
+% FORMATO DE TÍTULOS ICONTEC
+% --------------------------------------------
+
+% CAPÍTULO: 1 INTRODUCCIÓN
+% (Centrado, mayúscula sostenida, sin punto final)
+\titleformat{\chapter}[block]
+  {\bfseries\large\centering}
+  {\thechapter}
+  {1em}
+  {\MakeUppercase}
+
+\titlespacing{\chapter}{0pt}{0pt}{2\baselineskip}
+
+% SECCIÓN NIVEL 2 (alineada a la izquierda)
+\titleformat{\section}
+  {\bfseries}
+  {\thesection}
+  {1em}
+  {}
+
+% SUBSECCIÓN NIVEL 3 (mayúscula inicial)
+\titleformat{\subsection}
+  {\normalfont}
+  {\thesubsection}
+  {1em}
+  {}
+
+
+% --------------------------------------------

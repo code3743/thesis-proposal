@@ -1,0 +1,91 @@
+
+
+% Colores suaves (pastel)
+\definecolor{diag}{RGB}{166,206,227}
+\definecolor{req}{RGB}{202,178,214}
+\definecolor{des}{RGB}{178,223,138}
+\definecolor{impl}{RGB}{251,154,153}
+\definecolor{eval}{RGB}{255,255,153}
+\definecolor{docu}{RGB}{200,200,200}
+
+
+\begin{table}[ht]
+\centering
+\caption{Cronograma de actividades del proyecto.}
+\label{fig:programa-hitos}
+\scalebox{0.89}{
+\resizebox{\textwidth}{!}{
+\begin{ganttchart}[
+    hgrid,
+    vgrid,
+    bar label font=\small,
+    bar height=0.6,
+    group label font=\normalsize\bfseries,
+    x unit=0.5cm,
+    y unit chart=0.8cm
+]{1}{32}
+
+\gantttitle{Semanas}{32} \\
+\gantttitlelist{1,...,32}{1} \\
+
+% -------------------------------
+% 1. DIAGNÓSTICO
+% -------------------------------
+\ganttgroup{1. Diagnóstico}{1}{4} \\
+
+\ganttbar[bar/.append style={fill=diag}]{Revisión bibliográfica}{1}{2} \\
+\ganttbar[bar/.append style={fill=diag}]{Identificación de conceptos clave}{2}{3} \\
+\ganttbar[bar/.append style={fill=diag}]{Documento de diagnóstico}{4}{4} \\
+
+% -------------------------------
+% 2. REQUISITOS
+% -------------------------------
+\ganttgroup{2. Requisitos}{5}{7} \\
+
+\ganttbar[bar/.append style={fill=req}]{Análisis de requisitos}{5}{5} \\
+\ganttbar[bar/.append style={fill=req}]{Priorización y backlog}{6}{6} \\
+\ganttbar[bar/.append style={fill=req}]{Criterios de aceptación}{6}{7} \\
+
+% -------------------------------
+% 3. DISEÑO
+% -------------------------------
+\ganttgroup{3. Diseño}{8}{12} \\
+
+\ganttbar[bar/.append style={fill=des}]{Diseño de arquitectura}{8}{9} \\
+\ganttbar[bar/.append style={fill=des}]{Mockups y UI}{9}{10} \\
+\ganttbar[bar/.append style={fill=des}]{Diseño de AST y visualizaciones}{10}{11} \\
+\ganttbar[bar/.append style={fill=des}]{Revisión de diseño}{12}{12} \\
+
+% -------------------------------
+% 4. IMPLEMENTACIÓN
+% -------------------------------
+\ganttgroup{4. Implementación}{13}{26} \\
+
+\ganttbar[bar/.append style={fill=impl}]{Sprint 1: Setup + base}{13}{14} \\
+\ganttbar[bar/.append style={fill=impl}]{Sprint 2: Editor v1}{15}{16} \\
+\ganttbar[bar/.append style={fill=impl}]{Sprint 3: AST básico}{17}{18} \\
+\ganttbar[bar/.append style={fill=impl}]{Sprint 4: AST mejorado}{19}{20} \\
+\ganttbar[bar/.append style={fill=impl}]{Sprint 5: Ambiente evaluación}{21}{22} \\
+\ganttbar[bar/.append style={fill=impl}]{Sprint 6: Integración completa}{23}{24} \\
+\ganttbar[bar/.append style={fill=impl}]{Sprint 7: Refactor + pruebas}{25}{26} \\
+
+% -------------------------------
+% 5. EVALUACIÓN
+% -------------------------------
+\ganttgroup{5. Evaluación}{27}{30} \\
+
+\ganttbar[bar/.append style={fill=eval}]{Diseño del protocolo}{27}{27} \\
+\ganttbar[bar/.append style={fill=eval}]{Pruebas + SUS}{28}{29} \\
+\ganttbar[bar/.append style={fill=eval}]{Análisis de resultados}{30}{30} \\
+
+% -------------------------------
+% 6. DOCUMENTO FINAL
+% -------------------------------
+\ganttgroup{6. Documento final}{31}{32} \\
+
+\ganttbar[bar/.append style={fill=docu}]{Redacción final}{31}{31} \\
+\ganttbar[bar/.append style={fill=docu}]{Correcciones y entrega}{32}{32} \\
+
+\end{ganttchart}
+}}
+\end{table}

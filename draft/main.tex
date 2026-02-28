@@ -1,0 +1,62 @@
+\documentclass[12pt,oneside]{report}
+
+\input{style/packages}
+\input{style/commands.tex}
+\begin{document}
+
+\portada
+\contraportada
+\pagenumbering{roman}
+
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+
+\input{sections/abstract}
+
+\vspace{1cm}
+
+\textbf{Palabras clave:} compiladores, intérpretes, lenguajes formales, tecnología educativa
+
+\newpage
+
+% --------------------------------------------
+% CAPÍTULOS
+% --------------------------------------------
+
+\chapter{Introducción}
+\input{sections/introduction}
+
+\chapter{Formulación del problema}
+\input{sections/problem_formulation}
+
+\chapter{Marco de referencia}
+\input{sections/framework}
+
+\chapter{Alcance del proyecto}
+\input{sections/scope}
+
+\chapter{Metodología}
+\input{sections/methodology}
+\chapter{Programa de hitos}
+\input{sections/milestones_program.tex}
+  
+\chapter{Presupuesto}
+\input{sections/estimate}
+
+\chapter{Impacto ambiental}
+\input{sections/environmental}
+
+\input{sections/glossary.tex}
+
+% --------------------------------------------
+% BIBLIOGRAFÍA
+% --------------------------------------------
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\include{annexes/annexes}
+
+\end{document}
