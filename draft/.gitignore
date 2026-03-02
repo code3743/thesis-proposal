@@ -64,6 +64,4 @@ logs/
 *.synctex(busy)
 *.synctex.gz(busy)
 
-%OUTDIR%/
-
 main.pdf

@@ -1,62 +1,203 @@
-\documentclass[12pt,oneside]{report}
+\documentclass[letterpaper, 11pt, oneside]{book}
 
-\input{style/packages}
-\input{style/commands.tex}
+\usepackage[utf8]{inputenc} %Para configuración de caracteres
+\usepackage[spanish]{babel} %Para configuración de idioma
+
+\usepackage{float} %Para que funcionen las tablas
+\usepackage{anysize} %Para usar márgenes
+%\marginsize{2cm}{2cm}{2cm}{2cm} %{izquierda}{derecha}{arriba}{abajo}. La superior esta sobre 1, la derecha sobre -0.5 y la de abajo sobre 2 (por el número de página)
+%tablas
+\usepackage{fancyhdr}
+%tablas
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{subcaption}
+%rotar tablas (y usar \includegraphics )
+\usepackage{rotating}
+%Dividir en diagonal
+%\usepackage{slashbox}
+%color tablas
+\usepackage{colortbl}
+%colocar tabla en lugar de cuadro
+
+
+\usepackage[notlof,notlot,nottoc]{tocbibind} %Para que la biliografía se llame así y no referencias y para que quede numerada como sección.
+%\usepackage[notlof,notlot,nottoc]{tocbibind} %Bibliografía sin numerar
+
+\bibliographystyle{ieeetr} %Estilo de bibliografía IEEE
+
+\usepackage{url} % inserción url's notas de pie.
+
+%Para poder colocar texto en color
+\usepackage{color}
+\definecolor{naranja}{rgb}{1,0.5,0} % valores de las componentes roja, verde y azul (RGB)
+\definecolor{rojo}{rgb}{1,0,0}
+\definecolor{SteelBlue}{rgb}{0.3,0.5,0.7}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{claregreen}{RGB}{4,180,95}
+\usepackage{listingsutf8}
+\lstset{ %
+  basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+  numberstyle=\footnotesize,          % the size of the fonts that are used for the line-numbers
+  numbersep=4pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;{}
+  extendedchars=false,
+  inputencoding=utf8, 
+}
+
+
+%Para tener los bookmarks del pdf (menú al lado derecho en los visualizadores de pdf)
+% si colorlinks= true, no salen las cajas, sino el color del link!!
+% linkcolor para los indices, citecolor para las citas en texto, urlcolor para los enlaces
+\usepackage[pdftex,bookmarks=true, pdfauthor={Carlos Delgado}, linkcolor=black, citecolor=black, colorlinks=true, urlcolor=black]{hyperref}
+           
+\usepackage{enumitem} % Para poder continuar enumerate en otras partes
+
+\usepackage{pdflscape}%Para colocar páginas horizontales en el PDF
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{todonotes}
+\usepackage{parskip}
+\usepackage{subcaption}
+\usepackage{footmisc}
+\usepackage{gensymb}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 \begin{document}
+	
+\renewcommand{\tablename}{Tabla}
+%%%Portada%%%
+\input{Capitulo_0/1_Portada.tex}
 
-\portada
-\contraportada
-\pagenumbering{roman}
 
-\tableofcontents
+\renewcommand{\thepage}{\roman{page}}
+%%%%%%Dedicatoria%%%%%
+%\input{Capitulo_0/2_Dedicatoria}
+
+%%%%%%%%Agradecimientos%%%%%%%
 \newpage
-\pagenumbering{arabic}
+\input{Capitulo_0/3_Agradecimientos.tex}
+
+
+%%%%%%%%%%Tabla de contenido%%%%%%
+\renewcommand{\contentsname}{Tabla de Contenido}
+\tableofcontents
+
+\renewcommand{\listfigurename}{Lista de Figuras}
+\listoffigures 
+
+\renewcommand{\listtablename}{Lista de tablas}
+\listoftables
 
 \chapter*{Resumen}
-\addcontentsline{toc}{chapter}{Resumen}
+\label{capResumen}
+\addcontentsline{toc}{chapter}{\nameref{capResumen}}
 
-\input{sections/abstract}
+\input{Capitulo_0/4_Resumen.tex}
 
-\vspace{1cm}
+\thispagestyle{empty}
 
-\textbf{Palabras clave:} compiladores, intérpretes, lenguajes formales, tecnología educativa
 
-\newpage
+%%%%%%%%%%%%%%Introducción%%%%%%
+\chapter*{Introducción}
+\label{capIntro}
+\addcontentsline{toc}{chapter}{\nameref{capIntro}}
+\input{Capitulo_0/5_Introduccion.tex}
+\thispagestyle{empty}
 
-% --------------------------------------------
-% CAPÍTULOS
-% --------------------------------------------
+%%%%%Capitulo UNO: Contexto y objetivos%%%%%%%%%%%%%
 
-\chapter{Introducción}
-\input{sections/introduction}
+\chapter{Contexto y objetivos}
+\label{cap1}
+\markboth{Contexto y objetivos}{Contexto y objetivos}
+\renewcommand{\thepage}{\arabic{page}}
+\setcounter{page}{1}
+%%%%Formulación del problema%%%%%%%
+\input{Capitulo_1/1_PlanteamientoProblema.tex}
 
-\chapter{Formulación del problema}
-\input{sections/problem_formulation}
+%%%%Objetivos%%%%
+\input{Capitulo_1/2_Objetivos.tex}
 
-\chapter{Marco de referencia}
-\input{sections/framework}
+%%%%Alcance%%%%
+\input{Capitulo_1/3_Alcance.tex}
 
-\chapter{Alcance del proyecto}
-\input{sections/scope}
+%%%%Estructura%%%%
+\input{Capitulo_1/4_Estructura.tex}
 
-\chapter{Metodología}
-\input{sections/methodology}
-\chapter{Programa de hitos}
-\input{sections/milestones_program.tex}
-  
-\chapter{Presupuesto}
-\input{sections/estimate}
 
-\chapter{Impacto ambiental}
-\input{sections/environmental}
+%%%%%%Capitulo DOS: Marco teórico%%%%%
 
-\input{sections/glossary.tex}
+\chapter[Marco Referencial]{Marco Referencial}
+\label{cap2}
+\markboth{Marco Referencial}{Marco Referencial}
 
-% --------------------------------------------
-% BIBLIOGRAFÍA
-% --------------------------------------------
-\bibliographystyle{IEEEtran}
-\bibliography{references}
-\include{annexes/annexes}
+\input{Capitulo_2/1_Glosario.tex}
+
+\input{Capitulo_2/2_MarcoTeorico/1_SistemaHipermedia.tex}
+\input{Capitulo_2/2_MarcoTeorico/2_EstilosCognitivos.tex}
+\input{Capitulo_2/2_MarcoTeorico/4_OVA.tex}
+\input{Capitulo_2/2_MarcoTeorico/3_MetodologiaMethadis.tex}
+\input{Capitulo_2/2_MarcoTeorico/5_XP.tex}
+
+\input{Capitulo_2/3_Antecedentes.tex}
+
+%%%%%%%Capitulo TRES: Identificación de las dificultades%%%%%%
+\chapter[Identificación de las dificultades que presentan los estudiantes de grado 10$^{\circ}$]{Identificación de las dificultades que presentan los estudiantes de grado 10$^{\circ}$ }
+\label{cap3}
+\markboth{Identificación de las dificultades que presentan los estudiantes de grado 10$^{\circ}$}{Identificación de las dificultades que presentan los estudiantes de 10$^{\circ}$ }
+
+\input{Capitulo_3/1_Encuesta.tex}
+
+
+%%%%%%%Capitulo Cuatro: Diseño y desarrollo del Proyecto %%%%%%
+
+\chapter{Diseño y desarrollo del Proyecto}\label{cap4}
+\markboth{Diseño y desarrollo del Proyecto}{Diseño y desarrollo del Proyecto}
+
+\input{Capitulo_4/1_Methadis.tex}
+\input{Capitulo_4/2_XP/1_Exploracion.tex}
+\input{Capitulo_4/2_XP/2_Planificacion.tex}
+\input{Capitulo_4/2_XP/3_Iteraciones.tex}
+\input{Capitulo_4/2_XP/4_Produccion.tex}
+
+%%%%%Capitulo Cinco: Pruebas cognitivas y de usabilidad%%%%%%%%
+\chapter{Pruebas cognitivas y de usabilidad}\label{cap5}
+
+\markboth{Pruebas cognitivas y de usabilidad}{Pruebas cognitivas y de usabilidad}
+
+\input{Capitulo_5/PruebasCognitivasUsabilidad.tex}
+
+
+%%%%%%Capitulo Seis: Conclusiones y trabajos Futuros%%%%%%%%%%%%%
+\chapter{Conclusiones y trabajos futuros}\label{cap6}
+\markboth{Conclusiones y trabajos futuros}{Conclusiones y trabajos futuros}
+
+\input{Capitulo_6/1_Conclusiones.tex}
+\input{Capitulo_6/2_TrabajosFuturos.tex}
+
+%%%%%BIBLIOGRAFIA%%%%%%%%
+\bibliography{Bibliografia}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ANEXOS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\chapter*{Anexos}
+%\addcontentsline{toc}{chapter}{Anexos}
+%\markboth{Anexos}{Anexos}
+
+%\input{CapituloAAnexos/1-RedesEstudio.tex}
+%\input{CapituloAAnexos/2-ProtocoloDePruebas.tex}
+%\input{CapituloAAnexos/3-Pruebas.tex}
+
 
 \end{document}
