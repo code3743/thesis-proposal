@@ -1,0 +1,119 @@
+\chapter{Encuesta aplicada a docentes de la asignatura FLP}
+\label{annex:encuesta-docentes}
+
+El siguiente instrumento fue aplicado a 3 docentes con experiencia en la impartición de la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación} en la Universidad del Valle, sede Tuluá. Los datos consignados corresponden a estimaciones obtenidas a partir del contacto con el cuerpo docente durante el desarrollo del proyecto.
+
+\section*{Instrucciones}
+
+Por favor responda con base en su experiencia docente en la asignatura FLP. Las respuestas son confidenciales y tienen como fin identificar las principales dificultades de los estudiantes para orientar el diseño de una herramienta educativa de apoyo.
+
+\section*{Bloque I — Perfil docente}
+
+\begin{enumerate}
+    \item Número de semestres que ha dictado la asignatura FLP:
+    \begin{enumerate}
+        \item 1 – 2 semestres
+        \item 3 – 5 semestres
+        \item Más de 5 semestres
+    \end{enumerate}
+
+    \item Enfoque metodológico principal que utiliza en la asignatura:
+    \begin{enumerate}
+        \item Clases magistrales con ejercicios guiados.
+        \item Proyectos de implementación progresiva (intérpretes/compiladores).
+        \item Combinación de ambas.
+        \item Otro: \underline{\hspace{6cm}}
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Bloque II — Dificultades observadas en los estudiantes}
+
+\begin{enumerate}
+    \setcounter{enumi}{2}
+
+    \item ¿Ha observado deficiencias generales en los estudiantes que ingresan a la asignatura?
+    \begin{enumerate}
+        \item Sí, de manera consistente.
+        \item En ocasiones.
+        \item No.
+    \end{enumerate}
+
+    \item ¿En cuáles cursos previos observa mayores falencias que afectan el desempeño en FLP? \textit{(puede marcar varias)}:
+    \begin{enumerate}
+        \item Matemáticas discretas (lógica proposicional, relaciones, conjuntos).
+        \item Teoría de lenguajes y autómatas.
+        \item Estructuras de datos (árboles, pilas, recursión).
+        \item Programación funcional.
+        \item Otro: \underline{\hspace{6cm}}
+    \end{enumerate}
+
+    \item Indique el nivel de dificultad que observa en sus estudiantes para cada concepto de la asignatura, usando la escala:
+
+    \begin{center}
+    \textbf{1 = Ninguna \quad 2 = Leve \quad 3 = Moderada \quad 4 = Alta \quad 5 = Muy alta}
+    \end{center}
+
+    \begin{longtable}{|p{9cm}|p{0.5cm}|p{0.5cm}|p{0.5cm}|p{0.5cm}|p{0.5cm}|}
+        \hline
+        \textbf{Concepto} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} \\
+        \hline
+        Definición y lectura de gramáticas libres de contexto & & & & & \\ \hline
+        Análisis sintáctico (\textit{parsing}) y construcción de derivaciones & & & & & \\ \hline
+        Construcción e interpretación de árboles de sintaxis abstracta (AST) & & & & & \\ \hline
+        Gestión de ambientes de ejecución y alcance léxico & & & & & \\ \hline
+        Clausuras y funciones de orden superior & & & & & \\ \hline
+        Definiciones dirigidas por sintaxis (SDD) & & & & & \\ \hline
+        \caption{Instrumento — Dificultad observada por docentes en estudiantes de FLP.\\
+        \scriptsize \textbf{Fuente:} Elaboración propia.}
+        \label{tab:instrumento-docentes}
+    \end{longtable}
+\end{enumerate}
+
+\section*{Bloque III — Herramientas y estrategias didácticas}
+
+\begin{enumerate}
+    \setcounter{enumi}{5}
+
+    \item ¿Ha utilizado estrategias o materiales adicionales para apoyar la comprensión de los conceptos más abstractos de la asignatura?
+    \begin{enumerate}
+        \item Sí, con buenos resultados.
+        \item Sí, pero con resultados limitados.
+        \item No, no he encontrado recursos adecuados.
+    \end{enumerate}
+
+    \item En su opinión, ¿cuál es la principal limitación de Racket y la librería EOPL como herramientas pedagógicas?
+    \begin{enumerate}
+        \item La curva de aprendizaje técnica consume tiempo que podría usarse en los conceptos.
+        \item No exponen visualmente los procesos internos de interpretación.
+        \item Los estudiantes sin experiencia previa en programación funcional tienen dificultades para configurarlas.
+        \item Otra: \underline{\hspace{6cm}}
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Bloque IV — Valoración de herramientas interactivas}
+
+\begin{enumerate}
+    \setcounter{enumi}{7}
+
+    \item ¿Considera que una herramienta web interactiva que permita definir gramáticas, visualizar el AST y representar los cambios en el ambiente de ejecución mejoraría la comprensión de los estudiantes?
+    \begin{enumerate}
+        \item Sí, significativamente.
+        \item Probablemente sí.
+        \item No lo sé.
+        \item Probablemente no.
+    \end{enumerate}
+
+    \item ¿Qué características considera imprescindibles en dicha herramienta? \textit{(puede marcar varias)}:
+    \begin{enumerate}
+        \item Acceso desde el navegador sin instalación.
+        \item Ejemplos predefinidos de gramáticas y programas de menor a mayor complejidad.
+        \item Visualización gráfica del AST con posibilidad de explorar cada nodo.
+        \item Representación paso a paso de los cambios en el ambiente de ejecución.
+        \item Retroalimentación inmediata ante errores sintácticos o semánticos.
+        \item Otra: \underline{\hspace{6cm}}
+    \end{enumerate}
+
+    \item Comentarios adicionales sobre las dificultades que observa y los recursos que harían falta: \underline{\hspace{12cm}}
+
+    \underline{\hspace{14cm}}
+\end{enumerate}
