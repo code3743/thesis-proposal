@@ -59,7 +59,7 @@
 %Para tener los bookmarks del pdf (menú al lado derecho en los visualizadores de pdf)
 % si colorlinks= true, no salen las cajas, sino el color del link!!
 % linkcolor para los indices, citecolor para las citas en texto, urlcolor para los enlaces
-\usepackage[pdftex,bookmarks=true, pdfauthor={Carlos Delgado}, linkcolor=black, citecolor=black, colorlinks=true, urlcolor=black]{hyperref}
+\usepackage[pdftex,bookmarks=true, pdfauthor={Jota López Ramírez and Esmeralda Rivas Guzmán}, pdftitle={Prototipo web para apoyar la enseñanza de Fundamentos de Interpretación y Compilación de Lenguajes de Programación mediante lenguajes orientados por sintaxis}, linkcolor=black, citecolor=black, colorlinks=true, urlcolor=black]{hyperref}
            
 \usepackage{enumitem} % Para poder continuar enumerate en otras partes
 
@@ -152,10 +152,10 @@
 
 \input{Capitulo_2/3_Antecedentes.tex}
 
-%%%%%%%Capitulo TRES: Identificación de las dificultades%%%%%%
-\chapter[Identificación de las dificultades que presentan los estudiantes de grado 10$^{\circ}$]{Identificación de las dificultades que presentan los estudiantes de grado 10$^{\circ}$ }
+%%%%%%%Capitulo TRES: Identificación de las dificultades conceptuales%%%%%%
+\chapter[Identificación de dificultades conceptuales en la asignatura FLP]{Identificación de dificultades conceptuales en la asignatura FLP}
 \label{cap3}
-\markboth{Identificación de las dificultades que presentan los estudiantes de grado 10$^{\circ}$}{Identificación de las dificultades que presentan los estudiantes de 10$^{\circ}$ }
+\markboth{Identificación de dificultades conceptuales en la asignatura FLP}{Identificación de dificultades conceptuales en la asignatura FLP}
 
 \input{Capitulo_3/1_Encuesta.tex}
 
@@ -191,13 +191,12 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ANEXOS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\chapter*{Anexos}
-%\addcontentsline{toc}{chapter}{Anexos}
-%\markboth{Anexos}{Anexos}
+\appendix
+\addcontentsline{toc}{chapter}{Anexos}
+\markboth{Anexos}{Anexos}
 
-%\input{CapituloAAnexos/1-RedesEstudio.tex}
-%\input{CapituloAAnexos/2-ProtocoloDePruebas.tex}
-%\input{CapituloAAnexos/3-Pruebas.tex}
+\input{CapituloAAnexos/1_EncuestaEstudiantes.tex}
+\input{CapituloAAnexos/2_EncuestaDocentes.tex}
 
 
 \end{document}

@@ -1,13 +1,47 @@
 \section{Alcance}
 
-El presente trabajo está enfocado en la creación de un sistema hipermedia con características adaptativas para la enseñanza de Física del grado 10$^{\circ}$ de la Institución Educativa Juan María Céspedes. 
+Este proyecto comprende el diseño y desarrollo de un \textit{prototipo web educativo} orientado a apoyar la comprensión de conceptos fundamentales de interpretación y compilación de lenguajes de programación. El alcance técnico incluye: (1)~la definición y edición de \textit{gramáticas con sintaxis configurable} por el usuario, (2)~la visualización de \textit{árboles de sintaxis abstracta (AST)} generados a partir de dichas gramáticas, y (3)~la representación de los \textit{cambios en el ambiente de ejecución} durante la evaluación de programas escritos bajo la gramática definida.
 
-A través de una entrevista dirigida a los docentes de la asignatura de Física de la Institución Educativa Juan María Céspedes, la cual tenía como objetivo principal determinar los temas que se les dificulta a los estudiantes en dicha asignatura; los docentes indicaron que los temas relacionados con la cinemática son los que presentan mayor dificultad a los estudiantes, puesto que su nivel de complejidad es alto, debido a que, la cinemática reúne ciertos temas de periodos académicos anteriores los cuales los estudiantes no tienen presentes y por ello no tienen buenas bases para la comprensión de la cinemática. Por consiguiente, los subtemas de la cinemática serán tratados en el sistema hipermedia con características adaptativas. 
+El prototipo se limita a funcionalidades demostrativas orientadas al aprendizaje, cubriendo únicamente aquellos conceptos de la asignatura que, de acuerdo con la literatura y la experiencia docente, presentan mayores niveles de dificultad para los estudiantes. No se pretende soportar un lenguaje completo de propósito general ni mecanismos avanzados de ejecución.
 
-Por otro lado, en un sistema hipermedia con características adaptativas, se puede realizar un acercamiento adaptativo de la presentación y la navegación del sistema. En este caso, la aplicación buscó las opciones de navegación apropiadas las cuales se basaron en los estilos cognitivos de los usuarios de los autores Witkin y Goodenough \cite{Witkin}, el cual  el usuario al registrarse por primera vez al sistema, se le presentará un test de figuras enmascaradas que permitirá determinar cuál es  el estilo cognitivo apropiado y por consiguiente presentar el tipo de navegación apropiada.
+La investigación se desarrolla en el contexto de la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación} del programa de Ingeniería de Sistemas de la Universidad del Valle, sede Tuluá. La población de estudio está compuesta por los estudiantes matriculados en la asignatura y el docente responsable. No obstante, debido al tiempo disponible para la realización del trabajo de grado, la evaluación del prototipo se llevará a cabo con un grupo reducido de entre 10 y 20 estudiantes, quienes participarán en pruebas de funcionalidad, usabilidad y retroalimentación cualitativa.
 
-El diseño de los módulos de la aplicación está destinado a tres tipos de usuarios (estudiante, docente y administrador) que realizan diversas actividades dentro de esta. El módulo del estudiante permite acceder al contenido de la aplicación desde el monitor para llevar a cabo el proceso de aprendizaje pertinente, también desarrollar cuestionarios planteados acerca de los temas de la cinemática y consultar el progreso de los temas. El módulo del docente proporciona diversas actividades específicas: permite acceder al contenido de la aplicación web desde el monitor, permite consultar las calificaciones de los estudiantes de los cuestionarios previamente diligenciados, establecer las preguntas y respuestas que deben tener los cuestionarios y habilitar a los estudiantes para que ingresen a la aplicación. Por último, el módulo del administrador proporciona diversas actividades específicas las cuales se muestran a continuación: Permite registrar a los estudiantes, docentes, registrar las preguntas y respuestas de los cuestionarios, consultar los estudiantes, docentes y cuestionarios pertenecientes a la aplicación, por último, editar su perfil de usuario.
+El proyecto adopta un enfoque \textit{experimental y evaluativo} que comprende el análisis documental, el diseño e implementación del prototipo web y la realización de pruebas cualitativas centradas en la comprensión conceptual y la experiencia de uso. Quedan fuera del alcance aspectos como la depuración paso a paso, la compilación a código máquina, la autenticación o persistencia de usuarios, el despliegue en infraestructura productiva, la optimización de rendimiento y las evaluaciones pedagógicas de impacto a largo plazo.
 
-El sistema hipermedia con características adaptativas está alojado en el servidor de la Institución Educativa Juan María Céspedes; debido a que se reduce los costos al tener previamente invertido en servidores y hardware; por otro lado, se obtiene una mayor accesibilidad a la información y se puede escalar según las necesidades, por otro lado, el sistema soporta los navegadores: Google Chrome y Mozilla Firefox y algunos dispositivos móviles como smartphones y tablets.
+\subsection{Entregables del Proyecto}
 
-Por último, cabe resaltar que el desarrollo de este sistema hipermedia es con características adaptativas, por lo cual no es totalmente adaptable al usuario, es un prototipo funcional que permite servir de guía de apoyo para nuevos trabajos futuros donde estos trabajos puedan adaptar la presentación y se implementen sistemas de agentes inteligentes, es decir, que los sistemas que se desprenden de este trabajo de grado sean capaces de aprender y acoplarse al método o manera en el que el usuario entiende un tema específico, proporcionando las herramientas necesarias para llevar a cabo el aprendizaje.
+\begin{enumerate}
+    \item \textbf{Prototipo web funcional:} desplegado en un entorno de pruebas, con las capacidades definidas en el alcance: definición de gramáticas, visualización de árboles de sintaxis abstracta y representación de cambios en el ambiente de ejecución.
+
+    \item \textbf{Documentación técnica:} descripción de la arquitectura del sistema, tecnologías utilizadas, decisiones de diseño y guía de instalación y despliegue.
+
+    \item \textbf{Manual de usuario:} guía dirigida a estudiantes y docentes que explique cómo utilizar las funcionalidades del prototipo.
+
+    \item \textbf{Código fuente:} repositorio con el código completo, debidamente documentado y versionado, acompañado de un archivo README con instrucciones de instalación y ejecución.
+\end{enumerate}
+
+\subsection{Restricciones y Supuestos}
+
+\paragraph{Restricciones temporales}
+
+El proyecto debe completarse en un período total de ocho meses, lo cual limita el alcance de las funcionalidades a implementar y la profundidad de la evaluación.
+
+\paragraph{Restricciones de recursos humanos}
+
+El desarrollo estará a cargo de dos estudiantes de trabajo de grado, lo que restringe la complejidad y cantidad de características que pueden incorporarse. La participación de estudiantes en las pruebas de usabilidad depende del calendario académico y de su disponibilidad voluntaria durante el período de evaluación.
+
+\paragraph{Restricciones tecnológicas}
+
+El prototipo debe funcionar en navegadores web modernos sin requerir instalaciones adicionales, garantizando compatibilidad con los dispositivos comúnmente utilizados por los estudiantes. No se cuenta con infraestructura institucional garantizada para el despliegue, por lo que este se limitará a servicios gratuitos o de bajo costo. La selección tecnológica debe considerar la curva de aprendizaje del equipo y privilegiar herramientas con documentación amplia y comunidades activas.
+
+\paragraph{Restricciones de evaluación}
+
+No es posible medir el impacto en el aprendizaje a largo plazo, dado que esto requeriría estudios experimentales prolongados con grupos de control y seguimiento por varios semestres. Por lo tanto, la evaluación se restringirá a funcionalidad técnica y usabilidad, mediante cuestionarios estandarizados, con una muestra entre 10 y 20 estudiantes.
+
+\paragraph{Supuestos del contexto educativo}
+
+Se asume que los estudiantes cuentan con conocimientos básicos de programación y estructuras de datos. También se supone la disposición de un grupo de estudiantes para participar voluntariamente en las pruebas, así como la colaboración del docente para facilitar el acceso a la asignatura y permitir la presentación del prototipo.
+
+\paragraph{Supuestos técnicos}
+
+Se asume la viabilidad técnica de implementar un \textit{parser} para gramáticas libres de contexto y un generador de AST con rendimiento adecuado para uso interactivo. Se presupone que las tecnologías web modernas permitirán desarrollar visualizaciones dinámicas sin dependencias externas ni instalación adicional en el navegador.
