@@ -2,6 +2,7 @@
 
 \usepackage[utf8]{inputenc} %Para configuración de caracteres
 \usepackage[spanish]{babel} %Para configuración de idioma
+\addto\captionsspanish{\renewcommand{\appendixname}{Anexo}}
 
 \usepackage{float} %Para que funcionen las tablas
 \usepackage{anysize} %Para usar márgenes
@@ -70,6 +71,7 @@
 \usepackage{todonotes}
 \usepackage{parskip}
 \usepackage{subcaption}
+\usepackage{placeins}
 \usepackage{footmisc}
 \usepackage{gensymb}
 \setcounter{secnumdepth}{3}
@@ -87,18 +89,18 @@
 
 %%%%%%%%Agradecimientos%%%%%%%
 \newpage
-\input{Capitulo_0/3_Agradecimientos.tex}
+%\input{Capitulo_0/3_Agradecimientos.tex}
 
 
 %%%%%%%%%%Tabla de contenido%%%%%%
-%\renewcommand{\contentsname}{Tabla de Contenido}
-%\tableofcontents
+\renewcommand{\contentsname}{Tabla de Contenido}
+\tableofcontents
 
-%\renewcommand{\listfigurename}{Lista de Figuras}
-%\listoffigures 
+\renewcommand{\listfigurename}{Lista de Figuras}
+\listoffigures 
 
-%\renewcommand{\listtablename}{Lista de tablas}
-%\listoftables
+\renewcommand{\listtablename}{Lista de tablas}
+\listoftables
 
 \chapter*{Resumen}
 \label{capResumen}
@@ -144,47 +146,15 @@
 
 \input{Capitulo_2/1_Glosario.tex}
 
-\input{Capitulo_2/2_MarcoTeorico/1_SistemaHipermedia.tex}
-\input{Capitulo_2/2_MarcoTeorico/2_EstilosCognitivos.tex}
-\input{Capitulo_2/2_MarcoTeorico/4_OVA.tex}
-\input{Capitulo_2/2_MarcoTeorico/3_MetodologiaMethadis.tex}
-\input{Capitulo_2/2_MarcoTeorico/5_XP.tex}
-
-\input{Capitulo_2/3_Antecedentes.tex}
-
 %%%%%%%Capitulo TRES: Identificación de las dificultades%%%%%%
-\chapter[Identificación de las dificultades que presentan los estudiantes de grado 10$^{\circ}$]{Identificación de las dificultades que presentan los estudiantes de grado 10$^{\circ}$ }
+\chapter[Diagnóstico de dificultades conceptuales]{Diagnóstico de dificultades conceptuales}
 \label{cap3}
-\markboth{Identificación de las dificultades que presentan los estudiantes de grado 10$^{\circ}$}{Identificación de las dificultades que presentan los estudiantes de 10$^{\circ}$ }
+\markboth{Diagnóstico de dificultades conceptuales}{Diagnóstico de dificultades conceptuales}
 
-\input{Capitulo_3/1_Encuesta.tex}
-
-
-%%%%%%%Capitulo Cuatro: Diseño y desarrollo del Proyecto %%%%%%
-
-\chapter{Diseño y desarrollo del Proyecto}\label{cap4}
-\markboth{Diseño y desarrollo del Proyecto}{Diseño y desarrollo del Proyecto}
-
-\input{Capitulo_4/1_Methadis.tex}
-\input{Capitulo_4/2_XP/1_Exploracion.tex}
-\input{Capitulo_4/2_XP/2_Planificacion.tex}
-\input{Capitulo_4/2_XP/3_Iteraciones.tex}
-\input{Capitulo_4/2_XP/4_Produccion.tex}
-
-%%%%%Capitulo Cinco: Pruebas cognitivas y de usabilidad%%%%%%%%
-\chapter{Pruebas cognitivas y de usabilidad}\label{cap5}
-
-\markboth{Pruebas cognitivas y de usabilidad}{Pruebas cognitivas y de usabilidad}
-
-\input{Capitulo_5/PruebasCognitivasUsabilidad.tex}
-
-
-%%%%%%Capitulo Seis: Conclusiones y trabajos Futuros%%%%%%%%%%%%%
-\chapter{Conclusiones y trabajos futuros}\label{cap6}
-\markboth{Conclusiones y trabajos futuros}{Conclusiones y trabajos futuros}
-
-\input{Capitulo_6/1_Conclusiones.tex}
-\input{Capitulo_6/2_TrabajosFuturos.tex}
+\input{Capitulo_3/1_Diagnostico.tex}
+\input{Capitulo_3/2_EncuestaEstudiante.tex}
+\input{Capitulo_3/3_EncuestaDocente.tex}
+\input{Capitulo_3/4_ConceptosBase.tex}
 
 %%%%%BIBLIOGRAFIA%%%%%%%%
 \bibliography{Bibliografia}
@@ -199,5 +169,7 @@
 %\input{CapituloAAnexos/2-ProtocoloDePruebas.tex}
 %\input{CapituloAAnexos/3-Pruebas.tex}
 
+\appendix
+\include{annexes/annexes}
 
 \end{document}
