@@ -1,0 +1,69 @@
+\section{Revisión del microcurrículo}
+El microcurrículo de la asignatura FLP organiza sus contenidos en torno a tres competencias específicas y una competencia genérica, articuladas a través de tres resultados de aprendizaje y veinte indicadores de logro distribuidos con pesos diferenciados en las actividades de evaluación.
+
+El \textbf{Resultado de Aprendizaje 1 (R.A.1)}, con un peso del {40\%} sobre la nota total, abarca la construcción de datos recursivos mediante gramáticas BNF, el manejo del cálculo lambda, alcance de variables, implementación de tipos abstractos de datos y la construcción de árboles de sintaxis abstracta. Este R.A sienta la bases formales sobre las que se construye todo el trabajo posterior de la asignatura. 
+
+El \textbf{Resultado de Aprendizaje 2 (R.A.2)}, con el mayor peso de la asignatura ({50\%}), se centra en la implementación de lenguajes con ambientes de variables, el recorrido del AST, la construcción de intérpretes básicos y la implementación de conceptos como condicionales, clausuras, estado y paso de parámetros. La profundidad de este resultado, sumado a su peso evaluativo, lo convierte en el eje central de la asignatura y en la fuente principal de dificultades reportadas por los estudiantes.
+
+El \textbf{Resultado de Aprendizaje 3 (R.A.3)}, con un peso del {5\%}, tiene un carácter más conceptual, puesto que se enfoca en que los estudiantes comprendan las diferencias entre compilación e interpretación identificando sus beneficios y limitaciones.  
+
+La \textbf{Competencia Genérica (C.G.2)}, con un peso del {5\%}, integra varios indicadores del R.A.2 en la construcción de un intérprete completo evaluado en el proyecto final de la asignatura.
+
+\section{Selección de conceptos base para el prototipo}
+
+A partir de las dificultades reportadas por los estudiantes, las percepciones del cuerpo docente y la revisión del microcurrículo, se seleccionaron cinco indicadores de logro como base conceptual para la biblioteca de casos predefinidos del prototipo. El criterio de selección combinó tres factores, entre los que se encuentran el nivel de dificultad reportado por los estudiantes, el peso evaluativo en el microcurrículo y la viabilidad de representación visual e interactiva en una herramienta web.
+
+La Tabla \ref{tabla:indicadores_logro_prototipo} presenta los indicadores de logro seleccionados, junto con su relación con los resultados de aprendizaje y una justificación para su inclusión en el prototipo. 
+
+\begin{table}[H]
+\centering
+\caption{Indicadores de logro seleccionados como base para el prototipo}
+\label{tabla:indicadores_logro_prototipo}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+
+\begin{tabular}{
+>{\centering\arraybackslash}p{1.5cm}
+>{\raggedright\arraybackslash}p{3.8cm}
+>{\centering\arraybackslash}p{1cm}
+>{\raggedright\arraybackslash}p{7cm}
+}
+\hline
+\textbf{ID} & \textbf{Indicador de logro} & \textbf{R.A.} & \textbf{Justificación} \\
+\hline
+
+\textbf{IL 1.1.6} &
+Construye un árbol de sintaxis abstracta a partir de una representación concreta en una gramática BNF &
+R.A.1 &
+El AST es la estructura central del proceso de interpretación. Los estudiantes reportan dificultades para visualizar cómo una cadena de texto se transforma en una representación jerárquica; su visualización dinámica es la funcionalidad más distintiva del prototipo. \\
+
+\textbf{IL 1.2.3} &
+Construye intérpretes básicos para dos conjuntos de valores (valor expresado, valor denotado) &
+R.A.2 &
+Corresponde al primer nivel de construcción de intérpretes, donde se establece la relación entre la gramática, el AST y la evaluación. Es el punto de entrada natural para comprender el proceso completo de interpretación. \\
+
+\textbf{IL 1.2.6} &
+Implementa lenguajes de programación con el concepto de estado asociado al manejo de ambientes para variables en lenguajes imperativos &
+R.A.2 &
+El concepto de estado y su representación mediante ambientes fue identificado como el de mayor dificultad por los estudiantes (77.8\,\% reportó dificultades con entornos y estado). La representación visual de cómo evoluciona el ambiente durante la ejecución es uno de los aportes centrales del prototipo. \\
+
+\textbf{IL 1.2.7} &
+Comprende la diferencia entre ligadura y asignación de variables &
+R.A.2 &
+La distinción entre ligadura y asignación es conceptualmente sutil y frecuentemente confundida. Su representación visual mediante ambientes permite hacer explícita la diferencia que el código por sí solo no comunica con claridad. \\
+
+\textbf{IL 1.3.1} &
+Identifica los componentes necesarios de un intérprete y un compilador &
+R.A.3 &
+Provee el marco conceptual global que da sentido al resto de los contenidos. Comprender la arquitectura de un intérprete permite al estudiante situar cada concepto específico dentro de un proceso coherente. \\
+\hline
+
+\end{tabular}
+
+\vskip 4pt
+\footnotesize\textit{Fuente: elaboración propia a partir del microcurrículo de la asignatura (código 750017C).}
+\end{table}
+
+\FloatBarrier
+
+Estos cinco indicadores cubren los dos ejes de dificultad identificados en el diagnóstico. Por un lado, el eje sintáctico estructural, representado por IL 1.1.6, que corresponde a la construcción del AST. Por otro lado, el eje semántico-evaluativo, representado por IL 1.2.3, 1.2.6 y 1.2.7, referentes a la construcción del intérprete y el manejo del ambiente, complementado por el eje conceptual arquitectónico (IL 1.3.1).

@@ -1,0 +1,58 @@
+\section{Análisis de la encuesta a estudiantes}
+
+\subsection{Resultados cuantitativos}
+
+La Tabla \ref{tabla:encuesta_estudiantes} presenta la distribución de respuestas para los siete ítems Likert de la encuesta aplicada a los 36 estudiantes.
+
+\begin{table}[H]
+  \centering
+  \caption{Distribución de respuestas - encuesta a estudiantes de FLP ($n = 36$)}
+  \label{tabla:encuesta_estudiantes}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+
+  \begin{tabular}{>{\raggedright\arraybackslash}p{4.2cm} >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.2cm} c >{\centering\arraybackslash}p{1.3cm} >{\centering\arraybackslash}p{1.3cm} cc}
+    \hline
+    \textbf{Ítem} & \textbf{Tot. desac.} & \textbf{En desac.} & \textbf{Neutral} & \textbf{De acuerdo} & \textbf{Tot. acuerdo} & \textbf{\% Acuerdo} & \textbf{\% Desacuerdo} \\
+    \hline
+    P1. Comprendí adecuadamente los conceptos teóricos & 8.3 \% & 19.4 \% & 27.8 \% & 36.1 \% & 8.3 \% & \textbf{44.4 \%} & 27.8 \% \\
+    P2. Las clases magistrales fueron útiles & 0.0 \% & 8.3 \% & 36.1 \% & 33.3 \% & 22.2 \% & \textbf{55.6 \%} & 8.3 \% \\
+    P3. Me siento preparado para aplicar los conceptos & 8.3 \% & 36.1 \% & 36.1 \% & 19.4 \% & 0.0 \% & \textbf{19.4 \%} & 44.4 \% \\
+    P4. Tuve dificultades con conceptos abstractos & 2.8 \% & 13.9 \% & 5.6 \% & 52.8 \% & 25.0 \% & \textbf{77.8 \%} & 16.7 \% \\
+    P5. Racket y EOPL facilitaron la comprensión & 13.9 \% & 25.0 \% & 41.7 \% & 19.4 \% & 0.0 \% & \textbf{19.4 \%} & 38.9 \% \\
+    P6. Fue fácil encontrar recursos externos & 16.7 \% & 44.4 \% & 22.2 \% & 5.6 \% & 11.1 \% & \textbf{16.7 \%} & 61.1 \% \\
+    P7. Recursos adicionales habrían mejorado mi aprendizaje & 0.0 \% & 2.8 \% & 2.8 \% & 38.9 \% & 55.6 \% & \textbf{94.4 \%} & 2.8 \% \\
+    \hline
+  \end{tabular}
+
+  \vskip 4pt
+  \footnotesize\textit{Fuente: elaboración propia.}
+\end{table}
+
+\FloatBarrier
+
+Los resultados permiten identificar cuatro hallazgos clave:
+
+\paragraph{Brecha entre comprensión teórica y aplicación práctica}: Aunque el 44.4\% de los estudiantes se mostraron de acuerdo en haber comprendido adecuadamente los conceptos teóricos (P1), solo el 19.4\% se sintieron preparados para aplicarlos en otros cursos o proyectos (P3). Esta diferencia de puntos porcentuales revela que la comprensión teorica de los contenidos no se traduce necesariamente en una comprensión funcional que permita su uso autónomo. Adicionalmente, el procentaje de respuestas neutrales en P3 (36.1\%) es significativamente mayor que en P1 (27.8\%), lo que sugiere que muchos estudiantes no tienen una opinión clara sobre su preparación para aplicar los conceptos, lo que refuerza la idea de una brecha entre teoría y práctica.
+
+\paragraph{Alta incidencia de dificultades con conceptos abstractos}: El ítem P4 concentra el mayor porcentaje de acuerdo de toda la encuesta, el {77.8\%} de los partipantes reportó haber tenido dificultades para comprender conceptos como entornos, estado o secuenciación. Este dato es especialmente significativo porque estos conceptos corresponden directamente al segundo resultado de aprendizaje (R.A.2) del microcurrículo de FLP, el cual concentra el {50\%} del total de la nota de la asignatura.
+
+\paragraph{Percepción negativa o neutra de Racket y EOPL como herramientas de aprendizaje}: El ítem P5 muestra que solo que el {19.4\%} de los estudiantes consideró que Racket y EOPL facilitaron su comprensión, mientras que el {38.9\%} estuvo en desacuerdo y el {41.7\%} restante se mantuvo neutral. Este resultado sugiere que, para la mayoría de los participantes, las herramientas actuales no representan un apoyo claro al aprendizaje, lo que se alinea con la teoría de la carga cognitiva de Sweller, donde la sintaxis de Racket actúa como una carga extrínseca que satura la memoria de trabajo \cite{sweller2024cognitive} y obstaculiza la comprensión semántica al obligar al estudiante a agotar sus recursos mentales en el descifrado visual del código \cite{gordon2024linguistics}.
+
+\paragraph{Escasez de recursos externos y necesidad de herramientas adicionales}: El {61.1\%} de los estudiantes indicó que no fue fácil encontrar recursos externos de apoyo (P6), lo que apunta a un vacío en la disponibilidad de material complementario específico para los contenidos de la asignatura. Asimismo, el {94.4\%} de los encuestados consideró que recursos adicionales habrían mejorado su aprendizaje de manera significativa (P7), constituyendo el dato de mayor consenso en toda la encuesta. 
+
+\subsection{Resultados cualitativos}
+
+Del análisis temático de las recomendaciones proporcionadas por los estudiantes emergen cuatro categorías recurrentes:
+
+\paragraph{Necesidad de experimentación con retroalimentación inmediata.}
+Varios participantes señalaron que el principal obstáculo no es la complejidad conceptual en sí, sino la imposibilidad de explorar los conceptos en tiempo real con acompañamiento. Un estudiante sintetizó esta situación con precisión: \textit{``me gustaría poder tener al profesor en vivo para una pregunta, porque las dudas surgen a medida que uno va haciendo y practicando [...] me quedó el vacío de un diagrama de ambientes''}. Otro participante expresó la misma necesidad de forma más directa: \textit{``crear espacios donde los estudiantes puedan experimentar con Racket y la librería EOPL en tiempo real, con retroalimentación inmediata''}.
+
+\paragraph{Carga cognitiva de Racket como obstáculo al aprendizaje semántico.}
+La fricción generada por la sintaxis de Racket fue identificada de forma explícita por varios estudiantes como un factor que desplaza el foco del aprendizaje. El testimonio más detallado al respecto señala: \textit{``el principal obstáculo del curso es la carga cognitiva que impone Racket. [...] Los nombres de funciones internas (como \texttt{car}, \texttt{cdr} o \texttt{map}) y la estructura visual plana terminan desplazando el foco de la semántica de lenguajes hacia la resolución de errores sintácticos''}. 
+
+\paragraph{Limitaciones de la metodología de aula invertida.}
+Cuatro estudiantes mencionaron explícitamente la metodología de aula invertida como un factor de dificultad. Sus comentarios señalan que este modelo, si bien puede ser efectivo en otros contextos, resulta especialmente problemático para una asignatura con alto nivel de abstracción, donde la orientación directa del docente durante la exposición inicial de los conceptos es percibida como necesaria: \textit{``con aula invertida es muy difícil entender''}; \textit{``mayor explicación, resolver ejercicios desde cero con estudiantes''}.
+
+\paragraph{Complejidad acumulada en los temas del último corte.}
+Dos participantes señalaron que los temas de mayor dificultad se concentran en el tramo final del semestre, los cuales están relacionados con estado, paso de parámetros y tipos. Además, el ritmo de avance no permite profundizar en ellos adecuadamente: \textit{``tomar más tiempo para la enseñanza de los temas más complejos que se ven en el último corte''}.
