@@ -1,6 +1,6 @@
 El presente capítulo documenta los resultados correspondientes al diseño del prototipo. En primer lugar, se presenta la especificación de requisitos del sistema, derivada del diagnóstico realizado en el capítulo anterior y de los indicadores de logro seleccionados como base conceptual del prototipo. En segundo lugar, se describe la arquitectura adoptada, la selección y justificación de tecnologías, los prototipos de interfaz de usuario y las estrategias de visualización implementadas para apoyar la comprensión de los contenidos de la asignatura FLP.
 
-\section{Resultados del Objetivo Específico 2: Especificación de requisitos del sistema}
+\section{Especificación de requisitos del sistema}
 
 \subsection{Enfoque metodológico}
 
@@ -75,15 +75,17 @@ RNF-05 & Escalabilidad & La arquitectura debe permitir incorporar nuevos ejemplo
 
 \FloatBarrier
 
-\section{Resultados del Objetivo Específico 3: Diseño del prototipo}
+\section{Diseño del prototipo}
 
 \subsection{Arquitectura del sistema}
 
 La arquitectura del prototipo se estructuró en tres capas principales: infraestructura de despliegue, servidor y cliente. Esta separación de responsabilidades permite que el procesamiento computacionalmente intensivo (la ejecución de Racket) ocurra en el servidor, mientras que la interfaz de usuario opera íntegramente en el navegador sin necesidad de recargas de página \cite{Fielding2000REST}.
 
+Las decisiones arquitectónicas del sistema se fundamentan en tres criterios: la simplicidad operativa requerida por el alcance del prototipo, el aislamiento de la ejecución de código arbitrario y la minimización de la latencia percibida por el usuario. En cuanto al primer criterio, se optó por una arquitectura monolítica de servidor único en lugar de una arquitectura de microservicios. Fowler y Lewis señalan que los microservicios introducen una complejidad operativa significativa —en términos de coordinación entre servicios, trazabilidad distribuida y gestión de fallos— que solo se justifica cuando la escala o la independencia de despliegue de los componentes lo requieren \cite{fowler2014microservices}; dado que el prototipo cuenta con un equipo de desarrollo reducido y un conjunto acotado de funcionalidades, la arquitectura monolítica resulta más adecuada para el alcance del proyecto. En cuanto al segundo criterio, la ejecución de Racket se delega a un subproceso del servidor Node.js en lugar de separarse como servicio independiente: cada invocación opera en un proceso con tiempo límite estricto y directorio temporal propio, lo que garantiza que un programa en bucle infinito o con comportamiento inesperado no comprometa el servidor principal \cite{tanenbaum2015modern}. Finalmente, respecto al tercer criterio, el pipeline de transformación de gramática se ubicó íntegramente en el cliente, acercando el cómputo al punto de generación de los datos y eliminando la latencia de red para las validaciones inmediatas \cite{Fielding2000REST}; esto es viable dado que la carga computacional del pipeline es baja y no requiere acceso a recursos del servidor.
+
 \subsubsection{Infraestructura de despliegue}
 
-El sistema se despliega mediante Docker Compose con dos servicios. El primero es un servidor nginx que actúa como reverse proxy y recibe las solicitudes HTTP en el puerto 80. El segundo es el contenedor de la aplicación, el cual incluye el runtime de Node.js y el intérprete de Racket instalado como dependencia del sistema operativo. Esta configuración garantiza la reproducibilidad del entorno de ejecución independientemente del sistema operativo del servidor \cite{merkel2014docker}.
+El sistema se despliega mediante Docker Compose con dos servicios. El primero es un servidor nginx que actúa como reverse proxy\footnote{Un \textit{reverse proxy} es un servidor interpuesto entre el cliente y el servidor de aplicación que recibe las solicitudes entrantes y las reenvía al servicio interno correspondiente, ocultando los detalles de la infraestructura backend y permitiendo aplicar reglas de seguridad, balanceo de carga o compresión de manera centralizada.} y recibe las solicitudes HTTP en el puerto 80. El segundo es el contenedor de la aplicación, el cual incluye el runtime de Node.js y el intérprete de Racket instalado como dependencia del sistema operativo. Esta configuración garantiza la reproducibilidad del entorno de ejecución independientemente del sistema operativo del servidor \cite{merkel2014docker}.
 
 \subsubsection{Capa de servidor}
 
@@ -97,7 +99,7 @@ El componente \texttt{PlaygroundLayout} actúa como orquestador del lado del cli
 
 \begin{figure}[H]
     \centering
-    \todo[inline, color=yellow!30]{Insertar diagrama de arquitectura generado desde arquitectura.puml}
+    \includegraphics[width=\textwidth]{Capitulo_4/imagenes/arquitectura.png}
     \caption{Diagrama de arquitectura del sistema FLP Viewer}
     \scriptsize \textbf{Fuente:} Elaboración propia
     \label{fig:arquitectura}
@@ -164,7 +166,7 @@ La interfaz principal se organiza en cinco zonas funcionales, cuya distribución
 
 \begin{figure}[H]
     \centering
-    \todo[inline, color=yellow!30]{Insertar wireframe de la interfaz principal}
+    \includegraphics[width=0.92\textwidth]{Capitulo_4/imagenes/wireframe-principal.png}
     \caption{Wireframe de la interfaz principal del prototipo FLP Viewer}
     \scriptsize \textbf{Fuente:} Elaboración propia
     \label{fig:wireframe-principal}
@@ -176,7 +178,7 @@ Adicionalmente, se diseñó un modal de gramática (Figura \ref{fig:wireframe-gr
 
 \begin{figure}[H]
     \centering
-    \todo[inline, color=yellow!30]{Insertar wireframe del modal de gramática BNF}
+    \includegraphics[width=0.80\textwidth]{Capitulo_4/imagenes/wireframe-gramatica.png}
     \caption{Wireframe del modal de definición de gramática BNF}
     \scriptsize \textbf{Fuente:} Elaboración propia
     \label{fig:wireframe-gramatica}
