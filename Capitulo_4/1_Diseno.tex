@@ -89,13 +89,11 @@ El sistema se despliega mediante Docker Compose con dos servicios. El primero es
 
 \subsubsection{Capa de servidor}
 
-El servidor ejecuta Next.js con soporte de React Server Components (RSC). El componente raíz \texttt{page.tsx} se renderiza en el servidor durante la solicitud inicial y se encarga de cargar desde el sistema de archivos los ejemplos predefinidos y las secciones de ayuda, transmitiendo estos datos como propiedades al componente cliente orquestador. De esta forma, la carga inicial de la aplicación no requiere peticiones adicionales al servidor para obtener estos recursos estáticos.
-
-El sistema expone además una ruta de API en \texttt{/api/run} que recibe los archivos del editor y la expresión de prueba, escribe los archivos en un directorio temporal del sistema operativo, e invoca el proceso Racket mediante \texttt{execFileAsync} con un tiempo límite de 15 segundos. El resultado, serializado en formato JSON, es devuelto al cliente como un arreglo de pasos de evaluación.
+La capa de servidor asume dos responsabilidades diferenciadas. La primera es el renderizado inicial de la interfaz: se planificó que los datos estáticos del sistema —ejemplos predefinidos y contenidos de ayuda— sean cargados desde el sistema de archivos en el momento del renderizado y transmitidos directamente a la capa cliente, eliminando la necesidad de peticiones adicionales tras la carga de la página. La segunda responsabilidad es la ejecución del intérprete: el servidor expone un punto de acceso interno que recibe los archivos del editor y la expresión a evaluar, lanza el proceso Racket de forma aislada con un tiempo límite configurable y devuelve al cliente el resultado de la evaluación estructurado como una secuencia de pasos.
 
 \subsubsection{Capa de cliente}
 
-El componente \texttt{PlaygroundLayout} actúa como orquestador del lado del cliente. Mantiene el estado global de la sesión de trabajo y coordina la interacción entre los subcomponentes de la interfaz. La Figura \ref{fig:arquitectura} ilustra la relación entre los componentes del sistema y el flujo de datos a través de las capas descritas.
+La capa cliente se diseñó con un componente orquestador central que mantiene el estado global de la sesión de trabajo y coordina la comunicación entre los distintos paneles de la interfaz. Este componente centraliza las transiciones de estado —inicio y fin de sesión, recepción de resultados, avance paso a paso— de forma que cada panel de visualización sea stateless y reciba únicamente los datos que necesita para renderizarse. La Figura \ref{fig:arquitectura} ilustra la relación entre los componentes del sistema y el flujo de datos a través de las capas descritas.
 
 \begin{figure}[H]
     \centering
@@ -109,7 +107,7 @@ El componente \texttt{PlaygroundLayout} actúa como orquestador del lado del cli
 
 \subsubsection{Pipeline de gramática}
 
-Un componente central de la arquitectura cliente es el pipeline de gramática, que opera íntegramente en el navegador sin intervención del servidor. Este pipeline transforma el texto BNF introducido por el usuario en cuatro archivos Racket listos para su ejecución. El proceso comprende tres etapas: análisis léxico (\texttt{bnf-lexer.ts}), análisis sintáctico (\texttt{bnf-parser.ts}) y generación de código mediante cuatro módulos especializados (\texttt{eopl-generator.ts}, \texttt{env-generator.ts}, \texttt{main-generator.ts}, \texttt{utils-generator.ts}). Al ejecutarse en el cliente, el pipeline ofrece retroalimentación inmediata sobre errores en la gramática BNF sin latencia de red, lo cual es coherente con el objetivo de reducir la carga extrínseca sobre el estudiante \cite{sweller2024cognitive}.
+Un componente transversal de la arquitectura cliente es el pipeline de transformación de gramática, que opera íntegramente en el navegador sin intervención del servidor. Se diseñó como una cadena de etapas independientes: análisis léxico de la notación BNF, análisis sintáctico para la construcción de una representación intermedia de la gramática, y generación de los archivos del intérprete a partir de dicha representación. La separación en etapas independientes permite reportar errores de forma precisa en el punto donde se originan —léxico o sintáctico— y facilita la extensión futura del pipeline sin modificar las etapas existentes \cite{aho2006compilers}. Al ejecutarse en el cliente, el pipeline ofrece retroalimentación inmediata sobre errores en la gramática sin latencia de red, lo cual es coherente con el objetivo de reducir la carga extrínseca sobre el estudiante \cite{sweller2024cognitive}.
 
 \subsection{Selección de tecnologías}
 
