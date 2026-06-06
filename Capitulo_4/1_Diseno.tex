@@ -1,0 +1,205 @@
+El presente capítulo documenta los resultados correspondientes al diseño del prototipo. En primer lugar, se presenta la especificación de requisitos del sistema, derivada del diagnóstico realizado en el capítulo anterior y de los indicadores de logro seleccionados como base conceptual del prototipo. En segundo lugar, se describe la arquitectura adoptada, la selección y justificación de tecnologías, los prototipos de interfaz de usuario y las estrategias de visualización implementadas para apoyar la comprensión de los contenidos de la asignatura FLP.
+
+\section{Resultados del Objetivo Específico 2: Especificación de requisitos del sistema}
+
+\subsection{Enfoque metodológico}
+
+La identificación y documentación de los requisitos del sistema se realizó siguiendo las directrices del estándar IEEE 830 \cite{ieee830} para la especificación de requisitos de software, adaptado al contexto educativo del proyecto. Los requisitos fueron derivados a partir de tres fuentes complementarias: las dificultades conceptuales identificadas en el diagnóstico con estudiantes y docentes (Capítulo 3), los indicadores de logro del microcurrículo de la asignatura (Tabla \ref{tabla:indicadores_logro_prototipo}) y las características de calidad de software definidas en la norma ISO/IEC 25010 \cite{iso25010}, que orientó la formulación de los requisitos no funcionales.
+
+Cada requisito fue clasificado por prioridad (Alta, Media) en función de su relevancia para los objetivos de aprendizaje identificados y de su viabilidad de implementación en el alcance del proyecto. Los criterios de aceptación asociados a cada requisito fueron formulados de manera verificable, haciendo referencia al comportamiento concreto del sistema implementado. La especificación completa se encuentra en el Anexo \ref{annex:rf}.
+
+\subsection{Requisitos funcionales}
+
+Se definieron ocho requisitos funcionales que cubren las capacidades esenciales del prototipo. La Tabla \ref{tab:rf_resumen} presenta el resumen de los mismos con su prioridad y una descripción concisa.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de requisitos funcionales del sistema}
+\label{tab:rf_resumen}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{1.4cm}
+  >{\raggedright\arraybackslash}p{5.2cm}
+  >{\raggedright\arraybackslash}p{6.5cm}
+  >{\centering\arraybackslash}p{1.3cm}
+}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Descripción resumida} & \textbf{Prioridad} \\
+\hline
+RF-01 & Generación del AST & Procesar el programa del usuario con la gramática definida y producir el AST correspondiente. & Alta \\
+RF-02 & Visualización del AST & Renderizar el AST generado de forma jerárquica e interactiva en un panel dedicado. & Alta \\
+RF-03 & Ejecución y evaluación & Invocar el intérprete Racket sobre los archivos del editor y mostrar el resultado en la consola. & Alta \\
+RF-04 & Representación del ambiente & Mostrar el ambiente de evaluación como estructura jerárquica de frames actualizada tras cada ejecución. & Alta \\
+RF-05 & Biblioteca de ejemplos & Ofrecer un conjunto de programas predefinidos alineados con los indicadores de logro de la asignatura. & Media \\
+RF-06 & Validación de sintaxis Racket & Detectar y reportar errores léxicos y sintácticos en la gramática BNF y en el programa del usuario. & Alta \\
+RF-07 & Visualización del intérprete & Presentar los archivos del intérprete generado (gramática, ambiente, evaluador) en un editor organizado por pestañas con secciones protegidas. & Media \\
+RF-08 & Plantilla base y exportación & Proveer una plantilla editable del intérprete con secciones bloqueadas y permitir la descarga del proyecto en formato \texttt{.zip}. & Alta \\
+\hline
+\end{tabular}
+\vskip 4pt
+\footnotesize\textit{Fuente: elaboración propia. Especificación completa en Anexo \ref{annex:rf}.}
+\end{table}
+
+\FloatBarrier
+
+\subsection{Requisitos no funcionales}
+
+Se definieron cinco requisitos no funcionales que establecen las condiciones de calidad del sistema. La Tabla \ref{tab:rnf_resumen} presenta el resumen correspondiente.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de requisitos no funcionales del sistema}
+\label{tab:rnf_resumen}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{1.4cm}
+  >{\raggedright\arraybackslash}p{3.5cm}
+  >{\raggedright\arraybackslash}p{8.2cm}
+  >{\centering\arraybackslash}p{1.3cm}
+}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Descripción resumida} & \textbf{Prioridad} \\
+\hline
+RNF-01 & Usabilidad & La interfaz debe ser operada sin instrucción previa por estudiantes sin experiencia avanzada en compiladores. & Alta \\
+RNF-02 & Rendimiento & La generación del AST y la evaluación del programa deben completarse en menos de 5 segundos en condiciones normales. & Alta \\
+RNF-03 & Accesibilidad web & El sistema debe ejecutarse en navegadores modernos sin instalación adicional ni autenticación. & Alta \\
+RNF-04 & Mantenibilidad & El código debe estar organizado en módulos independientes con separación explícita de tipos, lógica y presentación. & Media \\
+RNF-05 & Escalabilidad & La arquitectura debe permitir incorporar nuevos ejemplos, gramáticas o características sin afectar las funcionalidades existentes. & Media \\
+\hline
+\end{tabular}
+\vskip 4pt
+\footnotesize\textit{Fuente: elaboración propia. Especificación completa en Anexo \ref{annex:rf}.}
+\end{table}
+
+\FloatBarrier
+
+\section{Resultados del Objetivo Específico 3: Diseño del prototipo}
+
+\subsection{Arquitectura del sistema}
+
+La arquitectura del prototipo se estructuró en tres capas principales: infraestructura de despliegue, servidor y cliente. Esta separación de responsabilidades permite que el procesamiento computacionalmente intensivo (la ejecución de Racket) ocurra en el servidor, mientras que la interfaz de usuario opera íntegramente en el navegador sin necesidad de recargas de página \cite{Fielding2000REST}.
+
+\subsubsection{Infraestructura de despliegue}
+
+El sistema se despliega mediante Docker Compose con dos servicios. El primero es un servidor nginx que actúa como reverse proxy y recibe las solicitudes HTTP en el puerto 80. El segundo es el contenedor de la aplicación, el cual incluye el runtime de Node.js y el intérprete de Racket instalado como dependencia del sistema operativo. Esta configuración garantiza la reproducibilidad del entorno de ejecución independientemente del sistema operativo del servidor \cite{merkel2014docker}.
+
+\subsubsection{Capa de servidor}
+
+El servidor ejecuta Next.js con soporte de React Server Components (RSC). El componente raíz \texttt{page.tsx} se renderiza en el servidor durante la solicitud inicial y se encarga de cargar desde el sistema de archivos los ejemplos predefinidos y las secciones de ayuda, transmitiendo estos datos como propiedades al componente cliente orquestador. De esta forma, la carga inicial de la aplicación no requiere peticiones adicionales al servidor para obtener estos recursos estáticos.
+
+El sistema expone además una ruta de API en \texttt{/api/run} que recibe los archivos del editor y la expresión de prueba, escribe los archivos en un directorio temporal del sistema operativo, e invoca el proceso Racket mediante \texttt{execFileAsync} con un tiempo límite de 15 segundos. El resultado, serializado en formato JSON, es devuelto al cliente como un arreglo de pasos de evaluación.
+
+\subsubsection{Capa de cliente}
+
+El componente \texttt{PlaygroundLayout} actúa como orquestador del lado del cliente. Mantiene el estado global de la sesión de trabajo y coordina la interacción entre los subcomponentes de la interfaz. La Figura \ref{fig:arquitectura} ilustra la relación entre los componentes del sistema y el flujo de datos a través de las capas descritas.
+
+\begin{figure}[H]
+    \centering
+    \todo[inline, color=yellow!30]{Insertar diagrama de arquitectura generado desde arquitectura.puml}
+    \caption{Diagrama de arquitectura del sistema FLP Viewer}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:arquitectura}
+\end{figure}
+
+\FloatBarrier
+
+\subsubsection{Pipeline de gramática}
+
+Un componente central de la arquitectura cliente es el pipeline de gramática, que opera íntegramente en el navegador sin intervención del servidor. Este pipeline transforma el texto BNF introducido por el usuario en cuatro archivos Racket listos para su ejecución. El proceso comprende tres etapas: análisis léxico (\texttt{bnf-lexer.ts}), análisis sintáctico (\texttt{bnf-parser.ts}) y generación de código mediante cuatro módulos especializados (\texttt{eopl-generator.ts}, \texttt{env-generator.ts}, \texttt{main-generator.ts}, \texttt{utils-generator.ts}). Al ejecutarse en el cliente, el pipeline ofrece retroalimentación inmediata sobre errores en la gramática BNF sin latencia de red, lo cual es coherente con el objetivo de reducir la carga extrínseca sobre el estudiante \cite{sweller2024cognitive}.
+
+\subsection{Selección de tecnologías}
+
+La selección de tecnologías se realizó evaluando cuatro criterios: curva de aprendizaje del equipo de desarrollo, disponibilidad de documentación, viabilidad de implementación de las funcionalidades requeridas y compatibilidad entre las tecnologías seleccionadas. La Tabla \ref{tab:tecnologias} presenta la justificación de cada elección.
+
+\begin{table}[H]
+\centering
+\caption{Tecnologías seleccionadas y justificación}
+\label{tab:tecnologias}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{3.2cm}
+  >{\centering\arraybackslash}p{1.8cm}
+  >{\raggedright\arraybackslash}p{9cm}
+}
+\hline
+\textbf{Tecnología} & \textbf{Versión} & \textbf{Justificación} \\
+\hline
+Next.js \cite{nextjs} & 16.2.6 & Framework React con soporte nativo de Server Components y rutas de API integradas, lo que elimina la necesidad de un backend independiente y permite el renderizado inicial en el servidor sin configuración adicional. \\
+React \cite{react} & 19.2 & Biblioteca de interfaz de usuario con el ecosistema más amplio de la industria. Su modelo declarativo basado en componentes facilita la gestión del estado complejo de la sesión de trabajo. \\
+TypeScript \cite{typescript} & 5.9 & Superset tipado de JavaScript que permite definir contratos explícitos entre módulos mediante interfaces y tipos, reduciendo errores en tiempo de desarrollo en un sistema con múltiples flujos de datos heterogéneos. \\
+Monaco Editor \cite{monaco} & 0.55 & Motor del editor Visual Studio Code, disponible como librería independiente. Ofrece la API necesaria para marcar rangos de líneas como de solo lectura, funcionalidad indispensable para proteger el código generado automáticamente que el estudiante no debe modificar. \\
+Tailwind CSS \cite{tailwind} & 4 & Framework de estilos utilitarios que permite construir la interfaz directamente en el marcado sin archivos CSS separados, reduciendo el tiempo de desarrollo de la capa de presentación. \\
+Racket \cite{Friedman2008EPL} & 9.x & Lenguaje nativo de la asignatura FLP y plataforma de la librería EOPL. Su inclusión como motor de evaluación garantiza que el código generado por el prototipo sea directamente compatible con el entorno de trabajo utilizado por los estudiantes. \\
+Docker \cite{merkel2014docker} & --- & Plataforma de contenedores que garantiza la reproducibilidad del entorno de ejecución. Permite incluir Racket como dependencia del sistema operativo dentro del contenedor sin requerir su instalación en el servidor anfitrión. \\
+nginx & alpine & Servidor web de alto rendimiento empleado como reverse proxy. Gestiona las solicitudes entrantes y las redirige al proceso Node.js, permitiendo configuraciones de seguridad y compresión sin modificar el código de la aplicación. \\
+pnpm & 10 & Gestor de paquetes con almacenamiento eficiente de dependencias y soporte de workspaces. Reduce significativamente el tiempo de instalación en el entorno de construcción Docker respecto a npm. \\
+\hline
+\end{tabular}
+\vskip 4pt
+\footnotesize\textit{Fuente: elaboración propia.}
+\end{table}
+
+\FloatBarrier
+
+\subsection{Prototipos de interfaz de usuario}
+
+La distribución de la interfaz se diseñó con base en los principios de economía de la atención \cite{norman2013design} y en los hallazgos del diagnóstico, que evidenciaron que la fricción visual de las herramientas actuales desplaza la atención del estudiante desde la semántica del lenguaje hacia la resolución de errores sintácticos. Para mitigar este efecto, la disposición de zonas se estableció de forma que el flujo de trabajo del estudiante —definir gramática, editar el intérprete, ejecutar y observar resultados— se corresponda con un recorrido visual coherente dentro de una única pantalla, sin cambios de contexto abruptos.
+
+La interfaz principal se organiza en cinco zonas funcionales, cuya distribución se ilustra en el wireframe de la Figura \ref{fig:wireframe-principal}:
+
+\begin{enumerate}
+    \item \textbf{Barra de navegación} (zona superior): aloja el nombre de la herramienta, el acceso a la biblioteca de ejemplos, el botón de apertura del editor de gramática y los controles de sesión de ejecución.
+
+    \item \textbf{Panel de edición} (zona izquierda): contiene el editor de código con soporte para múltiples archivos organizados en pestañas. Las secciones del intérprete generadas automáticamente deben diferenciarse visualmente de las secciones habilitadas para edición por parte del estudiante.
+
+    \item \textbf{Panel del AST} (zona central): muestra la representación jerárquica del árbol de sintaxis abstracta producido por la última evaluación.
+
+    \item \textbf{Panel de ambiente} (zona derecha superior): presenta el estado del entorno de ejecución organizado en frames anidados, con los bindings activos en cada nivel de alcance.
+
+    \item \textbf{Panel de consola} (zona derecha inferior): recibe la entrada del usuario y muestra la salida de cada evaluación con diferenciación visual por tipo de mensaje.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \todo[inline, color=yellow!30]{Insertar wireframe de la interfaz principal}
+    \caption{Wireframe de la interfaz principal del prototipo FLP Viewer}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:wireframe-principal}
+\end{figure}
+
+\FloatBarrier
+
+Adicionalmente, se diseñó un modal de gramática (Figura \ref{fig:wireframe-gramatica}) que permite al estudiante ingresar la especificación léxica y la gramática en notación BNF en dos áreas de texto diferenciadas. Al confirmar la definición, el sistema genera los archivos del intérprete y los carga en el panel de edición. Este flujo de interacción mantiene la gramática y el intérprete en un vínculo explícito y visible para el estudiante, de forma que la relación entre la notación formal y el código generado sea directamente observable.
+
+\begin{figure}[H]
+    \centering
+    \todo[inline, color=yellow!30]{Insertar wireframe del modal de gramática BNF}
+    \caption{Wireframe del modal de definición de gramática BNF}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:wireframe-gramatica}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Estrategias de visualización}
+
+El diseño de las estrategias de visualización responde directamente a los dos ejes de dificultad identificados en el diagnóstico: el eje sintáctico-estructural, asociado a la comprensión del AST, y el eje semántico-evaluativo, asociado al seguimiento del estado durante la ejecución \cite{jovanovic2021comvis}.
+
+\subsubsection{Visualización del árbol de sintaxis abstracta}
+
+Se plantea renderizar el AST como una estructura de árbol jerárquico donde cada nodo representa un elemento de la gramática definida por el usuario. Esta correspondencia directa entre la notación BNF y la estructura resultante permite al estudiante conectar la gramática que definió con la representación interna que el parser produce, haciendo explícito un proceso que en el entorno de desarrollo habitual permanece opaco. Esta estrategia es consistente con los hallazgos de Stamenkovic et al. \cite{Stamenkovic2024AWE} y de Jovanovic et al. \cite{jovanovic2021comvis}, que identifican la visualización dinámica del AST como uno de los mecanismos más efectivos para apoyar la comprensión del análisis sintáctico.
+
+\subsubsection{Representación del ambiente de evaluación}
+
+El ambiente de ejecución se diseñó para ser representado como una pila de frames ordenados cronológicamente, donde cada frame expone los bindings activos en ese nivel de alcance con su nombre, valor y tipo. Esta representación busca hacer observable la diferencia entre ligadura y asignación (IL 1.2.7) y la evolución del ambiente con cada llamada a función (IL 1.2.6), abordando directamente la dificultad reportada por el 77.8\,\% de los estudiantes encuestados respecto al manejo de entornos y estado.
+
+\subsubsection{Modo de evaluación paso a paso}
+
+Se contempla un modo de evaluación paso a paso que permita al estudiante avanzar la ejecución de forma controlada, observando cómo el AST y el ambiente evolucionan con cada expresión procesada. Este mecanismo responde a la necesidad de experimentación con retroalimentación inmediata identificada en las recomendaciones cualitativas de los estudiantes, y es coherente con los principios de carga cognitiva gestionada, donde la segmentación de la información reduce la presión sobre la memoria de trabajo \cite{sweller2024cognitive}.
+
+\subsubsection{Consola de salida con codificación visual por nivel}
+
+La consola de salida se diseñó con un sistema de niveles de mensaje (entrada del usuario, valor de retorno, información, advertencia, error) diferenciados mediante color y prefijo textual. Esta diferenciación busca que el estudiante pueda identificar de forma inmediata si la expresión evaluada produjo un valor, un error o una ejecución sin efecto observable, sin necesidad de interpretar la salida nativa del intérprete Racket, cuyo formato puede resultar críptico para usuarios con poca experiencia en el lenguaje.
