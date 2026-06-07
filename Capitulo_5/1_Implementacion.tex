@@ -1,0 +1,207 @@
+El presente capítulo documenta los resultados correspondientes al desarrollo e implementación del prototipo FLP Viewer, en cumplimiento del objetivo específico 2 del proyecto. El capítulo se organiza en cinco secciones. En primer lugar, se describe el repositorio de código fuente y su estructura de directorios. En segundo lugar, se detallan los componentes implementados, abordando el pipeline de gramática, la arquitectura del cliente, el punto de acceso de ejecución y la instrumentación en tiempo de ejecución. En tercer lugar, se presenta el flujo principal de ejecución a través de un diagrama de secuencia. En cuarto lugar, se describe la configuración de despliegue en el entorno de pruebas. Finalmente, se verifica el cumplimiento de los requisitos funcionales definidos en el diseño.
+
+\section{Repositorio de código fuente}
+
+El código fuente del prototipo se encuentra alojado en el repositorio público de GitHub disponible en \url{https://github.com/Esmeralda-RG/flp-viewer}. El repositorio registra el historial completo de \textit{commits} del proceso de desarrollo, organizado en torno a las funcionalidades incrementales del sistema. El archivo \texttt{README.md} incluye la descripción del proyecto, el stack tecnológico utilizado, las instrucciones de instalación y ejecución local, la estrategia de integración con Racket y la descripción de la estructura de directorios.
+
+La estructura del proyecto sigue la convención del \textit{App Router}\footnote{El \textit{App Router} es el sistema de enrutamiento de Next.js basado en el sistema de archivos introducido en la versión 13. Organiza las rutas, los componentes de servidor y la lógica de la API dentro del directorio \texttt{app/}, permitiendo mezclar componentes de servidor y de cliente en la misma aplicación.} de Next.js \cite{nextjs}, con los siguientes directorios principales:
+
+\begin{itemize}
+  \item \texttt{app/api/run/}: contiene la ruta de API encargada de gestionar la ejecución del intérprete Racket, junto con los archivos \texttt{.rkt} de instrumentación en tiempo de ejecución (\texttt{\_runner.rkt}, \texttt{\_tracking.rkt} y \texttt{\_stream-parser.rkt}).
+  \item \texttt{app/components/}: agrupa los componentes de la interfaz de usuario, entre ellos el orquestador \texttt{PlaygroundLayout}, el visualizador de árbol \texttt{ASTViewer}, el panel de ambiente \texttt{EnvironmentPanel}, la consola \texttt{ConsoleOutput}, el editor \texttt{EditorPanel} y los modales auxiliares.
+  \item \texttt{app/lib/}: contiene los módulos del pipeline de gramática, los generadores de código Racket y las utilidades del playground.
+  \item \texttt{app/services/}: incluye el cliente HTTP que comunica la capa cliente con la ruta de API.
+  \item \texttt{app/types/}: centraliza las definiciones de tipos TypeScript compartidas entre módulos.
+  \item \texttt{examples/}: almacena las plantillas de programas predefinidos cargadas en el renderizado inicial del servidor.
+\end{itemize}
+
+\section{Implementación de los componentes}
+
+\subsection{Pipeline de gramática BNF}
+
+El pipeline de gramática se implementó íntegramente en TypeScript \cite{typescript} como una cadena de módulos independientes que opera en el cliente sin intervención del servidor. Su punto de entrada único es la función \texttt{runPipeline}, definida en \texttt{grammar-pipeline.ts}, que recibe la especificación léxica y la gramática en notación BNF y retorna los archivos del intérprete generados o una lista de errores.
+
+La cadena de transformación sigue el modelo clásico de compilación \cite{aho2006compilers} y comprende tres etapas secuenciales. La primera es el análisis léxico, implementado en \texttt{bnf-lexer.ts}: la función \texttt{tokenize} recorre el texto de entrada carácter a carácter y produce una secuencia de tokens tipados. Los errores léxicos se reportan mediante la clase \texttt{LexError}, que incluye la línea y columna exactas del fallo. La segunda etapa es el análisis sintáctico, implementado en \texttt{bnf-parser.ts}: la función \texttt{parse} consume la secuencia de tokens y construye una representación intermedia de la gramática (\texttt{GrammarAST}) compuesta por reglas de producción. Los errores sintácticos se reportan mediante la clase \texttt{ParseError} con la misma precisión posicional. La tercera etapa es la generación de código, distribuida en tres módulos especializados. \texttt{eopl-generator.ts} produce el archivo \texttt{grammar.rkt} con la especificación léxica y gramatical en formato SLLGEN\footnote{SLLGEN es la biblioteca de análisis sintáctico incluida en EOPL que genera automáticamente un escáner y un analizador a partir de una especificación léxica y una gramática expresadas como listas Racket \cite{Friedman2008EPL}.}; \texttt{env-generator.ts} genera \texttt{environment.rkt} con el ambiente inicial y las funciones de extensión; y \texttt{main-generator.ts} produce \texttt{main.rkt} con los \textit{stubs}\footnote{Un \textit{stub} es una función con cuerpo incompleto que declara la firma esperada y sirve como marcador del trabajo pendiente de implementación. En este contexto, los \textit{stubs} definen las funciones de evaluación del intérprete que el estudiante debe completar.} de las funciones de evaluación pendientes de implementación por parte del estudiante, registrando además las líneas bloqueadas para protección en el editor.
+
+La especificación léxica se define en un área de texto independiente del modal de gramática, escribiendo un nombre de token por línea. Para cada nombre reconocido — \texttt{number}, \texttt{float}, \texttt{identifier}, \texttt{binary}, \texttt{octal}, \texttt{hex} y \texttt{text} — la función \texttt{expandLexRule} de \texttt{eopl-generator.ts} produce las reglas SLLGEN correspondientes. Las reglas de espaciado (\texttt{whitespace}) y de comentarios de línea (\texttt{comment}) se incluyen siempre de forma automática. Si el área léxica se deja vacía, el pipeline incorpora el conjunto completo de tokens por defecto. Para tipos léxicos no contemplados en los nombres predefinidos, el estudiante puede escribir directamente la regla en notación SLLGEN entre paréntesis, que el pipeline incorpora sin transformaciones.
+
+\subsection{Componente orquestador y paneles de la interfaz}
+
+La Figura \ref{fig:bienvenida} muestra el modal de bienvenida que se presenta al estudiante en el primer acceso. El modal ofrece un resumen de las acciones básicas y carga automáticamente el ejemplo \textit{Hola Mundo} como punto de partida.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-01-bienvenida.png}
+    \caption{Modal de bienvenida del prototipo FLP Viewer}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:bienvenida}
+\end{figure}
+
+\FloatBarrier
+
+El componente \texttt{PlaygroundLayout} actúa como orquestador central de la interfaz. Mantiene el estado global de la sesión de trabajo e implementa las transiciones de estado definidas en el diseño: inicio y fin de ejecución, recepción de resultados, avance paso a paso y apertura de modales auxiliares.
+
+El estado que gestiona el orquestador comprende los archivos del editor (\texttt{files}), el árbol de sintaxis abstracta activo (\texttt{ast}), los marcos del ambiente de ejecución (\texttt{frames}), el historial de mensajes de la consola (\texttt{logs}), los indicadores de sesión activa y ejecución en curso, el modo de evaluación paso a paso (\texttt{stepMode}) y la cola de pasos pendientes (\texttt{pendingSteps}). Los cuatro paneles de visualización — \texttt{ASTViewer}, \texttt{EnvironmentPanel}, \texttt{ConsoleOutput} y \texttt{EditorPanel} — son componentes React \cite{react} sin estado propio: reciben exclusivamente los datos necesarios para su renderizado a través de las propiedades que el orquestador les suministra.
+
+El modo de evaluación paso a paso opera mediante una cola de pasos (\texttt{pendingSteps}) que se inicializa con todos los pasos retornados por la API. Cada vez que el usuario activa el control \textit{Next step}, el orquestador extrae el siguiente paso de la cola y actualiza de forma sincronizada el árbol AST, los marcos del ambiente y la salida de la consola, permitiendo al estudiante observar la evolución del estado del intérprete expresión por expresión, en correspondencia con el modelo de evaluación por pasos propuesto por Clements et al. \cite{Clements2001}.
+
+La Figura \ref{fig:modal-gramatica} ilustra el modal de definición de gramática con una especificación BNF y la vista previa del archivo \texttt{grammar.rkt} generado.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-05-modal-gramatica.png}
+    \caption{Modal de definición de gramática BNF con vista previa del archivo generado}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:modal-gramatica}
+\end{figure}
+
+\FloatBarrier
+
+El modal de gramática (\texttt{GrammarModal}) recibe las entradas del estudiante — especificación léxica y gramática BNF — y, al confirmar, invoca \texttt{runPipeline} para obtener los archivos generados, que son cargados en el panel de edición a través del mecanismo \texttt{upsertFile}. Si el pipeline reporta errores léxicos o sintácticos, estos se presentan en el modal antes de cerrar, sin modificar los archivos activos en el editor.
+
+El componente \texttt{EditorPanel} utiliza Monaco Editor \cite{monaco} para la edición de código. Las líneas generadas automáticamente por el pipeline se marcan como de solo lectura mediante la API de rangos de Monaco, de modo que el estudiante solo puede editar las secciones correspondientes a la lógica de evaluación.
+
+Las Figuras \ref{fig:interfaz-principal} y \ref{fig:eval-cierres} documentan dos evaluaciones representativas sobre el ejemplo \textit{Intérprete EOPL (avanzado)}, seleccionadas por cubrir los dos ejes conceptuales que el prototipo busca hacer visibles: el estado mutable con iteración y las funciones de orden superior con clausuras.
+
+La Figura \ref{fig:interfaz-principal} evalúa la expresión \texttt{var x = 0 in begin for i from 0 until 10 by 1 do set x = (x + i); x end}, que acumula la suma de 0 a 9 mediante un bucle con asignación destructiva. El panel de ambiente muestra la cadena \texttt{empty-env} $\to$ \texttt{init-env} $\to$ \texttt{x}, donde el marco final refleja el valor de \texttt{x} tras la última iteración del bucle. Este caso documenta que la instrumentación captura correctamente la evolución del estado mutable a lo largo de la ejecución.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-06-eval-bucle.png}
+    \caption{Evaluación de una expresión con iteración y estado mutable: suma acumulada mediante bucle \texttt{for}}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:interfaz-principal}
+\end{figure}
+
+\FloatBarrier
+
+La Figura \ref{fig:eval-cierres} evalúa la expresión \texttt{var f = func(x) if (x == 0) \{ 0 else (x + call f((x - 1))) \} in call f(10)}, que define una función recursiva \texttt{f} y la aplica sobre 10, obteniendo la suma triangular 55. A diferencia del caso anterior, el marco final del ambiente contiene la ligadura \texttt{f} cuyo valor es una clausura — no un número — lo que permite al estudiante observar que en el modelo de EOPL las funciones son valores de primera clase almacenados en el ambiente como cualquier otra ligadura \cite{Friedman2008EPL}. La presencia de la clausura en el panel de ambiente distingue esta visualización de la anterior y justifica su inclusión como caso complementario.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-07-eval-cierres.png}
+    \caption{Evaluación de una función recursiva con clausura: la ligadura \texttt{f} en el panel de ambiente refleja una función como valor de primera clase}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:eval-cierres}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Punto de acceso de ejecución}
+
+La ruta de API \texttt{/api/run} se implementó como un manejador HTTP POST en \texttt{app/api/run/route.ts}, siguiendo el modelo de rutas de Next.js. Su flujo de operación comprende cuatro fases.
+
+En la primera fase, el servidor crea un directorio temporal exclusivo para la solicitud mediante \texttt{mkdtemp}\footnote{\texttt{mkdtemp} es una llamada del sistema POSIX que crea un directorio temporal con nombre único, garantizando que no colisione con directorios preexistentes aunque varias solicitudes se procesen de forma concurrente.} y escribe en él todos los archivos del editor recibidos en el cuerpo de la petición. Antes de escribir \texttt{environment.rkt} y \texttt{main.rkt}, la función \texttt{injectRuntime} inyecta en su contenido los módulos de instrumentación correspondientes (\texttt{\_tracking.rkt} y \texttt{\_stream-parser.rkt} respectivamente). El archivo \texttt{\_runner.rkt} se copia también al directorio temporal como punto de entrada del proceso Racket.
+
+En la segunda fase, el servidor lanza el proceso Racket sobre \texttt{\_runner.rkt} mediante \texttt{execFile}, pasando la expresión de prueba como argumento y aplicando un tiempo límite de 15 segundos. La señal de cancelación del \texttt{AbortController}\footnote{\texttt{AbortController} es una API web estándar que permite cancelar operaciones asíncronas mediante una señal compartida entre el código que inicia la operación y el que la ejecuta. Cuando el cliente cierra la conexión, la señal se activa y el proceso Racket es terminado antes de consumir el tiempo límite completo.} asociado a la petición permite interrumpir el proceso si el cliente cancela la solicitud antes de que finalice la ejecución.
+
+En la tercera fase, el servidor deserializa la salida estándar del proceso. Si la salida es un arreglo JSON válido, se interpreta como una secuencia de pasos de evaluación; de lo contrario, se trata como texto plano. Los mensajes de error presentes en \texttt{stderr} son normalizados por la función \texttt{cleanStderr}, que elimina las secciones de contexto interno del intérprete Racket que resultan irrelevantes para el estudiante.
+
+En la cuarta fase, el servidor elimina el directorio temporal y retorna la respuesta HTTP con los campos \texttt{steps}, \texttt{stderr} y \texttt{error}. La eliminación del directorio se realiza en el bloque \texttt{finally} del manejador para garantizar la limpieza del sistema de archivos independientemente del resultado de la ejecución.
+
+\subsection{Instrumentación en tiempo de ejecución}
+
+La instrumentación en tiempo de ejecución se implementó mediante tres archivos Racket que se inyectan en el entorno de ejecución de forma transparente para el estudiante.
+
+El archivo \texttt{\_tracking.rkt} redefine la función \texttt{extend-env} al momento de cargar el módulo \texttt{environment.rkt}. Cada llamada a la función redefinida registra un \textit{snapshot} del estado del ambiente en el log interno \texttt{\_env-log}. Al finalizar cada evaluación, el ejecutor principal lee este log e incluye la secuencia de marcos en la respuesta serializada.
+
+El archivo \texttt{\_stream-parser.rkt} se inyecta al final de \texttt{main.rkt} e instrumenta la función de evaluación del programa para capturar, por cada reducción, el árbol de sintaxis abstracta resultante, el estado del ambiente y el valor producido. La salida se serializa como un arreglo JSON de objetos de paso, donde cada objeto incluye los campos \texttt{ast}, \texttt{environments} y \texttt{output}.
+
+El archivo \texttt{\_runner.rkt} actúa como punto de entrada del proceso Racket. Carga los módulos del proyecto en el orden correcto, recibe la expresión de prueba como argumento de línea de comandos y coordina la evaluación dentro de un manejador de excepciones que captura errores del intérprete y los incluye en la respuesta.
+
+En el flujo de descarga del proyecto, la función \texttt{downloadZip} de \texttt{playground-utils.ts} genera un archivo ZIP con los archivos del editor, eliminando previamente los bloques de instrumentación marcados con las directivas \texttt{FLP-VIEWER-TRACKING-START/END}. Esto garantiza que el código exportado sea directamente compatible con el entorno DrRacket \cite{felleisen2018racket} sin modificaciones adicionales.
+
+\section{Flujo de ejecución principal}
+
+La Figura \ref{fig:secuencia} ilustra el flujo de ejecución que se produce cuando el estudiante envía una expresión desde la consola del prototipo. El flujo inicia en el componente \texttt{ConsoleOutput}, que delega la acción al orquestador \texttt{PlaygroundLayout}. Este registra la expresión en el historial, inicializa el mecanismo de cancelación y deshabilita nuevas ejecuciones concurrentes. A continuación, invoca el servicio \texttt{racket.ts}, que empaqueta los archivos del editor y la expresión en una petición HTTP POST hacia \texttt{/api/run}. La solicitud transita por el contenedor \textbf{nginx}, que actúa como \textit{reverse proxy} y la redirige al servidor de aplicación. El servidor prepara el entorno de ejecución aislado, lanza el proceso Racket, deserializa su salida y devuelve la secuencia de pasos al cliente. Finalmente, \texttt{PlaygroundLayout} distribuye los resultados entre los paneles de visualización según el modo activo: en modo normal actualiza el AST, el ambiente y la consola con el estado final, y en modo paso a paso encola los pasos y presenta el primero de forma inmediata, habilitando la navegación manual.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/secuencia.png}
+    \caption{Diagrama de secuencia del flujo principal de ejecución del prototipo FLP Viewer}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:secuencia}
+\end{figure}
+
+\FloatBarrier
+
+La Figura \ref{fig:paso-a-paso} ilustra la interfaz en modo paso a paso, con el botón de avance visible en la consola y el estado del AST y el ambiente correspondiente al paso activo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-08-paso-a-paso.png}
+    \caption{Modo de evaluación paso a paso con pasos pendientes de navegación}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:paso-a-paso}
+\end{figure}
+
+\FloatBarrier
+
+\section{Despliegue en entorno de pruebas}
+
+El prototipo se despliega mediante Docker Compose \cite{merkel2014docker} en un único servidor anfitrión, con dos contenedores coordinados en la misma red interna. La Figura \ref{fig:despliegue} presenta el diagrama de la infraestructura de despliegue.
+
+La imagen del contenedor de aplicación se construye mediante un \textit{Dockerfile} multi-etapa con tres etapas diferenciadas. La primera etapa (\texttt{deps}) instala las dependencias del proyecto utilizando \texttt{pnpm} sobre una imagen base de Node.js 25 Alpine. La segunda etapa (\texttt{builder}) ejecuta la construcción de Next.js en modo \textit{standalone}\footnote{El modo \textit{standalone} de Next.js genera un servidor Node.js autocontenido que incluye únicamente las dependencias estrictamente necesarias para producción, sin requerir la carpeta \texttt{node\_modules} completa en el entorno de despliegue. Esto reduce significativamente el tamaño de la imagen Docker resultante.}, que produce un artefacto autocontenido con todas las dependencias necesarias para ejecutar el servidor en producción. La tercera etapa (\texttt{runner}) utiliza la imagen \texttt{node:25-bookworm-slim} e instala el intérprete de Racket como dependencia del sistema operativo mediante \texttt{apt-get}. Esta etapa copia únicamente el artefacto \textit{standalone}, el directorio de archivos estáticos, el directorio \texttt{public} y los tres archivos de instrumentación Racket, minimizando el tamaño de la imagen final. La variable de entorno \texttt{RACKET\_BIN} se configura en \texttt{/usr/bin/racket} para que la ruta de API localice el ejecutable sin depender de la configuración del sistema anfitrión.
+
+El servicio \textbf{app} expone el puerto interno 3000 al servicio \textbf{nginx} dentro de la red interna de Docker, pero no lo publica hacia el host. El servicio \textbf{nginx} utiliza la imagen oficial \texttt{nginx:alpine} y es el único que publica un puerto hacia el exterior (puerto 80). Su configuración se suministra como volumen de solo lectura mediante el archivo \texttt{nginx.conf}, que define una directiva \texttt{proxy\_pass}\footnote{\texttt{proxy\_pass} es la directiva de nginx que especifica la dirección del servidor al que se redirigen las solicitudes entrantes. En combinación con los encabezados \texttt{Upgrade} y \texttt{Connection}, habilita además el soporte para conexiones \textit{WebSocket}.} hacia \texttt{http://app:3000} con los encabezados necesarios para el correcto funcionamiento del protocolo HTTP/1.1 y las conexiones \textit{WebSocket}. Esta arquitectura garantiza que el acceso externo al prototipo se realice exclusivamente a través del proxy, centralizando el control de las solicitudes entrantes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Capitulo_5/imagenes/despliegue.png}
+    \caption{Diagrama de despliegue del prototipo FLP Viewer en el entorno de pruebas}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:despliegue}
+\end{figure}
+
+\FloatBarrier
+
+\section{Verificación de requisitos funcionales}
+
+La Tabla \ref{tab:verificacion_rf} presenta la correspondencia entre los requisitos funcionales definidos en el diseño y los módulos que materializan cada uno en la implementación. Todos los requisitos de prioridad alta y media definidos en la especificación fueron implementados en el prototipo entregado.
+
+\begin{table}[H]
+\centering
+\caption{Verificación del cumplimiento de los requisitos funcionales}
+\label{tab:verificacion_rf}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{1.2cm}
+  >{\raggedright\arraybackslash}p{3.8cm}
+  >{\raggedright\arraybackslash}p{7.5cm}
+  >{\centering\arraybackslash}p{1.4cm}
+}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Módulos de implementación} & \textbf{Estado} \\
+\hline
+RF-01 & Generación del AST &
+  \texttt{\_runner.rkt}, \texttt{\_stream-parser.rkt}, \texttt{racket.ts} &
+  Implementado \\
+RF-02 & Visualización del AST &
+  \texttt{ASTViewer.tsx}, \texttt{PlaygroundLayout.tsx} &
+  Implementado \\
+RF-03 & Ejecución y evaluación &
+  \texttt{app/api/run/route.ts} (\textit{endpoint} \texttt{/api/run}) &
+  Implementado \\
+RF-04 & Representación del ambiente &
+  \texttt{\_tracking.rkt}, \texttt{EnvironmentPanel.tsx} &
+  Implementado \\
+RF-05 & Biblioteca de ejemplos &
+  \texttt{examples/}, \texttt{load-examples.ts}, \texttt{WelcomeModal.tsx} &
+  Implementado \\
+RF-06 & Validación de sintaxis Racket &
+  \texttt{bnf-lexer.ts}, \texttt{bnf-parser.ts}, \texttt{cleanStderr()} en \texttt{route.ts} &
+  Implementado \\
+RF-07 & Visualización del intérprete &
+  \texttt{EditorPanel.tsx}, \texttt{CodeEditor.tsx} (líneas bloqueadas con Monaco Editor) &
+  Implementado \\
+RF-08 & Plantilla base y exportación &
+  \texttt{INITIAL\_FILES} y \texttt{downloadZip()} en \texttt{playground-utils.ts} &
+  Implementado \\
+\hline
+\end{tabular}
+\vskip 4pt
+\footnotesize\textit{Fuente: elaboración propia.}
+\end{table}
+
+\FloatBarrier
