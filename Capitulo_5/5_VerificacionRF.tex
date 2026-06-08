@@ -1,0 +1,50 @@
+\section{Verificación de requisitos funcionales}
+
+La Tabla \ref{tab:verificacion_rf} presenta la correspondencia entre los requisitos funcionales definidos en el diseño y los módulos que materializan cada uno en la implementación. Todos los requisitos de prioridad alta y media definidos en la especificación fueron implementados en el prototipo entregado.
+
+\begin{table}[H]
+\centering
+\caption{Verificación del cumplimiento de los requisitos funcionales}
+\label{tab:verificacion_rf}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{1.2cm}
+  >{\raggedright\arraybackslash}p{3.8cm}
+  >{\raggedright\arraybackslash}p{6.8cm}
+  >{\centering\arraybackslash}p{2.1cm}
+}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Módulos de implementación} & \textbf{Estado} \\
+\hline
+RF-01 & Generación del AST &
+  \texttt{\_runner.rkt}, \texttt{\_stream-parser.rkt}, \texttt{racket.ts} &
+  Implementado \\
+RF-02 & Visualización del AST &
+  \texttt{ASTViewer.tsx}, \texttt{PlaygroundLayout.tsx} &
+  Implementado \\
+RF-03 & Ejecución y evaluación &
+  \texttt{app/api/run/route.ts} (\textit{endpoint} \texttt{/api/run}) &
+  Implementado \\
+RF-04 & Representación del ambiente &
+  \texttt{\_tracking.rkt}, \texttt{EnvironmentPanel.tsx} &
+  Implementado \\
+RF-05 & Biblioteca de ejemplos &
+  \texttt{examples/}, \texttt{load-examples.ts}, \texttt{WelcomeModal.tsx} &
+  Implementado \\
+RF-06 & Validación de sintaxis Racket &
+  \texttt{bnf-lexer.ts}, \texttt{bnf-parser.ts}, \texttt{cleanStderr()} en \texttt{route.ts} &
+  Implementado \\
+RF-07 & Visualización del intérprete &
+  \texttt{EditorPanel.tsx}, \texttt{CodeEditor.tsx} (líneas bloqueadas con Monaco Editor) &
+  Implementado \\
+RF-08 & Plantilla base y exportación &
+  \texttt{INITIAL\_FILES} y \texttt{downloadZip()} en \texttt{playground-utils.ts} &
+  Implementado \\
+\hline
+\end{tabular}
+\vskip 4pt
+\footnotesize\textit{Fuente: elaboración propia.}
+\end{table}
+
+\FloatBarrier
