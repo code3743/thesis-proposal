@@ -1,0 +1,46 @@
+\subsection{Relación conceptual entre gramática, AST y ambiente de ejecución}
+
+Los apartados anteriores describen por separado las estructuras y operaciones que conforman el proceso de interpretación en el modelo EOPL: la gramática BNF como especificación formal del lenguaje, el AST como representación interna que el analizador produce a partir de esa especificación, y el ambiente de ejecución como estructura dinámica que el evaluador consulta y extiende al recorrer el árbol. La figura~\ref{fig:pipeline-interpretacion} sintetiza estas relaciones y explicita la cadena que constituye el núcleo conceptual del curso: desde que el estudiante escribe una gramática hasta que el intérprete produce un valor y deja un rastro en el ambiente.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.8cm,
+    box/.style={
+        rectangle, rounded corners=4pt,
+        draw=SteelBlue, fill=SteelBlue!10,
+        text width=2.2cm, align=center,
+        minimum height=1.4cm,
+        font=\small, inner sep=5pt
+    },
+    arr/.style={->, >=Stealth, thick, draw=gray!60},
+    lbl/.style={font=\small\itshape, fill=white, inner sep=2pt}
+]
+    % Fila superior: pipeline de análisis
+    \node[box] (bnf)    {\textbf{Gramática}\\\textbf{BNF}};
+    \node[box, right=of bnf]    (sllgen) {\textbf{SLLGEN}\\(analizador)};
+    \node[box, right=of sllgen] (ast)    {\textbf{AST}};
+
+    % Fila inferior: pipeline de ejecución
+    \node[box, below=1.6cm of ast]  (eval) {\textbf{Evaluador}\\\texttt{eval-expr}};
+    \node[box, left=3.5cm of eval]   (env)  {\textbf{Ambiente}\\\texttt{apply-env}};
+
+    % Flechas fila superior
+    \draw[arr] (bnf)    -- node[above, lbl] {genera}   (sllgen);
+    \draw[arr] (sllgen) -- node[above, lbl] {produce}  (ast);
+
+    % Flecha vertical: análisis → ejecución
+    \draw[arr] (ast)  -- node[right=3pt, lbl] {recorre} (eval);
+
+    % Flecha fila inferior
+    \draw[arr] (eval) -- node[above, lbl] {consulta / extiende} (env);
+
+    % Arco discontinuo: gramática define estructura del AST
+    \draw[arr, dashed, bend left=30] (bnf) to
+        node[above, lbl] {define estructura de} (ast);
+\end{tikzpicture}
+\caption{Relación conceptual entre los componentes del proceso de interpretación en el modelo EOPL. La fila superior muestra el pipeline de análisis (tiempo de compilación); la fila inferior, el pipeline de ejecución (tiempo de evaluación). La flecha discontinua indica que la gramática determina los constructores del AST en tiempo de diseño.}
+\label{fig:pipeline-interpretacion}
+\end{figure}
+
+La flecha discontinua entre la gramática y el AST refleja la correspondencia estática descrita en la sección~\ref{sec:ast}: cada producción BNF se convierte en un constructor del tipo de datos algebraico, de modo que la estructura del árbol es un reflejo directo de las decisiones que el estudiante toma al definir la gramática. Las flechas sólidas, en cambio, representan el flujo dinámico de la interpretación: SLLGEN transforma el código fuente en un AST, el evaluador lo recorre de forma recursiva y, a medida que lo hace, consulta y extiende el ambiente. Esta distinción entre estructura estática y comportamiento dinámico es una de las fuentes de dificultad identificadas en la literatura para cursos de lenguajes de programación \cite{zagami2023}, y es precisamente lo que el prototipo propuesto busca hacer visible al presentar de forma simultánea el AST y el estado del ambiente tras cada paso de evaluación.

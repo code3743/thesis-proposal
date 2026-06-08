@@ -1,3 +1,40 @@
 \section{Glosario}
 
-Capitulo pendiente
+Los términos que se definen a continuación son empleados de forma recurrente a lo largo del documento. Su inclusión tiene por objeto establecer un vocabulario preciso y evitar ambigüedades en la lectura de los capítulos posteriores.
+
+\begin{itemize}
+
+    \item \textbf{Árbol de sintaxis abstracta (AST):}
+    Representación jerárquica de la estructura semántica de un programa, producida por el analizador sintáctico a partir del código fuente. Elimina los detalles superficiales de la notación concreta y conserva únicamente la información relevante para la evaluación del programa. En el modelo de EOPL, los nodos del AST corresponden a los constructores del tipo de datos definido mediante \texttt{define-datatype} \cite{Friedman2008EPL}.
+
+    \item \textbf{Ambiente de ejecución (\textit{environment}):}
+    Estructura de datos que asocia identificadores con sus valores durante la evaluación de un programa. Se organiza como una cadena de marcos (\textit{frames}), donde cada llamada a \texttt{extend-env} agrega un nuevo marco con las ligaduras introducidas por la expresión en evaluación \cite{Friedman2008EPL}.
+
+    \item \textbf{BNF (notación de Backus-Naur):}
+    Metalenguaje estándar para la especificación de gramáticas libres de contexto mediante reglas de producción de la forma $\langle\text{no-terminal}\rangle \mathrel{::=} \alpha_1 \mid \alpha_2 \mid \ldots$. En el prototipo propuesto en este trabajo, el estudiante utiliza notación BNF para definir la gramática de su intérprete \cite{aho2006compilers}.
+
+    \item \textbf{Clausura (\textit{closure}):}
+    Valor que resulta de evaluar una expresión de función y que encapsula el cuerpo de la función junto con el ambiente léxico en el que fue definida. Las clausuras son la representación concreta de los procedimientos como valores de primera clase en el modelo de EOPL \cite{Friedman2008EPL}.
+
+    \item \textbf{Carga cognitiva:}
+    Cantidad de esfuerzo mental requerido para procesar información en la memoria de trabajo. La teoría distingue entre carga intrínseca (complejidad inherente del contenido), extrínseca (generada por la forma de presentación) y germana (asociada a la formación de esquemas de conocimiento) \cite{sweller2024cognitive}.
+
+    \item \textbf{EOPL (\textit{Essentials of Programming Languages}):}
+    Libro de texto de Friedman y Wand que presenta una metodología para la construcción de intérpretes y compiladores en Racket usando la librería SLLGEN \cite{Friedman2008EPL}. Es el texto base de la asignatura FLP.
+
+    \item \textbf{FLP:}
+    Abreviatura empleada en este documento para referirse a la asignatura \textit{Fundamentos de Interpretación y Compilación de Lenguajes de Programación} (código 750017C) del programa de Ingeniería de Sistemas de la Universidad del Valle.
+
+    \item \textbf{Indicador de logro (IL):}
+    Criterio de evaluación del microcurrículo de la asignatura FLP que especifica el desempeño observable esperado en relación con un resultado de aprendizaje particular.
+
+    \item \textbf{Ligadura (\textit{binding}):}
+    Asociación entre un identificador y un valor dentro de un marco del ambiente de ejecución. En el modelo funcional de EOPL, las ligaduras son inmutables: una vez creadas, no pueden modificarse; únicamente pueden ocultarse mediante la creación de un nuevo marco con el mismo identificador en el ambiente extendido \cite{Friedman2008EPL}.
+
+    \item \textbf{Referencia implícita (\textit{implicit reference}):}
+    Modelo de ambiente introducido en el Capítulo 4 de EOPL en el que los valores se almacenan en celdas mutables representadas mediante referencias, y el ambiente contiene punteros a dichas celdas. Este modelo habilita la asignación destructiva mediante \texttt{set} sin crear un nuevo marco en el ambiente \cite{Friedman2008EPL}.
+
+    \item \textbf{SLLGEN:}
+    Biblioteca de análisis sintáctico incluida en Racket que genera automáticamente un escáner y un analizador a partir de una especificación léxica y una gramática BNF. Es la herramienta utilizada en EOPL para automatizar las etapas de análisis léxico y sintáctico en la construcción de intérpretes \cite{Friedman2008EPL}.
+
+\end{itemize}

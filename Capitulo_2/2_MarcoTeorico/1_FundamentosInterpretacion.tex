@@ -1,0 +1,94 @@
+\section{Marco Teórico}
+
+El presente proyecto se apoya en tres áreas de conocimiento: los fundamentos técnicos de la interpretación de lenguajes de programación, que constituyen el objeto de estudio que el prototipo busca hacer visible, las teorías del aprendizaje aplicadas a la educación en computación, que orientan las decisiones pedagógicas del diseño, y los principios de usabilidad y visualización en herramientas educativas interactivas, que guían las decisiones de interfaz. Los apartados siguientes desarrollan cada una de estas áreas.
+
+\subsection{Fundamentos de la Interpretación de Lenguajes de Programación}
+
+\subsubsection{Gramáticas formales y notación BNF}
+
+Los lenguajes de programación se definen formalmente mediante gramáticas libres de contexto, clasificadas por Chomsky en el nivel dos de su jerarquía de lenguajes formales \cite{gordon2024linguistics}. Una gramática libre de contexto se compone de un conjunto de símbolos terminales, un conjunto de símbolos no terminales, un símbolo inicial y un conjunto de reglas de producción que especifican cómo cada símbolo no terminal puede reemplazarse por una secuencia de símbolos terminales y no terminales. Esta estructura proporciona una descripción precisa y no ambigua de la sintaxis del lenguaje, que puede ser procesada de forma automática por un analizador sintáctico.
+
+La notación de Backus-Naur (BNF) es un metalenguaje estándar para expresar gramáticas libres de contexto de forma legible para el ser humano \cite{aho2006compilers}. En BNF, cada regla de producción adopta la forma $\langle\text{no-terminal}\rangle \mathrel{::=} \alpha_1 \mid \alpha_2 \mid \ldots$, donde las alternativas están separadas por el símbolo $|$. Esta notación es el punto de entrada con el que el estudiante define la gramática de su intérprete en el prototipo propuesto: a partir de las reglas escritas en el área de definición de gramática, el pipeline genera automáticamente los archivos de código Racket necesarios para que SLLGEN construya el analizador correspondiente.
+
+En el contexto de la librería EOPL, la gramática BNF se utiliza directamente como especificación de entrada para SLLGEN, la biblioteca de análisis sintáctico incluida en Racket \cite{Friedman2008EPL}. A partir de dicha especificación, SLLGEN genera de forma automática un escáner y un analizador sintáctico, de modo que el estudiante puede concentrarse en la implementación de la semántica de su lenguaje sin necesidad de desarrollar manualmente las etapas de análisis léxico y sintáctico.
+
+\subsubsection{Árbol de Sintaxis Abstracta}
+\label{sec:ast}
+
+El análisis sintáctico transforma la secuencia de tokens producida por el escáner en un árbol de sintaxis abstracta (AST), que representa la estructura jerárquica y semántica del programa con independencia de los detalles superficiales de la notación concreta \cite{aho2006compilers}. A diferencia del árbol de derivación, el AST elimina elementos como paréntesis, palabras clave auxiliares y otros tokens cuya función es únicamente desambiguar la notación, pero que no contribuyen al significado del programa.
+
+En el modelo de EOPL, el AST se representa mediante un tipo de datos algebraico definido con la macro \texttt{define-datatype} de Racket \cite{Friedman2008EPL}. Cada regla de producción de la gramática se corresponde con un constructor del tipo de datos, de modo que existe una relación directa y verificable entre la estructura de la gramática BNF y la estructura del árbol. Esta correspondencia es pedagógicamente relevante porque permite al estudiante observar en el visualizador de AST del prototipo cómo cada construcción del programa origina un nodo específico del árbol, haciendo visible la relación entre la especificación formal del lenguaje y la representación interna que el intérprete utiliza para evaluar expresiones.
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=0.55cm and 1.6cm,
+    N/.style={rectangle, rounded corners=2pt, draw=SteelBlue, fill=SteelBlue!10,
+              font=\small\ttfamily, inner sep=4pt, minimum width=1.8cm, align=center}
+]
+    \node[N] (root) {diff-exp};
+    \node[N, below left=of root]  (c1)  {const-exp\\[1pt]{\footnotesize 3}};
+    \node[N, below right=of root] (mid) {diff-exp};
+    \node[N, below left=of mid]   (c2)  {const-exp\\[1pt]{\footnotesize 1}};
+    \node[N, below right=of mid]  (c3)  {const-exp\\[1pt]{\footnotesize 2}};
+    \draw[->, >=Stealth, gray!60] (root) -- (c1);
+    \draw[->, >=Stealth, gray!60] (root) -- (mid);
+    \draw[->, >=Stealth, gray!60] (mid)  -- (c2);
+    \draw[->, >=Stealth, gray!60] (mid)  -- (c3);
+\end{tikzpicture}
+
+{\small\itshape AST de \texttt{(diff 3 (diff 1 2))}: cada producción BNF origina un constructor del tipo de datos.}
+\end{center}
+
+\subsubsection{Proceso de interpretación y ambientes de ejecución}
+
+La interpretación de un programa consiste en recorrer el AST de forma recursiva y calcular el valor de cada nodo de acuerdo con las reglas semánticas del lenguaje \cite{Friedman2008EPL}. En el modelo de EOPL, esta operación está encapsulada en la función \texttt{eval-expression}, que despacha sobre el tipo de cada nodo del árbol mediante la forma \texttt{cases}. Para cada constructor del tipo de datos, existe un caso que especifica cómo calcular el valor correspondiente, posiblemente invocando de forma recursiva a \texttt{eval-expression} sobre los subárboles del nodo.
+
+Durante la evaluación, el intérprete mantiene un ambiente de ejecución que asocia identificadores con sus valores. Friedman y Wand definen el ambiente como una función parcial de identificadores a valores denotados, y la operación fundamental sobre él es la búsqueda mediante \texttt{apply-env}, que recorre la cadena de marcos desde el más reciente hasta el ambiente inicial \cite{Friedman2008EPL}. La extensión del ambiente mediante \texttt{extend-env} agrega un nuevo marco con las ligaduras introducidas por la expresión en evaluación, sin modificar los marcos preexistentes en el modelo funcional.
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=0.4cm and 1.4cm,
+    F/.style={draw=SteelBlue, fill=SteelBlue!10, font=\small\ttfamily,
+              inner sep=5pt, minimum width=1.6cm, align=center},
+    L/.style={font=\scriptsize\itshape, text=gray!70}
+]
+    \node[F] (f1) {x $\mapsto$ 3};
+    \node[F, right=1.4cm of f1] (f2) {y $\mapsto$ 7};
+    \node[right=1.0cm of f2, font=\normalsize] (emp) {$\emptyset$};
+    \draw[->, >=Stealth, thick, gray!60] (f1) -- (f2);
+    \draw[->, >=Stealth, thick, gray!60] (f2) -- (emp);
+    \node[L, below=0.15cm of f1] {más reciente};
+    \node[L, below=0.15cm of f2] {anterior};
+    \node[L, below=0.15cm of emp] {vacío};
+\end{tikzpicture}
+
+{\small\itshape Cadena de marcos tras \texttt{(extend-env 'x 3 (extend-env 'y 7 (empty-env)))}. \texttt{apply-env} recorre de izquierda a derecha.}
+\end{center}
+
+A partir del Capítulo 4 de EOPL, el modelo introduce las referencias implícitas (IMPLICIT-REFS): los valores dejan de almacenarse directamente en el ambiente y pasan a residir en celdas mutables representadas por referencias. Esta modificación habilita la asignación destructiva mediante \texttt{set}, que modifica el contenido de una celda sin agregar un nuevo marco al ambiente. La diferencia entre ligadura y asignación que emerge de este cambio arquitectónico es uno de los conceptos de mayor dificultad en cursos que siguen el modelo de EOPL, dado que requiere distinguir entre dos operaciones que en la superficie parecen equivalentes pero tienen efectos estructuralmente distintos sobre el ambiente \cite{zagami2023}.
+
+\begin{center}
+\begin{tikzpicture}[
+    B/.style={draw=gray!60, fill=gray!8, font=\small\ttfamily,
+              inner sep=6pt, minimum width=3.2cm, align=center},
+    R/.style={draw=SteelBlue, fill=SteelBlue!10, font=\small\ttfamily,
+              inner sep=6pt, minimum width=3.2cm, align=center},
+    T/.style={font=\small\bfseries},
+    S/.style={font=\scriptsize\itshape, text=gray!70}
+]
+    \node[T] (lt) {sin \textsc{implicit-refs}};
+    \node[B, below=0.3cm of lt] (lenv) {env:\quad x $\mapsto$ \textbf{3}};
+
+    \node[T, right=4.5cm of lt] (rt) {con \textsc{implicit-refs}};
+    \node[B, below=0.3cm of rt] (renv) {env:\quad x $\mapsto$ ref$_1$};
+    \node[R, below=0.5cm of renv] (sto) {store:\; ref$_1$ $\mapsto$ \textbf{3}};
+    \draw[->, >=Stealth, thick, SteelBlue] (renv) -- (sto);
+    \node[S, below=0.25cm of sto] {\texttt{(set x 5)} modifica \textit{store}, no \textit{env}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Racket y la librería EOPL como marco pedagógico}
+
+Racket es un lenguaje de programación diseñado con propósitos docentes y de investigación en lenguajes de programación \cite{felleisen2018racket}. Su característica distintiva es la capacidad de modificar y extender el propio lenguaje mediante macros, lo que lo convierte en una plataforma especialmente adecuada para la implementación de intérpretes. En el contexto de la asignatura FLP, Racket se utiliza como plataforma para la construcción de los intérpretes descritos en EOPL, aprovechando su sistema de módulos y las herramientas de la librería para la generación automática de analizadores.
+
+La librería EOPL proporciona, además de SLLGEN, las macros \texttt{define-datatype} y \texttt{cases}, que permiten definir tipos de datos algebraicos y despachar sobre ellos de forma idiomática \cite{Friedman2008EPL}. Al declarar explícitamente los constructores del AST como constructores de un tipo de datos algebraico, el estudiante mantiene una correspondencia directa entre la gramática del lenguaje y la estructura del evaluador. En conjunto, estas herramientas permiten que la atención del estudiante se concentre en la semántica del lenguaje más que en los aspectos mecánicos del análisis sintáctico o la gestión de estructuras de datos, lo cual es coherente con el principio de reducción de la carga cognitiva extrínseca descrito en la sección siguiente \cite{sweller2024cognitive}.
