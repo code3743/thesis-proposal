@@ -1,0 +1,17 @@
+\section{Despliegue en entorno de pruebas}
+
+El prototipo se despliega mediante Docker Compose \cite{merkel2014docker} en un único servidor anfitrión, con dos contenedores coordinados en la misma red interna. La Figura \ref{fig:despliegue} presenta el diagrama de la infraestructura de despliegue.
+
+La imagen del contenedor de aplicación se construye mediante un \textit{Dockerfile} multi-etapa con tres etapas diferenciadas. La primera etapa (\texttt{deps}) instala las dependencias del proyecto utilizando \texttt{pnpm} sobre una imagen base de Node.js 25 Alpine. La segunda etapa (\texttt{builder}) ejecuta la construcción de Next.js en modo \textit{standalone}\footnote{El modo \textit{standalone} de Next.js genera un servidor Node.js autocontenido que incluye únicamente las dependencias estrictamente necesarias para producción, sin requerir la carpeta \texttt{node\_modules} completa en el entorno de despliegue. Esto reduce significativamente el tamaño de la imagen Docker resultante.}, que produce un artefacto autocontenido con todas las dependencias necesarias para ejecutar el servidor en producción. La tercera etapa (\texttt{runner}) utiliza la imagen \texttt{node:25-bookworm-slim} e instala el intérprete de Racket como dependencia del sistema operativo mediante \texttt{apt-get}. Esta etapa copia únicamente el artefacto \textit{standalone}, el directorio de archivos estáticos, el directorio \texttt{public} y los tres archivos de instrumentación Racket, minimizando el tamaño de la imagen final. La variable de entorno \texttt{RACKET\_BIN} se configura en \texttt{/usr/bin/racket} para que la ruta de API localice el ejecutable sin depender de la configuración del sistema anfitrión.
+
+El servicio \textbf{app} expone el puerto interno 3000 al servicio \textbf{nginx} dentro de la red interna de Docker, pero no lo publica hacia el host. El servicio \textbf{nginx} utiliza la imagen oficial \texttt{nginx:alpine} y es el único que publica un puerto hacia el exterior (puerto 80). Su configuración se suministra como volumen de solo lectura mediante el archivo \texttt{nginx.conf}, que define una directiva \texttt{proxy\_pass}\footnote{\texttt{proxy\_pass} es la directiva de nginx que especifica la dirección del servidor al que se redirigen las solicitudes entrantes. En combinación con los encabezados \texttt{Upgrade} y \texttt{Connection}, habilita además el soporte para conexiones \textit{WebSocket}.} hacia \texttt{http://app:3000} con los encabezados necesarios para el correcto funcionamiento del protocolo HTTP/1.1 y las conexiones \textit{WebSocket}. Esta arquitectura garantiza que el acceso externo al prototipo se realice exclusivamente a través del proxy, centralizando el control de las solicitudes entrantes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Capitulo_5/imagenes/despliegue.png}
+    \caption{Diagrama de despliegue del prototipo FLP Viewer en el entorno de pruebas}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:despliegue}
+\end{figure}
+
+\FloatBarrier

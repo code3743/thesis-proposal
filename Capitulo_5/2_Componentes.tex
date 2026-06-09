@@ -1,0 +1,159 @@
+\section{Implementación de los componentes}
+
+\subsection{Pipeline de gramática BNF}
+
+El pipeline de gramática se implementó íntegramente en TypeScript \cite{typescript} como una cadena de módulos independientes que opera en el cliente sin intervención del servidor. Su punto de entrada único es la función \texttt{runPipeline}, definida en \texttt{grammar-pipeline.ts}, que recibe la especificación léxica y la gramática en notación BNF y retorna los archivos del intérprete generados o una lista de errores.
+
+La cadena de transformación sigue el modelo clásico de compilación \cite{aho2006compilers} y comprende tres etapas secuenciales. La primera es el análisis léxico, implementado en \texttt{bnf-lexer.ts}: la función \texttt{tokenize} recorre el texto de entrada carácter a carácter y produce una secuencia de tokens tipados. Los errores léxicos se reportan mediante la clase \texttt{LexError}, que incluye la línea y columna exactas del fallo. La segunda etapa es el análisis sintáctico, implementado en \texttt{bnf-parser.ts}: la función \texttt{parse} consume la secuencia de tokens y construye una representación intermedia de la gramática (\texttt{GrammarAST}) compuesta por reglas de producción. Los errores sintácticos se reportan mediante la clase \texttt{ParseError} con la misma precisión posicional. La tercera etapa es la generación de código, distribuida en tres módulos especializados. \texttt{eopl-generator.ts} produce el archivo \texttt{grammar.rkt} con la especificación léxica y gramatical en formato SLLGEN\footnote{SLLGEN es la biblioteca de análisis sintáctico incluida en EOPL que genera automáticamente un escáner y un analizador a partir de una especificación léxica y una gramática expresadas como listas Racket \cite{Friedman2008EPL}.}. \texttt{env-generator.ts} genera \texttt{environment.rkt} con el ambiente inicial y las funciones de extensión. \texttt{main-generator.ts} produce \texttt{main.rkt} con los \textit{stubs}\footnote{Un \textit{stub} es una función con cuerpo incompleto que declara la firma esperada y sirve como marcador del trabajo pendiente de implementación. En este contexto, los \textit{stubs} definen las funciones de evaluación del intérprete que el estudiante debe completar.} de las funciones de evaluación pendientes de implementación por parte del estudiante, registrando además las líneas bloqueadas para protección en el editor.
+
+La especificación léxica se define en un área de texto independiente del modal de gramática, escribiendo un nombre de token por línea. Para cada nombre reconocido (\texttt{number}, \texttt{float}, \texttt{identifier}, \texttt{binary}, \texttt{octal}, \texttt{hex} y \texttt{text}) la función \texttt{expandLexRule} de \texttt{eopl-generator.ts} produce las reglas SLLGEN correspondientes. Las reglas de espaciado (\texttt{whitespace}) y de comentarios de línea (\texttt{comment}) se incluyen siempre de forma automática. Si el área léxica se deja vacía, el pipeline incorpora el conjunto completo de tokens por defecto. Para tipos léxicos no contemplados en los nombres predefinidos, el estudiante puede escribir directamente la regla en notación SLLGEN entre paréntesis, que el pipeline incorpora sin transformaciones.
+
+\subsection{Componente orquestador y paneles de la interfaz}
+
+La Figura \ref{fig:bienvenida} muestra el modal de bienvenida que se presenta al estudiante en el primer acceso. El modal ofrece un resumen de las acciones básicas y carga automáticamente el ejemplo \textit{Hola Mundo} como punto de partida.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-01-bienvenida.png}
+    \caption{Modal de bienvenida del prototipo FLP Viewer}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:bienvenida}
+\end{figure}
+
+\FloatBarrier
+
+El componente \texttt{PlaygroundLayout} actúa como orquestador central de la interfaz. Mantiene el estado global de la sesión de trabajo e implementa las transiciones de estado definidas en el diseño: inicio y fin de ejecución, recepción de resultados, avance paso a paso y apertura de modales auxiliares.
+
+El estado que gestiona el orquestador comprende los archivos del editor (\texttt{files}), el árbol de sintaxis abstracta activo (\texttt{ast}), los marcos del ambiente de ejecución (\texttt{frames}), el historial de mensajes de la consola (\texttt{logs}), los indicadores de sesión activa y ejecución en curso, el modo de evaluación paso a paso (\texttt{stepMode}) y la cola de pasos pendientes (\texttt{pendingSteps}). Los cuatro paneles de visualización (\texttt{ASTViewer}, \texttt{EnvironmentPanel}, \texttt{ConsoleOutput} y \texttt{EditorPanel}) son componentes React \cite{react} sin estado propio: reciben exclusivamente los datos necesarios para su renderizado a través de las propiedades que el orquestador les suministra.
+
+El modo de evaluación paso a paso opera mediante una cola de pasos (\texttt{pendingSteps}) que se inicializa con todos los pasos retornados por la API. Cada vez que el usuario activa el control \textit{Next step}, el orquestador extrae el siguiente paso de la cola y actualiza de forma sincronizada el árbol AST, los marcos del ambiente y la salida de la consola, permitiendo al estudiante observar la evolución del estado del intérprete expresión por expresión, en correspondencia con el modelo de evaluación por pasos propuesto por Clements et al. \cite{Clements2001}.
+
+La Figura \ref{fig:paso-a-paso} ilustra la interfaz en modo paso a paso, con el botón de avance visible en la consola y el estado del AST y el ambiente correspondiente al paso activo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-08-paso-a-paso.png}
+    \caption{Modo de evaluación paso a paso con pasos pendientes de navegación}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:paso-a-paso}
+\end{figure}
+
+\FloatBarrier
+
+La Figura \ref{fig:modal-gramatica} ilustra el modal de definición de gramática con una especificación BNF y la vista previa del archivo \texttt{grammar.rkt} generado.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-05-modal-gramatica.png}
+    \caption{Modal de definición de gramática BNF con vista previa del archivo generado}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:modal-gramatica}
+\end{figure}
+
+\FloatBarrier
+
+El modal de gramática (\texttt{GrammarModal}) recibe las entradas del estudiante y, al confirmar, invoca \texttt{runPipeline} para obtener los archivos generados, que son cargados en el panel de edición a través del mecanismo \texttt{upsertFile}. Si el pipeline reporta errores léxicos o sintácticos, estos se presentan en el modal antes de cerrar, sin modificar los archivos activos en el editor.
+
+El componente \texttt{EditorPanel} utiliza Monaco Editor \cite{monaco} para la edición de código. Las líneas generadas automáticamente por el pipeline se marcan como de solo lectura mediante la API de rangos de Monaco, de modo que el estudiante solo puede editar las secciones correspondientes a la lógica de evaluación.
+
+Las Figuras~\ref{fig:interfaz-principal} y~\ref{fig:eval-cierres} documentan dos evaluaciones representativas sobre el ejemplo \textit{Intérprete EOPL (avanzado)}, seleccionadas por su correspondencia directa con los indicadores de logro IL~1.2.6 e IL~1.2.7, identificados en el Capítulo~3 como las fuentes de mayor dificultad conceptual del R.A.2 (Tabla~\ref{tabla:indicadores_logro_prototipo}). Dicho resultado concentra el 50\,\% del peso evaluativo de la asignatura, y el 77.8\,\% de los estudiantes encuestados reportó haber tenido dificultades con los conceptos asociados (entornos, estado y secuenciación) durante su cursada (P4, Tabla~\ref{tabla:encuesta_estudiantes}). Las evaluaciones cubren, de forma complementaria, los dos ejes semánticos que el diagnóstico identificó como prioritarios: el estado mutable con iteración, cuya comprensión exige distinguir entre ligadura y asignación destructiva (IL~1.2.7), y las funciones de orden superior con clausuras, cuya representación hace visible cómo el ambiente registra procedimientos como valores de primera clase almacenados junto a cualquier otra ligadura (IL~1.2.6) \cite{Friedman2008EPL}.
+
+La Figura \ref{fig:interfaz-principal} evalúa la expresión \texttt{var x = 0 in begin for i from 0 until 10 by 1 do set x = (x + i); x end}, que acumula la suma de 0 a 9 mediante un bucle con asignación destructiva. El panel de ambiente muestra la cadena \texttt{empty-env} $\to$ \texttt{init-env} $\to$ \texttt{x}, donde el marco final refleja el valor de \texttt{x} tras la última iteración del bucle. Este caso documenta que la instrumentación captura correctamente la evolución del estado mutable a lo largo de la ejecución.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-06-eval-bucle.png}
+    \caption{Evaluación de una expresión con iteración y estado mutable: suma acumulada mediante bucle \texttt{for}}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:interfaz-principal}
+\end{figure}
+
+\FloatBarrier
+
+La Figura \ref{fig:eval-cierres} evalúa la expresión \texttt{var f = func(x) if (x == 0) \{ 0 else (x + call f((x - 1))) \} in call f(10)}, que define una función recursiva \texttt{f} y la aplica sobre 10, obteniendo la suma triangular 55. A diferencia del caso anterior, el marco final del ambiente contiene la ligadura \texttt{f} cuyo valor es una clausura, lo que permite al estudiante observar que en el modelo de EOPL las funciones son valores de primera clase almacenados en el ambiente como cualquier otra ligadura \cite{Friedman2008EPL}. La presencia de la clausura en el panel de ambiente distingue esta visualización de la anterior y justifica su inclusión como caso complementario.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/cap-07-eval-cierres.png}
+    \caption{Evaluación de una función recursiva con clausura: la ligadura \texttt{f} en el panel de ambiente refleja una función como valor de primera clase}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:eval-cierres}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Biblioteca de ejemplos predefinidos}
+
+La biblioteca de ejemplos predefinidos (RF-05) comprende seis programas cargados durante el renderizado inicial del servidor mediante \texttt{load-examples.ts} y presentados al estudiante desde el modal de bienvenida. Cada entrada está compuesta por el conjunto completo de archivos del intérprete (\texttt{grammar.rkt}, \texttt{environment.rkt}, \texttt{main.rkt} y \texttt{utils.rkt}), de modo que cualquier ejemplo puede ejecutarse y explorarse de forma inmediata sin modificaciones previas. La Tabla~\ref{tab:biblioteca_ejemplos} presenta la correspondencia entre los ejemplos implementados y los indicadores de logro identificados en el Capítulo~3.
+
+\begin{table}[H]
+\centering
+\caption{Biblioteca de ejemplos predefinidos y correspondencia con indicadores de logro}
+\label{tab:biblioteca_ejemplos}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{0.4cm}
+  >{\raggedright\arraybackslash}p{5.5cm}
+  >{\centering\arraybackslash}p{6.5cm}
+}
+\hline
+\textbf{\#} & \textbf{Ejemplo} & \textbf{IL abordados} \\
+\hline
+1 & Hola Mundo        & IL~1.3.1 \\
+2 & Lenguaje LET      & IL~1.1.6, IL~1.2.3 \\
+3 & Ambientes         & IL~1.2.6, IL~1.2.7 \\
+4 & Procedimientos y cierres & IL~1.2.6 \\
+5 & Estado y asignación      & IL~1.2.6, IL~1.2.7 \\
+6 & Intérprete EOPL (avanzado) & IL~1.1.6, IL~1.2.6, IL~1.2.7 \\
+\hline
+\end{tabular}
+\vskip 4pt
+\footnotesize\textit{Fuente: elaboración propia a partir del microcurrículo de la asignatura (código 750017C).}
+\end{table}
+
+\FloatBarrier
+
+La secuencia de los ejemplos responde a dos ejes de variación simultáneos: la complejidad del lenguaje interpretado y la arquitectura del ambiente de ejecución. Los tres primeros ejemplos utilizan un ambiente funcional cuyos valores se almacenan en listas inmutables. A partir del cuarto, el ambiente introduce celdas mutables mediante el tipo \texttt{a-ref} sobre vectores. Este cambio arquitectónico en \texttt{environment.rkt} es el que hace observable la diferencia entre ligadura y asignación, conceptos que en el modelo funcional no tienen representación estructural distinta \cite{Friedman2008EPL}. Los párrafos siguientes describen el propósito específico de cada ejemplo dentro de esta progresión.
+
+\paragraph{Hola Mundo.}
+Con dos reglas gramaticales (\texttt{print-exp} y \texttt{string-exp}) y dos casos de evaluación, este ejemplo expone el pipeline completo de interpretación (gramática $\to$ AST $\to$ evaluación) en su forma más reducida, sin ligaduras activas ni operaciones sobre el ambiente. Su función en la biblioteca no es introducir un concepto nuevo sino permitir que el estudiante recorra cada etapa del proceso, desde el ingreso de la cadena de texto hasta la obtención del valor de retorno, sin que ningún elemento adicional interfiera en la lectura. Este diseño sigue el principio de gradación de la complejidad identificado en herramientas educativas para la enseñanza de compiladores \cite{Stamenkovic2024AWE}, y garantiza que el primer contacto con el prototipo esté asociado a una experiencia de éxito inmediato, reduciendo así la barrera de entrada a la herramienta \cite{lu2022usability}.
+
+\paragraph{Lenguaje LET.}
+Este ejemplo implementa el lenguaje LET descrito en el Capítulo~3 de EOPL \cite{Friedman2008EPL}, que constituye el primer intérprete del libro en el que el ambiente cumple una función activa. La gramática define siete reglas de producción y el evaluador implementa seis casos, incluyendo \texttt{let-exp}, que introduce la primera llamada a \texttt{extend-env}. El ambiente se implementa como una estructura funcional e inmutable: cada ligadura se almacena en un nuevo frame que se apila sobre el anterior sin modificar ninguno de los existentes. La relevancia de este ejemplo reside en que establece la correspondencia visible entre tres niveles: el nodo \texttt{let-exp} en el AST, la llamada a \texttt{extend-env} en el evaluador y la aparición del nuevo frame en el panel de ambiente, haciendo observable la mecánica básica del modelo de ambientes antes de introducir cualquier forma de estado mutable.
+
+\paragraph{Ambientes.}
+Este ejemplo comparte gramática y evaluador con el Lenguaje LET, pero su \texttt{init-env} precarga tres ligaduras (\texttt{x=1}, \texttt{y=2}, \texttt{z=3}). Esta diferencia, localizada exclusivamente en \texttt{environment.rkt}, hace que el panel de ambiente muestre de inmediato una cadena de frames activos, lo que permite observar dos comportamientos que en el Lenguaje LET requieren expresiones más elaboradas. Sorva et al. señalan que la efectividad de las visualizaciones de programas está directamente relacionada con el grado en que la representación visual se corresponde con el modelo conceptual que el estudiante debe construir \cite{Sorva2013}. La cadena de frames preexistente en este ejemplo ofrece ese modelo desde el primer contacto, sin que el estudiante deba construirlo mediante expresiones anidadas. El primero es la búsqueda de identificadores, que escala por la cadena desde el frame más reciente hasta el ambiente inicial. El segundo es el \textit{shadowing}: al evaluar \texttt{let x = 10 in x}, el panel muestra un frame exterior con \texttt{x=1} y uno interior con \texttt{x=10}, haciendo visible que la ligadura interior no reemplaza a la exterior sino que la oculta dentro de su alcance \cite{Friedman2008EPL}.
+
+\paragraph{Procedimientos y cierres.}
+Este ejemplo extiende el Lenguaje LET con \texttt{proc} y \texttt{call}, correspondientes al lenguaje PROC del Capítulo~3 de EOPL \cite{Friedman2008EPL}. La clausura se implementa como una función Racket que captura el ambiente léxico en el momento de la evaluación del \texttt{proc-exp}: el entorno activo queda embebido en el valor resultante y acompaña al procedimiento durante toda su vida. Este mecanismo hace visible un aspecto del modelo de EOPL que el código fuente por sí solo no comunica: en el panel de ambiente, el identificador ligado a la función no contiene un número ni un booleano, sino un procedimiento, lo que evidencia que las funciones son valores de primera clase almacenados en el ambiente de la misma forma que cualquier otro dato \cite{Friedman2008EPL}. Adicionalmente, al invocar la función, el evaluador extiende el ambiente capturado en la clausura y no el ambiente activo en el punto de llamada, lo que corresponde al modelo de alcance léxico descrito por Friedman y Wand \cite{Friedman2008EPL} y permite que el estudiante verifique en el panel de ambiente qué ligaduras están disponibles durante la ejecución del cuerpo de la función.
+
+\paragraph{Estado y asignación.}
+Este ejemplo introduce la separación entre ligadura y asignación mediante el lenguaje IMPLICIT-REFS descrito en el Capítulo~4 de EOPL \cite{Friedman2008EPL}. El cambio es arquitectónico y se concentra en \texttt{environment.rkt}: los valores dejan de almacenarse directamente en listas y pasan a residir en celdas mutables representadas por el tipo \texttt{a-ref} sobre vectores. Esta modificación habilita la operación \texttt{set}, implementada en \texttt{main.rkt} mediante \texttt{setref!}, que modifica el contenido de la celda sin crear un nuevo frame. La diferencia respecto a \texttt{let} se vuelve directamente verificable: evaluar \texttt{let x = 1 in let x = 2 in x} produce dos frames apilados en el panel de ambiente, mientras que evaluar \texttt{let x = 1 in begin set x = 2; x end} produce un único frame cuyo valor ha sido actualizado. Este contraste aborda directamente la dificultad específica reportada por el 77.8\,\% de los estudiantes encuestados con los conceptos de entorno y estado (P4, Tabla~\ref{tabla:encuesta_estudiantes}), y es coherente con la estrategia de hacer visibles los procesos internos del intérprete identificada como beneficiosa en la literatura sobre herramientas educativas para compiladores \cite{Spigariol2023Aprendiendo, Stamenkovic2024AWE}.
+
+\paragraph{Intérprete EOPL (avanzado).}
+Este ejemplo presenta un intérprete de mayor escala que combina el modelo de referencias mutables con un lenguaje propio que incorpora estructuras de datos, arreglos, iteradores (\texttt{for}, \texttt{while}), \texttt{switch} y reconocimiento de patrones. A diferencia de los ejemplos anteriores, que aíslan conceptos específicos, este intérprete pone en juego simultáneamente los mecanismos de ligadura, clausura y estado mutable estudiados de forma separada en los ejemplos precedentes. La función \texttt{contains-set?}, incorporada en el evaluador, hace cumplir en tiempo de ejecución que las ligaduras \texttt{let} no admitan asignación, reforzando en el código ejecutable la distinción semántica respecto a \texttt{var} que el ejemplo anterior hizo observable a nivel del panel de ambiente. Este intérprete sirve además como base de las evaluaciones representativas documentadas en las Figuras~\ref{fig:interfaz-principal} y~\ref{fig:eval-cierres}.
+
+\subsection{Punto de acceso de ejecución}
+
+La ruta de API \texttt{/api/run} se implementó como un manejador HTTP POST en \texttt{app/api/run/route.ts}, siguiendo el modelo de rutas de Next.js. Su flujo de operación comprende cuatro fases.
+
+En la primera fase, el servidor crea un directorio temporal exclusivo para la solicitud mediante \texttt{mkdtemp}\footnote{\texttt{mkdtemp} es una llamada del sistema POSIX que crea un directorio temporal con nombre único, garantizando que no colisione con directorios preexistentes aunque varias solicitudes se procesen de forma concurrente.} y escribe en él todos los archivos del editor recibidos en el cuerpo de la petición. Antes de escribir \texttt{environment.rkt} y \texttt{main.rkt}, la función \texttt{injectRuntime} inyecta en su contenido los módulos de instrumentación correspondientes (\texttt{\_tracking.rkt} y \texttt{\_stream-parser.rkt} respectivamente). El archivo \texttt{\_runner.rkt} se copia también al directorio temporal como punto de entrada del proceso Racket.
+
+En la segunda fase, el servidor lanza el proceso Racket sobre \texttt{\_runner.rkt} mediante \texttt{execFile}, pasando la expresión de prueba como argumento y aplicando un tiempo límite de 15 segundos. La señal de cancelación del \texttt{AbortController}\footnote{\texttt{AbortController} es una API web estándar que permite cancelar operaciones asíncronas mediante una señal compartida entre el código que inicia la operación y el que la ejecuta. Cuando el cliente cierra la conexión, la señal se activa y el proceso Racket es terminado antes de consumir el tiempo límite completo.} asociado a la petición permite interrumpir el proceso si el cliente cancela la solicitud antes de que finalice la ejecución.
+
+En la tercera fase, el servidor deserializa la salida estándar del proceso. Si la salida es un arreglo JSON válido, se interpreta como una secuencia de pasos de evaluación. De lo contrario, se trata como texto plano. Los mensajes de error presentes en \texttt{stderr} son normalizados por la función \texttt{cleanStderr}, que elimina las secciones de contexto interno del intérprete Racket que resultan irrelevantes para el estudiante.
+
+En la cuarta fase, el servidor elimina el directorio temporal y retorna la respuesta HTTP con los campos \texttt{steps}, \texttt{stderr} y \texttt{error}. La eliminación del directorio se realiza en el bloque \texttt{finally} del manejador para garantizar la limpieza del sistema de archivos independientemente del resultado de la ejecución.
+
+\subsection{Instrumentación en tiempo de ejecución}
+
+La instrumentación en tiempo de ejecución se implementó mediante tres archivos Racket que se inyectan en el entorno de ejecución de forma transparente para el estudiante.
+
+El archivo \texttt{\_tracking.rkt} redefine la función \texttt{extend-env} al momento de cargar el módulo \texttt{environment.rkt}. Cada llamada a la función redefinida registra un \textit{snapshot} del estado del ambiente en el log interno \texttt{\_env-log}. Al finalizar cada evaluación, el ejecutor principal lee este log e incluye la secuencia de marcos en la respuesta serializada.
+
+El archivo \texttt{\_stream-parser.rkt} se inyecta al final de \texttt{main.rkt} e instrumenta la función de evaluación del programa para capturar, por cada reducción, el árbol de sintaxis abstracta resultante, el estado del ambiente y el valor producido. La salida se serializa como un arreglo JSON de objetos de paso, donde cada objeto incluye los campos \texttt{ast}, \texttt{environments} y \texttt{output}.
+
+El archivo \texttt{\_runner.rkt} actúa como punto de entrada del proceso Racket. Carga los módulos del proyecto en el orden correcto, recibe la expresión de prueba como argumento de línea de comandos y coordina la evaluación dentro de un manejador de excepciones que captura errores del intérprete y los incluye en la respuesta.
+
+En el flujo de descarga del proyecto, la función \texttt{downloadZip} de \texttt{playground-utils.ts} genera un archivo ZIP con los archivos del editor, eliminando previamente los bloques de instrumentación marcados con las directivas \texttt{FLP-VIEWER-TRACKING-START/END}. Esto garantiza que el código exportado sea directamente compatible con el entorno DrRacket \cite{felleisen2018racket} sin modificaciones adicionales.

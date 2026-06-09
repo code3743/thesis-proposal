@@ -1,7 +1,10 @@
 \documentclass[letterpaper, 11pt, oneside]{book}
 
 \usepackage[utf8]{inputenc} %Para configuración de caracteres
-\usepackage[spanish]{babel} %Para configuración de idioma
+\DeclareUnicodeCharacter{2715}{\texttimes}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{26A0}{\ensuremath{\triangle}}
+\usepackage[spanish,es-noshorthands]{babel} %Para configuración de idioma
 \addto\captionsspanish{\renewcommand{\appendixname}{Anexo}}
 
 \usepackage{float} %Para que funcionen las tablas
@@ -32,7 +35,7 @@
 \usepackage{url} % inserción url's notas de pie.
 
 %Para poder colocar texto en color
-\usepackage{color}
+\usepackage{xcolor}
 \definecolor{naranja}{rgb}{1,0.5,0} % valores de las componentes roja, verde y azul (RGB)
 \definecolor{rojo}{rgb}{1,0,0}
 \definecolor{SteelBlue}{rgb}{0.3,0.5,0.7}
@@ -56,6 +59,11 @@
   inputencoding=utf8, 
 }
 
+
+\usepackage{amsmath}
+\usepackage{cite} % Ordena y comprime citas múltiples automáticamente: [6,3,5] → [3,5,6]
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,babel}
 
 %Para tener los bookmarks del pdf (menú al lado derecho en los visualizadores de pdf)
 % si colorlinks= true, no salen las cajas, sino el color del link!!
@@ -134,9 +142,6 @@
 %%%%Alcance%%%%
 \input{Capitulo_1/3_Alcance.tex}
 
-%%%%Estructura%%%%
-\input{Capitulo_1/4_Estructura.tex}
-
 
 %%%%%%Capitulo DOS: Marco teórico%%%%%
 
@@ -145,6 +150,11 @@
 \markboth{Marco Referencial}{Marco Referencial}
 
 \input{Capitulo_2/1_Glosario.tex}
+
+\input{Capitulo_2/2_MarcoTeorico/1_FundamentosInterpretacion.tex}
+\input{Capitulo_2/2_MarcoTeorico/2_TeoriasAprendizaje.tex}
+\input{Capitulo_2/2_MarcoTeorico/3_RelacionConceptual.tex}
+\input{Capitulo_2/3_Antecedentes.tex}
 
 %%%%%%%Capitulo TRES: Identificación de las dificultades%%%%%%
 \chapter[Diagnóstico de dificultades conceptuales]{Diagnóstico de dificultades conceptuales}
@@ -155,6 +165,20 @@
 \input{Capitulo_3/2_EncuestaEstudiante.tex}
 \input{Capitulo_3/3_EncuestaDocente.tex}
 \input{Capitulo_3/4_ConceptosBase.tex}
+
+%%%%%Capitulo CUATRO: Diseño del prototipo FLP Viewer%%%%%
+\chapter[Diseño del prototipo FLP Viewer]{Diseño del prototipo FLP Viewer}
+\label{cap4}
+\markboth{Diseño del prototipo FLP Viewer}{Diseño del prototipo FLP Viewer}
+
+\input{Capitulo_4/1_Diseno.tex}
+
+
+%%%%%Capitulo CINCO: Implementación del prototipo FLP Viewer%%%%%
+\chapter[Implementación del prototipo FLP Viewer]{Implementación del prototipo FLP Viewer}
+\label{cap5}
+\markboth{Implementación del prototipo FLP Viewer}{Implementación del prototipo FLP Viewer}
+\input{Capitulo_5/1_Implementacion.tex}
 
 %%%%%BIBLIOGRAFIA%%%%%%%%
 \bibliography{Bibliografia}

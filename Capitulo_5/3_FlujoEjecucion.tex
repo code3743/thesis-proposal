@@ -1,0 +1,13 @@
+\section{Flujo de ejecución principal}
+
+La Figura \ref{fig:secuencia} ilustra el flujo de ejecución que se produce cuando el estudiante envía una expresión desde la consola del prototipo. El flujo inicia en el componente \texttt{ConsoleOutput}, que delega la acción al orquestador \texttt{PlaygroundLayout}. Este registra la expresión en el historial, inicializa el mecanismo de cancelación y deshabilita nuevas ejecuciones concurrentes. A continuación, invoca el servicio \texttt{racket.ts}, que empaqueta los archivos del editor y la expresión en una petición HTTP POST hacia \texttt{/api/run}. La solicitud transita por el contenedor \textbf{nginx}, que actúa como \textit{reverse proxy} y la redirige al servidor de aplicación. El servidor prepara el entorno de ejecución aislado, lanza el proceso Racket, deserializa su salida y devuelve la secuencia de pasos al cliente. Finalmente, \texttt{PlaygroundLayout} distribuye los resultados entre los paneles de visualización según el modo activo: en modo normal actualiza el AST, el ambiente y la consola con el estado final, y en modo paso a paso encola los pasos y presenta el primero de forma inmediata, habilitando la navegación manual.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Capitulo_5/imagenes/secuencia.png}
+    \caption{Diagrama de secuencia del flujo principal de ejecución del prototipo FLP Viewer}
+    \scriptsize \textbf{Fuente:} Elaboración propia
+    \label{fig:secuencia}
+\end{figure}
+
+\FloatBarrier

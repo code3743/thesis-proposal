@@ -1,0 +1,74 @@
+\section{Especificación de requisitos del sistema}
+
+\subsection{Enfoque metodológico}
+
+La identificación y documentación de los requisitos del sistema se realizó siguiendo las directrices del estándar IEEE 830 \cite{ieee830} para la especificación de requisitos de software, adaptado al contexto educativo del proyecto. Los requisitos fueron derivados a partir de tres fuentes complementarias. En primer lugar, las dificultades conceptuales identificadas en el diagnóstico con estudiantes y docentes (Capítulo 3); en segundo lugar, los indicadores de logro del microcurrículo de la asignatura (Tabla \ref{tabla:indicadores_logro_prototipo}); y en tercer lugar, las características de calidad de software definidas en la norma ISO/IEC 25010 \cite{iso25010}, que orientó la formulación de los requisitos no funcionales.
+
+Cada requisito fue clasificado por prioridad (Alta, Media) en función de su relevancia para los objetivos de aprendizaje identificados y de su viabilidad de implementación en el alcance del proyecto. Los criterios de aceptación asociados a cada requisito fueron formulados de manera verificable, haciendo referencia al comportamiento concreto del sistema implementado. La especificación completa se encuentra en el Anexo \ref{annex:rf}.
+
+\subsection{Requisitos funcionales}
+
+Se definieron ocho requisitos funcionales que cubren las capacidades esenciales del prototipo. La Tabla \ref{tab:rf_resumen} presenta el resumen de los mismos con su prioridad y una descripción concisa.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de requisitos funcionales del sistema}
+\label{tab:rf_resumen}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{1.4cm}
+  >{\raggedright\arraybackslash}p{5.2cm}
+  >{\raggedright\arraybackslash}p{6.5cm}
+  >{\centering\arraybackslash}p{1.3cm}
+}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Descripción resumida} & \textbf{Prioridad} \\
+\hline
+RF-01 & Generación del AST & Procesar el programa del usuario con la gramática definida y producir el AST correspondiente. & Alta \\
+RF-02 & Visualización del AST & Renderizar el AST generado de forma jerárquica e interactiva en un panel dedicado. & Alta \\
+RF-03 & Ejecución y evaluación & Invocar el intérprete Racket sobre los archivos del editor y mostrar el resultado en la consola. & Alta \\
+RF-04 & Representación del ambiente & Mostrar el ambiente de evaluación como estructura jerárquica de frames actualizada tras cada ejecución. & Alta \\
+RF-05 & Biblioteca de ejemplos & Ofrecer un conjunto de programas predefinidos alineados con los indicadores de logro de la asignatura. & Media \\
+RF-06 & Validación de sintaxis Racket & Detectar y reportar errores léxicos y sintácticos en la gramática BNF y en el programa del usuario. & Alta \\
+RF-07 & Visualización del intérprete & Presentar los archivos del intérprete generado (gramática, ambiente, evaluador) en un editor organizado por pestañas con secciones protegidas. & Media \\
+RF-08 & Plantilla base y exportación & Proveer una plantilla editable del intérprete con secciones bloqueadas y permitir la descarga del proyecto en formato \texttt{.zip}. & Alta \\
+\hline
+\end{tabular}
+\vskip 4pt
+\footnotesize\textit{Fuente: elaboración propia. Especificación completa en Anexo \ref{annex:rf}.}
+\end{table}
+
+\FloatBarrier
+
+\subsection{Requisitos no funcionales}
+
+Se definieron cinco requisitos no funcionales que establecen las condiciones de calidad del sistema. La Tabla \ref{tab:rnf_resumen} presenta el resumen correspondiente.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de requisitos no funcionales del sistema}
+\label{tab:rnf_resumen}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{1.4cm}
+  >{\raggedright\arraybackslash}p{3.5cm}
+  >{\raggedright\arraybackslash}p{8.2cm}
+  >{\centering\arraybackslash}p{1.3cm}
+}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Descripción resumida} & \textbf{Prioridad} \\
+\hline
+RNF-01 & Usabilidad & La interfaz debe ser operada sin instrucción previa por estudiantes sin experiencia avanzada en compiladores. & Alta \\
+RNF-02 & Rendimiento & La generación del AST y la evaluación del programa deben completarse en menos de 5 segundos en condiciones normales. & Alta \\
+RNF-03 & Accesibilidad web & El sistema debe ejecutarse en navegadores modernos sin instalación adicional ni autenticación. & Alta \\
+RNF-04 & Mantenibilidad & El código debe estar organizado en módulos independientes con separación explícita de tipos, lógica y presentación. & Media \\
+RNF-05 & Escalabilidad & La arquitectura debe permitir incorporar nuevos ejemplos, gramáticas o características sin afectar las funcionalidades existentes. & Media \\
+\hline
+\end{tabular}
+\vskip 4pt
+\footnotesize\textit{Fuente: elaboración propia. Especificación completa en Anexo \ref{annex:rf}.}
+\end{table}
+
+\FloatBarrier

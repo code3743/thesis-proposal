@@ -1,0 +1,297 @@
+\chapter{Requisitos del sistema}
+\label{annex:rf}
+
+\section{Requisitos Funcionales}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RF-01 \\
+\hline
+\textbf{Título} & Generación del Árbol de Sintaxis Abstracta (AST) \\
+\hline
+\textbf{Descripción} & El sistema debe procesar el programa ingresado por el usuario utilizando la gramática previamente definida para generar su correspondiente Árbol de Sintaxis Abstracta (AST). \\
+\hline
+\textbf{Prioridad} & Alta \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item El sistema invoca el intérprete Racket con los archivos del editor y la expresión de entrada; el AST resultante es serializado en formato JSON y transmitido al cliente.
+    \item El AST generado es renderizado en el panel ASTViewer reflejando la estructura jerárquica del programa evaluado.
+    \item Cuando el programa contiene errores sintácticos o de evaluación, el sistema muestra un mensaje de error en la consola con el prefijo \texttt{✕} y nivel visual diferenciado en rojo; el panel ASTViewer conserva el último AST válido.
+    \item El AST corresponde fielmente a la última expresión evaluada exitosamente.
+\end{itemize} \\
+\hline
+\caption{RF-01: Generación del AST}
+\label{tab:rf01}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RF-02 \\
+\hline
+\textbf{Título} & Visualización gráfica e interactiva del AST \\
+\hline
+\textbf{Descripción} & El sistema debe mostrar el árbol de sintaxis abstracta generado de forma gráfica e interactiva, permitiendo la exploración visual de su estructura. \\
+\hline
+\textbf{Prioridad} & Alta \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item El panel ASTViewer renderiza la representación jerárquica del AST con nodos que indican el tipo de dato retornado por el intérprete.
+    \item La visualización se actualiza automáticamente tras cada ejecución exitosa, sin necesidad de acción adicional por parte del usuario.
+    \item El panel es responsivo y se adapta al tamaño del contenedor asignado dentro del layout redimensionable.
+    \item En modo paso a paso, el panel refleja el AST correspondiente al paso de evaluación actualmente visualizado.
+    \item No se presentan errores de renderizado ni contenido huérfano durante el ciclo de vida de la sesión.
+\end{itemize} \\
+\hline
+\caption{RF-02: Visualización gráfica e interactiva del AST}
+\label{tab:rf02}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RF-03 \\
+\hline
+\textbf{Título} & Ejecución y evaluación del programa \\
+\hline
+\textbf{Descripción} & El sistema debe permitir ejecutar el programa del usuario e interpretar su resultado, siguiendo el proceso de evaluación definido por la gramática y el intérprete generado. \\
+\hline
+\textbf{Prioridad} & Alta \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item El sistema transmite los archivos del editor y la expresión de entrada a la ruta \texttt{POST /api/run} y recibe el arreglo de pasos de evaluación.
+    \item El resultado de cada paso es presentado en la consola con nivel de salida correspondiente: verde (\texttt{output}) para valores, rojo (\texttt{error}) para excepciones capturadas, gris (\texttt{info}) para resultados \texttt{void}.
+    \item Los errores producidos por \texttt{eopl:error} son capturados por el runtime, limpiados de trazas internas de Racket, y presentados con el prefijo \texttt{✕} en color rojo.
+    \item La ejecución puede ser cancelada por el usuario durante el proceso; el servidor aborta el subproceso Racket correspondiente.
+    \item El tiempo máximo de ejecución del subproceso Racket es de 15 segundos; transcurrido ese tiempo, el sistema reporta el error de tiempo límite en la consola.
+    \item El sistema soporta un modo de evaluación paso a paso que permite avanzar la ejecución de forma controlada mostrando el estado del AST y del ambiente en cada paso.
+\end{itemize} \\
+\hline
+\caption{RF-03: Ejecución y evaluación del programa}
+\label{tab:rf03}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RF-04 \\
+\hline
+\textbf{Título} & Representación del ambiente de ejecución \\
+\hline
+\textbf{Descripción} & El sistema debe representar el ambiente de evaluación como una estructura jerárquica de frames que se actualiza en cada ejecución, permitiendo al estudiante observar la evolución del estado del programa. \\
+\hline
+\textbf{Prioridad} & Alta \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item El panel EnvironmentPanel muestra el ambiente como una pila de frames jerárquicos, donde cada frame lista los bindings activos con su nombre, valor serializado y tipo de dato inferido.
+    \item El ambiente mostrado corresponde al último paso de evaluación completado; en modo paso a paso, se actualiza con cada avance del usuario.
+    \item La estructura de frames refleja fielmente la cadena de entornos construida durante la evaluación, permitiendo al estudiante identificar el alcance léxico de cada variable.
+    \item El panel permanece visible y no colapsa ante la ausencia de bindings en el ambiente actual.
+\end{itemize} \\
+\hline
+\caption{RF-04: Representación del ambiente de ejecución}
+\label{tab:rf04}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RF-05 \\
+\hline
+\textbf{Título} & Biblioteca de ejemplos \\
+\hline
+\textbf{Descripción} & El sistema debe ofrecer una biblioteca de ejemplos predefinidos orientados a los indicadores de logro identificados como base conceptual del prototipo, con el propósito de facilitar el aprendizaje mediante casos de uso concretos. \\
+\hline
+\textbf{Prioridad} & Media \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item Los ejemplos son cargados desde el sistema de archivos del servidor durante el renderizado inicial y transmitidos al cliente como propiedades del componente orquestador.
+    \item El sistema presenta la lista de ejemplos disponibles en el modal de bienvenida con nombre y descripción breve de cada uno.
+    \item Al seleccionar un ejemplo, los archivos del editor son reemplazados por los archivos correspondientes sin pérdida de estado de la interfaz.
+    \item Los ejemplos cubren los cinco indicadores de logro seleccionados en el diagnóstico: IL 1.1.6, IL 1.2.3, IL 1.2.6, IL 1.2.7 e IL 1.3.1.
+    \item Cada ejemplo es compatible con el pipeline de gramática y puede ser ejecutado sin modificaciones adicionales.
+\end{itemize} \\
+\hline
+\caption{RF-05: Biblioteca de ejemplos}
+\label{tab:rf05}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RF-06 \\
+\hline
+\textbf{Título} & Soporte y validación de sintaxis en Racket \\
+\hline
+\textbf{Descripción} & El sistema debe ser capaz de reconocer la sintaxis del lenguaje Racket en el editor y validar la gramática BNF ingresada por el usuario, reportando errores de forma clara y oportuna. \\
+\hline
+\textbf{Prioridad} & Alta \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item El editor Monaco provee resaltado de sintaxis para archivos con extensión \texttt{.rkt}.
+    \item El pipeline de gramática detecta y reporta errores léxicos en la especificación BNF durante el procesamiento; los mensajes son presentados en el modal de gramática antes de generar los archivos.
+    \item El sistema no genera los archivos del intérprete ni habilita la ejecución cuando la gramática BNF contiene errores léxicos o sintácticos.
+    \item Los errores de evaluación producidos por el intérprete Racket son presentados en la consola sin exponer trazas internas del runtime al usuario.
+\end{itemize} \\
+\hline
+\caption{RF-06: Soporte y validación de sintaxis en Racket}
+\label{tab:rf06}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RF-07 \\
+\hline
+\textbf{Título} & Visualización de los componentes internos del intérprete \\
+\hline
+\textbf{Descripción} & El sistema debe permitir al estudiante visualizar los archivos que componen el intérprete generado, mostrando su estructura con distinción entre las secciones técnicas y las secciones destinadas a la implementación del estudiante. \\
+\hline
+\textbf{Prioridad} & Media \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item El panel de edición organiza los archivos del intérprete en pestañas independientes, accesibles mediante navegación por clic.
+    \item Las líneas generadas automáticamente por el pipeline son marcadas como de solo lectura y presentadas con distinción visual respecto a las líneas editables.
+    \item Las líneas destinadas a la implementación del estudiante (stubs de \texttt{eval-program}, \texttt{eval-expression}, \texttt{apply-primitive}) permanecen activas y editables.
+    \item No se permite la modificación de las líneas protegidas durante la sesión de trabajo.
+\end{itemize} \\
+\hline
+\caption{RF-07: Visualización de los componentes internos del intérprete}
+\label{tab:rf07}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RF-08 \\
+\hline
+\textbf{Título} & Plantilla base editable y exportación del entorno \\
+\hline
+\textbf{Descripción} & El sistema debe proporcionar una plantilla base del intérprete donde el estudiante pueda completar la implementación, y permitir la descarga del proyecto completo en formato \texttt{.zip} compatible con la librería EOPL. \\
+\hline
+\textbf{Prioridad} & Alta \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item Al confirmar la gramática, el pipeline genera automáticamente los cuatro archivos del intérprete con los stubs de las funciones a implementar, cargándolos en el editor sin intervención adicional del usuario.
+    \item Las secciones de infraestructura técnica del intérprete están protegidas y no son modificables por el usuario.
+    \item Las secciones de implementación están identificadas con comentarios \texttt{;; TODO} que orientan al estudiante sobre qué debe completar.
+    \item El sistema genera un archivo \texttt{.zip} con todos los archivos del editor en su estado actual, incluyendo las modificaciones realizadas por el usuario.
+    \item El archivo descargado incluye una estructura de directorios compatible con la librería EOPL y puede ser abierto directamente en DrRacket.
+\end{itemize} \\
+\hline
+\caption{RF-08: Plantilla base editable y exportación del entorno}
+\label{tab:rf08}
+\end{longtable}
+
+\section{Requisitos No Funcionales}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RNF-01 \\
+\hline
+\textbf{Título} & Usabilidad \\
+\hline
+\textbf{Descripción} & El sistema debe ser intuitivo y operable por estudiantes sin experiencia avanzada en compiladores, minimizando la carga cognitiva extrínseca impuesta por la interfaz. \\
+\hline
+\textbf{Prioridad} & Alta \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item Los usuarios pueden iniciar una sesión de trabajo, definir una gramática y ejecutar un programa sin consultar documentación externa.
+    \item Los mensajes de error presentados en la consola son comprensibles sin conocimiento del funcionamiento interno de Racket.
+    \item La distribución de paneles sigue un orden visual coherente con el flujo de trabajo del estudiante: definición de gramática, edición del intérprete, ejecución y observación de resultados.
+    \item Las secciones del editor que no deben ser modificadas están diferenciadas visualmente de forma que el estudiante pueda identificarlas sin instrucción explícita.
+\end{itemize} \\
+\hline
+\caption{RNF-01: Usabilidad}
+\label{tab:rnf01}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RNF-02 \\
+\hline
+\textbf{Título} & Rendimiento \\
+\hline
+\textbf{Descripción} & El sistema debe completar la generación del AST y la evaluación del programa en un tiempo que no interrumpa el flujo cognitivo del estudiante durante la exploración. \\
+\hline
+\textbf{Prioridad} & Alta \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item La transformación BNF a archivos Racket se completa en el cliente en menos de 1 segundo para gramáticas de hasta 20 producciones.
+    \item La respuesta de la ruta \texttt{/api/run} para programas de complejidad habitual en la asignatura FLP se recibe en menos de 5 segundos bajo condiciones normales de red.
+    \item El tiempo máximo de ejecución del subproceso Racket está limitado a 15 segundos; transcurrido ese tiempo, el sistema notifica al usuario y libera los recursos asociados.
+    \item No se producen bloqueos del hilo principal del navegador durante la ejecución de la petición al servidor.
+\end{itemize} \\
+\hline
+\caption{RNF-02: Rendimiento}
+\label{tab:rnf02}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RNF-03 \\
+\hline
+\textbf{Título} & Accesibilidad web \\
+\hline
+\textbf{Descripción} & El sistema debe ejecutarse en navegadores web modernos sin requerir instalación de software adicional, plugins ni autenticación por parte del usuario. \\
+\hline
+\textbf{Prioridad} & Alta \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item La aplicación carga y opera correctamente en las versiones actuales de Google Chrome, Mozilla Firefox y Microsoft Edge.
+    \item No se requiere instalación de extensiones, plugins ni entornos de ejecución adicionales en el equipo del usuario.
+    \item El acceso al sistema no requiere registro ni autenticación de ningún tipo.
+    \item La interfaz es funcional en resoluciones de pantalla iguales o superiores a 1280 × 720 píxeles.
+\end{itemize} \\
+\hline
+\caption{RNF-03: Accesibilidad web}
+\label{tab:rnf03}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RNF-04 \\
+\hline
+\textbf{Título} & Mantenibilidad \\
+\hline
+\textbf{Descripción} & El código fuente debe estar organizado de forma modular, con separación explícita de responsabilidades, para facilitar la incorporación de mejoras futuras. \\
+\hline
+\textbf{Prioridad} & Media \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item Las definiciones de tipos e interfaces TypeScript residen exclusivamente en el directorio \texttt{app/types/}, con importaciones explícitas desde los módulos que las consumen.
+    \item Las funciones puras y utilitarios que no dependen del estado React residen en \texttt{app/lib/} y no en los archivos de componentes.
+    \item El pipeline de gramática está segmentado en módulos independientes (lexer, parser, generadores) con responsabilidades no solapadas.
+    \item Es posible añadir un nuevo generador de archivo Racket incorporando un módulo en \texttt{app/lib/} sin modificar los componentes de interfaz.
+\end{itemize} \\
+\hline
+\caption{RNF-04: Mantenibilidad}
+\label{tab:rnf04}
+\end{longtable}
+
+\begin{longtable}{|>{\bfseries}p{3cm}|p{11cm}|}
+\hline
+\textbf{Código} & RNF-05 \\
+\hline
+\textbf{Título} & Escalabilidad \\
+\hline
+\textbf{Descripción} & La arquitectura del sistema debe permitir incorporar nuevos ejemplos, gramáticas de mayor complejidad o características adicionales sin afectar la estabilidad de las funcionalidades existentes. \\
+\hline
+\textbf{Prioridad} & Media \\
+\hline
+\textbf{Criterios de aceptación} &
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item La incorporación de nuevos ejemplos se realiza añadiendo archivos al directorio de ejemplos del servidor, sin modificar código de componentes ni de la API.
+    \item El pipeline de gramática procesa gramáticas con hasta 20 producciones sin degradación observable del rendimiento en el cliente.
+    \item La adición de un nuevo panel de visualización puede realizarse como un componente React independiente integrable en el layout sin alterar el comportamiento de los paneles existentes.
+    \item El sistema de contenedores Docker permite escalar el servicio de ejecución de forma independiente al servidor de la interfaz.
+\end{itemize} \\
+\hline
+\caption{RNF-05: Escalabilidad}
+\label{tab:rnf05}
+\end{longtable}
