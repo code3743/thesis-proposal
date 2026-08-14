@@ -12,65 +12,7 @@ El tercer objetivo, relacionado con el diseño de la arquitectura web y las inte
 
 El cuarto objetivo, correspondiente a la implementación de un prototipo funcional, se desarrolló en el Capítulo~\ref{cap5}. El sistema implementado permite al estudiante definir gramáticas en notación BNF, generar y visualizar de forma interactiva el AST resultante, y observar los cambios en el ambiente de ejecución durante la evaluación paso a paso de un programa, cumpliendo con los ocho requisitos funcionales especificados en el Anexo~\ref{annex:rf}.
 
-El quinto objetivo, relacionado con la evaluación de la usabilidad y funcionalidad del prototipo mediante pruebas con estudiantes y el docente responsable, se desarrolló en la Sección~\ref{sec:evaluacion-prototipo} de este capítulo.
-
-\subsection{Evaluación del prototipo con usuarios}
-\label{sec:evaluacion-prototipo}
-
-La evaluación del prototipo se realizó con un grupo de 12 estudiantes matriculados en la asignatura FLP durante el período de desarrollo del trabajo de grado, quienes interactuaron con el prototipo definiendo una gramática, visualizando el AST resultante y ejecutando programas en modo paso a paso, antes de responder un instrumento compuesto por el cuestionario System Usability Scale (SUS) y un cuestionario de utilidad pedagógica de elaboración propia. Adicionalmente, se recogió la valoración del docente responsable de la asignatura mediante una entrevista semiestructurada.
-
-\paragraph{Usabilidad (SUS).} La Tabla~\ref{tab:sus-resultados} resume los puntajes obtenidos mediante el cuestionario System Usability Scale (SUS) aplicado a los 12 estudiantes.
-
-\begin{table}[H]
-\centering
-\footnotesize
-\caption{Resultados del cuestionario SUS ($n = 12$)}
-\label{tab:sus-resultados}
-\begin{tabular}{|l|c|}
-\hline
-\textbf{Estadístico} & \textbf{Valor} \\
-\hline
-Puntaje promedio & 82.7 \\
-\hline
-Desviación estándar & 7.9 \\
-\hline
-Puntaje mínimo & 70.0 \\
-\hline
-Puntaje máximo & 95.0 \\
-\hline
-Interpretación (Bangor et al., 2009) & Excelente \\
-\hline
-\end{tabular}
-\end{table}
-
-El puntaje promedio obtenido (82.7 sobre 100) se ubica en la categoría ``Excelente'' de la escala de adjetivos propuesta por Bangor, Kortum y Miller, y por encima del umbral de referencia de 68 puntos que se considera aceptable para sistemas de uso general. Este resultado sugiere que la complejidad adicional que introduce el prototipo respecto a los recursos actuales de la asignatura no representa una barrera de usabilidad relevante para los estudiantes.
-
-\paragraph{Utilidad pedagógica.} La Tabla~\ref{tab:utilidad-pedagogica} presenta la distribución de respuestas para los siete ítems del cuestionario de utilidad pedagógica, diseñado a partir de los cinco indicadores de logro seleccionados en el Capítulo~\ref{cap3}.
-
-\begin{table}[H]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\caption{Distribución de respuestas - cuestionario de utilidad pedagógica ($n = 12$)}
-\label{tab:utilidad-pedagogica}
-\begin{tabular}{>{\raggedright\arraybackslash}p{5.2cm} >{\centering\arraybackslash}p{1.1cm} >{\centering\arraybackslash}p{1.1cm} c >{\centering\arraybackslash}p{1.1cm} >{\centering\arraybackslash}p{1.1cm} c}
-\hline
-\textbf{Ítem} & \textbf{Tot. desac.} & \textbf{En desac.} & \textbf{Neutral} & \textbf{De acuerdo} & \textbf{Tot. acuerdo} & \textbf{\% Acuerdo} \\
-\hline
-P1. Visualización del AST y comprensión de la gramática BNF & 0.0\,\% & 0.0\,\% & 8.3\,\% & 41.7\,\% & 50.0\,\% & \textbf{91.7\,\%} \\
-P2. Visualización del ambiente y comprensión del estado & 0.0\,\% & 0.0\,\% & 16.7\,\% & 50.0\,\% & 33.3\,\% & \textbf{83.3\,\%} \\
-P3. Claridad en la distinción ligadura/asignación & 0.0\,\% & 8.3\,\% & 25.0\,\% & 50.0\,\% & 16.7\,\% & \textbf{66.7\,\%} \\
-P4. Utilidad frente a usar solo Racket y EOPL & 0.0\,\% & 0.0\,\% & 8.3\,\% & 33.3\,\% & 58.3\,\% & \textbf{91.7\,\%} \\
-P5. Claridad de la ejecución paso a paso & 0.0\,\% & 0.0\,\% & 0.0\,\% & 41.7\,\% & 58.3\,\% & \textbf{100.0\,\%} \\
-P6. Utilidad de la biblioteca de ejemplos & 0.0\,\% & 8.3\,\% & 16.7\,\% & 41.7\,\% & 33.3\,\% & \textbf{75.0\,\%} \\
-P7. Recomendaría el prototipo a futuros estudiantes & 0.0\,\% & 0.0\,\% & 8.3\,\% & 25.0\,\% & 66.7\,\% & \textbf{91.7\,\%} \\
-\hline
-\end{tabular}
-\end{table}
-
-Los resultados muestran una percepción positiva y consistente en los ítems relacionados con las funcionalidades núcleo del prototipo: la visualización del AST (P1), la ejecución paso a paso (P5) y la comparación frente al uso exclusivo de Racket y EOPL (P4) concentran los niveles de acuerdo más altos, y el 91.7\,\% de los estudiantes recomendaría el prototipo a futuros cursantes de la asignatura (P7). El ítem con menor nivel de acuerdo corresponde a la distinción entre ligadura y asignación de variables (P3, 66.7\,\%), lo que es consistente con la naturaleza conceptualmente sutil de esta distinción señalada en el Capítulo~\ref{cap3}, y sugiere que la visualización del ambiente, aunque útil, no es por sí sola suficiente para resolver por completo esta dificultad específica.
-
-En las preguntas abiertas del instrumento, la mayoría de los estudiantes destacó la posibilidad de observar el ambiente de ejecución y el AST de forma simultánea como el aporte más valioso del prototipo frente a la experiencia previa con Racket y EOPL, mientras que un grupo menor sugirió incorporar retroalimentación adicional sobre errores de sintaxis en la definición de la gramática. En la entrevista con el docente responsable se valoró positivamente la pertinencia de los conceptos representados y su viabilidad como recurso de apoyo dentro de las sesiones de clase.
+El quinto objetivo, relacionado con la evaluación de la usabilidad y funcionalidad del prototipo mediante pruebas con estudiantes y el docente responsable, se desarrolló en el Capítulo~\ref{cap6}.
 
 \subsection{Aportes del trabajo}
 
@@ -78,4 +20,4 @@ Frente a los vacíos identificados en la revisión de antecedentes (Capítulo~\r
 
 \subsection{Limitaciones}
 
-La evaluación del prototipo presenta limitaciones que deben considerarse al interpretar los resultados anteriores. El tamaño de la muestra (12 estudiantes de una única cohorte) no permite generalizar los hallazgos a otras cohortes o instituciones. La evaluación se restringió, además, a la usabilidad y a la utilidad pedagógica percibida, dejando por fuera mediciones del impacto del prototipo en el desempeño académico o en la retención del aprendizaje a largo plazo, tal como se estableció en el alcance del trabajo. Finalmente, el prototipo continúa dependiendo de Racket y EOPL como sustrato de ejecución, por lo que la carga cognitiva asociada a la sintaxis de Racket señalada en el Capítulo~\ref{cap3} no desaparece, sino que se busca mitigar mediante la representación visual complementaria.
+La evaluación del prototipo presenta limitaciones que deben considerarse al interpretar los resultados presentados en el Capítulo~\ref{cap6}. El tamaño de la muestra (12 estudiantes de una única cohorte) no permite generalizar los hallazgos a otras cohortes o instituciones. La evaluación se restringió, además, a la usabilidad y a la utilidad pedagógica percibida, dejando por fuera mediciones del impacto del prototipo en el desempeño académico o en la retención del aprendizaje a largo plazo, tal como se estableció en el alcance del trabajo. Finalmente, el prototipo continúa dependiendo de Racket y EOPL como sustrato de ejecución, por lo que la carga cognitiva asociada a la sintaxis de Racket señalada en el Capítulo~\ref{cap3} no desaparece, sino que se busca mitigar mediante la representación visual complementaria.
