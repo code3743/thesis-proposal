@@ -1,6 +1,7 @@
 \section{Antecedentes}
+\label{sec:antecedentes}
 
-La identificación de trabajos previos se realizó mediante una búsqueda sistemática en IEEE Xplore, ACM Digital Library y Scopus, acotada al período 2021--2026, utilizando términos relacionados con visualización de intérpretes, ambientes de ejecución, enseñanza de compiladores y herramientas educativas para cursos de lenguajes de programación. Los criterios de inclusión exigieron que los trabajos presentaran una herramienta o prototipo con componente de visualización o interactividad orientado a la enseñanza de alguna fase del proceso de interpretación o compilación, y que reportaran al menos una experiencia de uso o evaluación. El protocolo completo de búsqueda, incluyendo las cadenas booleanas utilizadas y el conteo de resultados por base, se presenta en el Anexo~\ref{anex:slr}.
+La identificación de trabajos previos se realizó mediante una búsqueda sistemática en IEEE Xplore, ACM Digital Library y Scopus, acotada al período 2021--2026, utilizando términos relacionados con visualización de intérpretes, ambientes de ejecución, enseñanza de compiladores y herramientas educativas para cursos de lenguajes de programación. Los criterios de inclusión exigieron que los trabajos presentaran una herramienta o prototipo con componente de visualización o interactividad orientado a la enseñanza de alguna fase del proceso de interpretación o compilación, y que reportaran al menos una experiencia de uso o evaluación. El protocolo completo de búsqueda, incluyendo las cadenas booleanas utilizadas y el conteo de resultados por base, se presenta en el Anexo~\ref{annex:slr}.
 
 Las propuestas encontradas pueden clasificarse en dos grupos: las que visualizan el pipeline de compilación clásico (análisis léxico, autómatas, tablas de análisis sintáctico) y las que apoyan específicamente la visualización del ambiente de ejecución y la evaluación de expresiones en lenguajes funcionales. La Tabla~\ref{tab:antecedentes} presenta una síntesis comparativa de las herramientas más relevantes identificadas.
 
@@ -30,7 +31,7 @@ Las propuestas encontradas pueden clasificarse en dos grupos: las que visualizan
 \endlastfoot
 Jovanović et al. (2021) \cite{jovanovic2021comvis} &
   ComVIS &
-  Entorno web interactivo para visualizar análisis léxico, construcción de autómatas y análisis sintáctico LL/LR con retroalimentación paso a paso. Reporta mejoras en comprensión y desempeño académico medidas mediante cuestionarios pre/post. &
+  Entorno web interactivo para visualizar análisis léxico, construcción de autómatas y análisis sintáctico LL/LR con retroalimentación paso a paso. Reporta mejoras en comprensión y desempeño académico evaluadas mediante cuestionarios pre/post. &
   Centrado en el pipeline de compilación clásico. No aborda la evaluación de intérpretes ni los ambientes de ejecución funcionales. \\
 \hline
 Cai et al. (2023) \cite{Cai2023VisualizingEnvironments} &
@@ -45,7 +46,7 @@ del Vado Vírseda (2023) \cite{delvado2023itt} &
 \hline
 Spigariol et al. (2023) \cite{Spigariol2023Aprendiendo} &
   Intérprete pedagógico funcional &
-  Combina un intérprete de un lenguaje funcional con componentes gráficos que visualizan las estructuras intermedias del proceso de interpretación, permitiendo seguir el comportamiento del evaluador paso a paso. Es el antecedente de mayor cercanía pedagógica con el prototipo propuesto en este trabajo. &
+  Combina un intérprete de un lenguaje funcional con componentes gráficos que visualizan las estructuras intermedias del proceso de interpretación, permitiendo seguir el comportamiento del evaluador paso a paso. Es el antecedente más cercano, desde el punto de vista pedagógico, al prototipo propuesto en este trabajo. &
   Específico para un lenguaje predefinido. No permite al estudiante definir su propia gramática ni trabajar con el modelo EOPL y SLLGEN en Racket. \\
 \hline
 Abad y Henz (2024) \cite{Abad2024BeyondSICP} &
@@ -53,13 +54,13 @@ Abad y Henz (2024) \cite{Abad2024BeyondSICP} &
   Extiende el modelo de ambientes de SICP a una máquina nocional completa para Scheme que visualiza paso a paso los ambientes, las clausuras y el control de flujo. Utilizada en CS1101S de la Universidad Nacional de Singapur con retroalimentación positiva de estudiantes y tutores. &
   Integrada en el ecosistema cerrado de Source Academy para un lenguaje predefinido. No está diseñada para que el estudiante construya e inspeccione su propio intérprete EOPL con gramática definida en SLLGEN. \\
 \hline
-Stamenkovic y Jovanovic (2024) \cite{Stamenkovic2024AWE} &
+Stamenković y Jovanović (2024) \cite{Stamenkovic2024AWE} &
   AWE &
   Sistema web educativo integral que combina visualización dinámica de estructuras de compilación, ejercicios guiados y experimentación directa para el aprendizaje del pipeline completo. Incluye módulos sobre análisis léxico y sintáctico, representación de árboles y generación de código. Reporta evidencia empírica de mejoras en comprensión con grupos de control y cuestionarios validados en instituciones de educación superior en Serbia. &
   Abarca el pipeline de compilación completo, pero no aborda la construcción interactiva de intérpretes EOPL ni la visualización del ambiente de ejecución desde la perspectiva del estudiante que implementa su propio evaluador. \\
 \end{longtable}
 }
 
-A partir del análisis comparativo de los trabajos identificados se reconocen tres vacíos que fundamentan el desarrollo de una propuesta específica para el contexto de la asignatura FLP. En primer lugar, las herramientas que más se aproximan al objetivo aquí planteado \cite{Cai2023VisualizingEnvironments, Abad2024BeyondSICP, Spigariol2023Aprendiendo} operan sobre lenguajes predefinidos integrados en ecosistemas cerrados, sin posibilidad de que el estudiante defina su propia gramática ni intervenga en la estructura del evaluador. En segundo lugar, ninguna de las soluciones revisadas ofrece un flujo integrado que combine la edición de gramáticas BNF en notación SLLGEN, la visualización del AST resultante y la inspección del ambiente de ejecución dentro de un único entorno diseñado para acompañar el trabajo con la librería EOPL en Racket. En tercer lugar, la evidencia empírica en cursos de lenguajes de programación de programas de ingeniería en universidades latinoamericanas es escasa, lo que demanda adaptación y validación contextualizada \cite{lu2022usability, jovanovic2021comvis}.
+A partir del análisis comparativo de los trabajos identificados se reconocen tres vacíos que fundamentan el desarrollo de una propuesta específica para el contexto de la asignatura FLP. En primer lugar, las herramientas que más se aproximan al objetivo aquí planteado \cite{Cai2023VisualizingEnvironments, Abad2024BeyondSICP, Spigariol2023Aprendiendo} operan sobre lenguajes predefinidos integrados en ecosistemas cerrados, sin posibilidad de que el estudiante defina su propia gramática ni intervenga en la estructura del evaluador. En segundo lugar, ninguna de las soluciones revisadas ofrece un flujo integrado que combine la edición de gramáticas BNF en notación SLLGEN, la visualización del AST resultante y la inspección del ambiente de ejecución dentro de un único entorno diseñado para acompañar el trabajo con la librería EOPL en Racket. En tercer lugar, la evidencia empírica en cursos de lenguajes de programación dictados en programas de ingeniería de universidades latinoamericanas es escasa, lo que demanda adaptación y validación contextualizada \cite{lu2022usability, jovanovic2021comvis}.
 
 Con el propósito de atender estos vacíos, este trabajo desarrolla un prototipo web diseñado para acompañar el aprendizaje de la asignatura FLP de la Universidad del Valle. A diferencia de las herramientas revisadas, el prototipo propuesto permite al estudiante definir su propia gramática en notación BNF, genera automáticamente el código Racket necesario para que SLLGEN construya el analizador correspondiente y presenta de forma simultánea la estructura del AST producido junto con el estado del ambiente de ejecución tras cada evaluación. Esta integración busca reducir los cambios de contexto que el flujo de trabajo convencional con Racket y EOPL impone sobre el estudiante, concentrando en un único entorno las representaciones que se deben relacionar para comprender el proceso de interpretación \cite{sweller2024cognitive}.

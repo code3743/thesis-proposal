@@ -78,16 +78,16 @@
 \hline
 \textbf{Título} & Representación del ambiente de ejecución \\
 \hline
-\textbf{Descripción} & El sistema debe representar el ambiente de evaluación como una estructura jerárquica de frames que se actualiza en cada ejecución, permitiendo al estudiante observar la evolución del estado del programa. \\
+\textbf{Descripción} & El sistema debe representar el ambiente de evaluación como una estructura jerárquica de marcos que se actualiza en cada ejecución, permitiendo al estudiante observar la evolución del estado del programa. \\
 \hline
 \textbf{Prioridad} & Alta \\
 \hline
 \textbf{Criterios de aceptación} &
 \begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
-    \item El panel EnvironmentPanel muestra el ambiente como una pila de frames jerárquicos, donde cada frame lista los bindings activos con su nombre, valor serializado y tipo de dato inferido.
+    \item El panel EnvironmentPanel muestra el ambiente como una pila de marcos jerárquicos, donde cada marco lista las ligaduras activas con su nombre, valor serializado y tipo de dato inferido.
     \item El ambiente mostrado corresponde al último paso de evaluación completado; en modo paso a paso, se actualiza con cada avance del usuario.
-    \item La estructura de frames refleja fielmente la cadena de entornos construida durante la evaluación, permitiendo al estudiante identificar el alcance léxico de cada variable.
-    \item El panel permanece visible y no colapsa ante la ausencia de bindings en el ambiente actual.
+    \item La estructura de marcos refleja fielmente la cadena de ambientes construida durante la evaluación, permitiendo al estudiante identificar el alcance léxico de cada variable.
+    \item El panel permanece visible y no colapsa ante la ausencia de ligaduras en el ambiente actual.
 \end{itemize} \\
 \hline
 \caption{RF-04: Representación del ambiente de ejecución}
@@ -109,7 +109,7 @@
     \item Los ejemplos son cargados desde el sistema de archivos del servidor durante el renderizado inicial y transmitidos al cliente como propiedades del componente orquestador.
     \item El sistema presenta la lista de ejemplos disponibles en el modal de bienvenida con nombre y descripción breve de cada uno.
     \item Al seleccionar un ejemplo, los archivos del editor son reemplazados por los archivos correspondientes sin pérdida de estado de la interfaz.
-    \item Los ejemplos cubren los cinco indicadores de logro seleccionados en el diagnóstico: IL 1.1.6, IL 1.2.3, IL 1.2.6, IL 1.2.7 e IL 1.3.1.
+    \item Los ejemplos cubren los cinco indicadores de logro seleccionados en el diagnóstico: IL~1.1.6, IL~1.2.3, IL~1.2.6, IL~1.2.7 e IL~1.3.1.
     \item Cada ejemplo es compatible con el pipeline de gramática y puede ser ejecutado sin modificaciones adicionales.
 \end{itemize} \\
 \hline
