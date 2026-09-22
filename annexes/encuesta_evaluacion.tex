@@ -22,11 +22,21 @@ Momento de aplicación & Inmediatamente después de que el estudiante interactua
 \section{Instrucciones para quien aplica la encuesta}
 
 \begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item Leer en voz alta, o presentar en el formulario digital, el encabezado de consentimiento informado de la Sección~\ref{annex:eval-consentimiento} antes de dar inicio a la aplicación.
     \item Explicar brevemente que la encuesta es anónima, que no tiene impacto en la nota de la asignatura, y que su propósito es evaluar el prototipo, no al estudiante.
     \item Verificar que el estudiante haya completado al menos una interacción con las tres funcionalidades núcleo: edición de gramática, visualización del AST y visualización del ambiente de ejecución.
+    \item Aplicar el instrumento en una única sesión, dentro del horario de clase de la asignatura FLP, inmediatamente después de que cada estudiante completara su interacción individual con el prototipo.
+    \item Indicar que el instrumento se responde de manera individual, sin discutir las respuestas con otros compañeros antes de entregarlas, con el fin de evitar sesgos de deseabilidad social o de grupo.
     \item Indicar que las Secciones B y C emplean una escala Likert de cinco puntos y que debe marcarse una única opción por ítem.
     \item Recoger los formularios, o cerrar el formulario digital, antes de iniciar la retroalimentación grupal, con el fin de no sesgar las respuestas.
 \end{itemize}
+
+\section{Consentimiento informado}
+\label{annex:eval-consentimiento}
+
+\begin{quote}
+Esta encuesta hace parte de la evaluación del prototipo FLP Viewer, desarrollado como trabajo de grado del programa de Ingeniería de Sistemas. Su participación es voluntaria y anónima: no se solicitan datos que permitan identificarlo y sus respuestas no tienen ningún efecto sobre la calificación de la asignatura. La información recolectada se utilizará exclusivamente con fines académicos, para el análisis presentado en el trabajo de grado, conforme a lo dispuesto en la Ley 1581 de 2012 sobre protección de datos personales \cite{colombia2012ley1581}. Al continuar y responder el formulario, usted manifiesta su consentimiento para participar en el estudio.
+\end{quote}
 
 \section{Sección A. Datos de contexto}
 
@@ -79,23 +89,27 @@ Para cada afirmación de la Tabla~\ref{tab:pedagogica-items}, el estudiante indi
 \hline
 \textbf{\#} & \textbf{Afirmación} \\
 \hline
-P1 & La visualización del AST me ayudó a comprender cómo una gramática BNF se transforma en una estructura jerárquica. \\
+P1 & La visualización del AST ofrece una forma directa de representar la relación entre una gramática BNF y una estructura jerárquica. \\
 \hline
-P2 & La visualización del ambiente de ejecución me ayudó a comprender el concepto de estado y las ligaduras de variables. \\
+P2 & La visualización del ambiente de ejecución resulta útil para explorar los conceptos de estado y ligaduras de variables. \\
 \hline
-P3 & El prototipo me ayudó a distinguir con mayor claridad entre ligadura y asignación de variables. \\
+P3 & La representación utilizada en el prototipo permite diferenciar visualmente entre ligadura y asignación de variables. \\
 \hline
-P4 & Usar el prototipo junto con Racket y EOPL facilitó mi comprensión del proceso de interpretación, en comparación con trabajar únicamente con Racket y EOPL. \\
+P4 & El prototipo constituye un complemento de utilidad para el trabajo realizado con Racket y EOPL. \\
 \hline
-P5 & La ejecución paso a paso me permitió seguir con claridad el orden en que se evalúan las expresiones. \\
+P5 & La ejecución paso a paso ofrece una forma adecuada de observar el orden de evaluación de las expresiones y su ambiente. \\
 \hline
-P6 & La biblioteca de ejemplos predefinidos fue útil para explorar los conceptos antes de escribir mi propia gramática. \\
+P6 & La biblioteca de ejemplos predefinidos ofrece un punto de partida adecuado para explorar los conceptos antes de construir una gramática propia. \\
 \hline
-P7 & Recomendaría el uso de este prototipo a futuros estudiantes de la asignatura FLP. \\
+P7 & Considero que el prototipo tiene valor como recurso de apoyo para el estudio de los contenidos de la asignatura Fundamentos de interpretación y compilación de lenguajes de programación (FLP). \\
+\hline
+P8 & Las funcionalidades disponibles en el prototipo tienen poca utilidad como apoyo para el estudio de los conceptos abordados. \\
 \hline
 \caption{Ítems del cuestionario de utilidad pedagógica}
 \label{tab:pedagogica-items}
 \end{longtable}
+
+El ítem P8 está redactado en sentido inverso respecto de los demás ítems del bloque, como control de respuestas por aquiescencia; su puntaje se invierte (6 menos la respuesta registrada) antes del análisis. La fiabilidad interna del bloque se estimó mediante el coeficiente alfa de Cronbach \cite{cronbach1951coefficient}.
 
 La Tabla~\ref{tab:relacion-item-indicador} presenta la correspondencia entre cada ítem y el indicador de logro del microcurrículo de FLP (Anexo~\ref{annex:microcurriculum}) que orientó su formulación.
 
@@ -109,7 +123,9 @@ P2, P5 & IL 1.2.6 -- Estado y ambientes de ejecución; IL 1.2.3 -- Construcción
 \hline
 P3 & IL 1.2.7 -- Distinción entre ligadura y asignación de variables \\
 \hline
-P4, P6, P7 & Utilidad percibida general y disposición a recomendar el prototipo \\
+P4, P6, P7 & Valoración general de la utilidad percibida del prototipo como recurso de apoyo \\
+\hline
+P8 & Ítem de control, redactado en sentido inverso; no se asocia a un indicador de logro específico \\
 \hline
 \caption{Relación entre los ítems del cuestionario de utilidad pedagógica y los indicadores de logro}
 \label{tab:relacion-item-indicador}
@@ -122,7 +138,3 @@ P4, P6, P7 & Utilidad percibida general y disposición a recomendar el prototipo
     \item ¿Qué mejoraría o qué le faltó al prototipo?
     \item ¿Hay algún concepto de la asignatura que el prototipo no le ayudó a comprender, o que le generó confusión adicional?
 \end{enumerate}
-
-\section{Entrevista al docente responsable}
-
-La valoración del docente responsable de la asignatura se recogió mediante una entrevista semiestructurada, en lugar de un cuestionario cerrado, dado que este formato permite profundizar en las razones detrás de cada valoración y adaptar las preguntas de seguimiento a las respuestas del entrevistado \cite{seaman1999qualitative}. La entrevista cubrió tres ejes: (1) la pertinencia de los conceptos representados en el prototipo, (2) la viabilidad de incorporarlo como recurso de apoyo dentro de las sesiones de clase, y (3) las observaciones del docente sobre el uso del prototipo por parte de los estudiantes durante la sesión de evaluación.
