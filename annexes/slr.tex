@@ -1,0 +1,219 @@
+\chapter{Protocolo de búsqueda sistemática de literatura}
+\label{annex:slr}
+
+Este anexo documenta el protocolo de búsqueda sistemática utilizado para la identificación de los antecedentes presentados en la Sección~\ref{sec:antecedentes} del Capítulo~\ref{cap2} (Tabla~\ref{tab:antecedentes}), siguiendo la estructura de reporte propuesta por PRISMA 2020 (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) adaptada a un protocolo de identificación de trabajos relacionados. Se documentan las preguntas de búsqueda, las fuentes de información, las cadenas booleanas empleadas en cada base de datos académica, los criterios de elegibilidad, el proceso de selección y la correspondencia entre los estudios incluidos y las referencias del documento.
+
+\section{Preguntas de búsqueda}
+
+\begin{itemize}
+    \item \textbf{PB1:} ¿Qué herramientas o prototipos con componente de visualización o interactividad se han propuesto para apoyar la enseñanza de la interpretación o compilación de lenguajes de programación entre 2021 y 2026?
+    \item \textbf{PB2:} De esas herramientas, ¿cuáles abordan específicamente la visualización del ambiente de ejecución o la evaluación de expresiones en lenguajes funcionales, y qué evidencia de uso o evaluación reportan?
+\end{itemize}
+
+\section{Fuentes de información}
+
+\subsection{Bases de datos primarias}
+
+La búsqueda sistemática se ejecutó en tres bases de datos académicas, acotada al período 2021--2026:
+
+\begin{itemize}
+    \item \textbf{IEEE Xplore Digital Library}
+    \item \textbf{ACM Digital Library}
+    \item \textbf{Scopus}
+\end{itemize}
+
+\subsection{Fuentes complementarias}
+
+Dado que parte de la producción relevante en el ámbito latinoamericano y los preprints no están indexados en las tres bases anteriores, se complementó la búsqueda sistemática con:
+
+\begin{itemize}
+    \item \textbf{Snowballing} (rastreo hacia adelante y hacia atrás de citas) a partir de los estudios ya incluidos, en particular desde el ecosistema Source Academy \cite{Cai2023VisualizingEnvironments}, que permitió identificar la máquina nocional CSE Machine \cite{Abad2024BeyondSICP} publicada como preprint en arXiv.
+    \item \textbf{Repositorios regionales y actas de congresos no indexadas en las bases anteriores}: SEDICI (Repositorio Institucional de la Universidad Nacional de La Plata) y actas del Congreso Argentino de Ciencias de la Computación (CACIC), que permitieron identificar el intérprete pedagógico funcional de Spigariol et al. \cite{Spigariol2023Aprendiendo}.
+\end{itemize}
+
+Esta decisión metodológica se documenta explícitamente porque ninguna de las tres bases primarias indexa estas dos fuentes (arXiv no es indexado como texto completo por IEEE Xplore, ACM DL ni Scopus; SEDICI/CACIC es un repositorio regional fuera del alcance editorial de las tres bases), por lo que su inclusión exclusivamente a través de la búsqueda sistemática habría sido imposible.
+
+\section{Estrategia de búsqueda}
+\label{sec:cadenas-busqueda}
+
+\subsection{Conceptos y términos}
+
+La estrategia de búsqueda se construyó combinando tres bloques conceptuales mediante el operador \texttt{AND}, con sinónimos y variantes combinados mediante \texttt{OR} dentro de cada bloque, tal como se resume en la Tabla~\ref{tab:conceptos-busqueda}.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{4.3cm}|>{\raggedright\arraybackslash}p{6.3cm}|}
+\hline
+\textbf{Bloque} & \textbf{Descripción} & \textbf{Términos (\texttt{OR})} \\
+\hline
+C1 --- Objeto &
+  Sistema o artefacto de lenguaje sobre el que trabaja la herramienta &
+  \texttt{interpreter}, \texttt{compiler}, \texttt{"programming language"} \\
+\hline
+C2 --- Foco &
+  Mecanismo de representación o visualización empleado &
+  \texttt{visualiz*}, \texttt{"notional machine"}, \texttt{"environment diagram"}, \texttt{"environment model"}, \texttt{"execution environment"}, \texttt{"abstract syntax tree"} \\
+\hline
+C3 --- Contexto &
+  Ámbito pedagógico de aplicación &
+  \texttt{teach*}, \texttt{educat*}, \texttt{learn*}, \texttt{course}, \texttt{pedagog*} \\
+\hline
+\end{tabular}
+\caption{Bloques conceptuales de la estrategia de búsqueda (C1 \texttt{AND} C2 \texttt{AND} C3).}
+\label{tab:conceptos-busqueda}
+\end{table}
+
+\subsection{Cadenas de búsqueda por base de datos}
+
+Las cadenas siguientes instancian los bloques de la Tabla~\ref{tab:conceptos-busqueda} en la sintaxis propia de cada base, filtrando por el período 2021--2026.
+
+\noindent\textbf{IEEE Xplore (Command Search)}
+
+\begin{lstlisting}
+("Full Text & Metadata":interpreter OR
+ "Full Text & Metadata":compiler OR
+ "Full Text & Metadata":"programming language")
+AND
+("Full Text & Metadata":visualiz* OR
+ "Full Text & Metadata":"notional machine" OR
+ "Full Text & Metadata":"environment diagram" OR
+ "Full Text & Metadata":"environment model" OR
+ "Full Text & Metadata":"execution environment" OR
+ "Full Text & Metadata":"abstract syntax tree")
+AND
+("Full Text & Metadata":teach* OR
+ "Full Text & Metadata":educat* OR
+ "Full Text & Metadata":learn* OR
+ "Full Text & Metadata":course OR
+ "Full Text & Metadata":pedagog*)
+\end{lstlisting}
+Filtros aplicados: \emph{Content Type} = Conferences, Journals; \emph{Year}: 2021--2026.
+
+\noindent\textbf{ACM Digital Library (Advanced Search)}
+
+\begin{lstlisting}
+[[Title: interpreter] OR [Title: compiler] OR [Title: "programming language"]
+ OR [Abstract: interpreter] OR [Abstract: compiler]
+ OR [Abstract: "programming language"]]
+AND
+[[Title: visualization] OR [Title: "notional machine"]
+ OR [Abstract: visualization] OR [Abstract: "notional machine"]
+ OR [Abstract: "environment diagram"] OR [Abstract: "environment model"]
+ OR [Abstract: "execution environment"] OR [Abstract: "abstract syntax tree"]]
+AND
+[[Title: teaching] OR [Title: education] OR [Title: course]
+ OR [Abstract: teaching] OR [Abstract: education]
+ OR [Abstract: learning] OR [Abstract: pedagogy]]
+\end{lstlisting}
+Filtros aplicados: \emph{Publication Date}: 01/2021 -- 12/2026.
+
+\noindent\textbf{Scopus (Document Search)}
+
+\begin{lstlisting}
+TITLE-ABS-KEY (
+  ( interpreter OR compiler OR "programming language" )
+  AND
+  ( visualiz* OR "notional machine" OR "environment diagram"
+    OR "environment model" OR "execution environment"
+    OR "abstract syntax tree" )
+  AND
+  ( teach* OR educat* OR learn* OR course OR pedagog* )
+)
+AND PUBYEAR > 2020 AND PUBYEAR < 2027
+AND ( LIMIT-TO ( DOCTYPE , "cp" ) OR LIMIT-TO ( DOCTYPE , "ar" ) )
+\end{lstlisting}
+Filtros aplicados: \emph{Document type}: Conference Paper, Article; \emph{Subject area}: Computer Science.
+
+\section{Criterios de elegibilidad}
+
+\subsection{Criterios de inclusión}
+
+\begin{itemize}
+    \item \textbf{CI1:} Presenta una herramienta, prototipo o sistema con componente de visualización o interactividad propio (no un estudio puramente teórico o de opinión).
+    \item \textbf{CI2:} Está orientado a la enseñanza de al menos una fase del proceso de interpretación o compilación de lenguajes de programación (análisis léxico, análisis sintáctico, construcción del AST, ambiente de ejecución o evaluación de expresiones).
+    \item \textbf{CI3:} Reporta al menos una experiencia de uso, evaluación o validación con estudiantes, aunque sea preliminar.
+    \item \textbf{CI4:} Fue publicado entre 2021 y 2026, o fue identificado mediante búsqueda complementaria (snowballing o repositorios regionales) por su relevancia directa para PB1/PB2.
+    \item \textbf{CI5:} Texto completo disponible en español o inglés.
+\end{itemize}
+
+\subsection{Criterios de exclusión}
+
+\begin{itemize}
+    \item \textbf{CE1:} Aborda visualización de algoritmos o estructuras de datos generales sin relación específica con interpretación o compilación de lenguajes.
+    \item \textbf{CE2:} Es una revisión de literatura, editorial, panel o resumen extendido que no presenta una herramienta propia.
+    \item \textbf{CE3:} No reporta ningún tipo de evaluación, validación o experiencia de uso.
+    \item \textbf{CE4:} Es un duplicado o una versión preliminar (\emph{workshop paper}) de un estudio ya incluido en una versión extendida.
+    \item \textbf{CE5:} El texto completo no está disponible pese a la solicitud a través del acceso institucional.
+\end{itemize}
+
+\section{Proceso de selección}
+
+La selección de estudios siguió las cuatro etapas del modelo PRISMA 2020: identificación, cribado, elegibilidad e inclusión. Los registros recuperados de las tres bases de datos se cribaron por título y resumen aplicando los criterios CI1--CI5 y CE1--CE5; los registros que superaron el cribado se evaluaron a texto completo bajo los mismos criterios. En paralelo, los registros identificados mediante snowballing y repositorios regionales se incorporaron directamente a la etapa de evaluación a texto completo, dado que su relevancia ya había sido establecida por su relación directa con los estudios incluidos desde las bases primarias. La Figura~\ref{fig:prisma-flow} resume el proceso; el conteo exacto de registros brutos y duplicados por base se obtiene al ejecutar las cadenas de la Sección~\ref{sec:cadenas-busqueda} con acceso institucional, dado que las interfaces de búsqueda avanzada de las tres bases exigen sesión autenticada y bloquean la consulta automatizada.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.5cm,
+    box/.style={rectangle, rounded corners=3pt, draw=SteelBlue, fill=SteelBlue!10,
+        text width=5.4cm, align=center, font=\footnotesize, inner sep=6pt},
+    boxalt/.style={rectangle, rounded corners=3pt, draw=SteelBlue, fill=SteelBlue!10,
+        text width=4.6cm, align=center, font=\footnotesize, inner sep=6pt},
+    exbox/.style={rectangle, rounded corners=3pt, draw=rojo, fill=rojo!8,
+        text width=4.6cm, align=left, font=\scriptsize, inner sep=5pt},
+    incbox/.style={rectangle, rounded corners=3pt, draw=dkgreen, fill=dkgreen!12,
+        text width=5.4cm, align=center, font=\footnotesize, inner sep=6pt},
+    arr/.style={->, >=Stealth, thick, draw=gray!70}
+]
+\node[box] (db) {\textbf{Identificación}\\Registros identificados en bases de datos:\\IEEE Xplore, ACM DL, Scopus};
+\node[boxalt, right=1.4cm of db] (other) {\textbf{Identificación}\\Registros identificados mediante otros métodos:\\snowballing, arXiv, repositorios regionales\\$n = 2$};
+
+\node[box, below=of db] (dup) {Duplicados eliminados antes del cribado};
+
+\node[box, below=of dup] (screen) {\textbf{Cribado}\\Registros cribados por título y resumen\\(CI1--CI5, CE1--CE5)};
+\node[exbox, right=1.2cm of screen] (exscreen) {Excluidos en cribado por título/resumen};
+
+\node[box, below=of screen] (full) {\textbf{Elegibilidad}\\Informes evaluados a texto completo};
+\node[exbox, right=1.2cm of full] (exfull) {Excluidos a texto completo, con motivo CE1--CE5};
+
+\node[incbox, below=of full] (inc) {\textbf{Inclusión}\\Estudios incluidos en la síntesis\\$n = 6$};
+
+\draw[arr] (db) -- (dup);
+\draw[arr] (dup) -- (screen);
+\draw[arr] (screen) -- (full);
+\draw[arr] (screen) -- (exscreen);
+\draw[arr] (full) -- (exfull);
+\draw[arr] (full) -- (inc);
+\draw[arr] (other.south) |- (full.east);
+\end{tikzpicture}
+\caption{Diagrama de flujo PRISMA del proceso de selección de antecedentes.}
+\label{fig:prisma-flow}
+\end{figure}
+
+\section{Estudios incluidos}
+
+La Tabla~\ref{tab:estudios-incluidos} presenta la correspondencia entre los seis estudios incluidos en la síntesis de la Tabla~\ref{tab:antecedentes} y la vía por la cual fueron identificados.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{4.3cm}|>{\raggedright\arraybackslash}p{4.7cm}|}
+\hline
+\textbf{Estudio} & \textbf{Referencia} & \textbf{Vía de identificación} \\
+\hline
+Jovanović et al. (2021) & \cite{jovanovic2021comvis} & Búsqueda sistemática (Scopus) \\
+\hline
+Cai et al. (2023) & \cite{Cai2023VisualizingEnvironments} & Búsqueda sistemática (Scopus) \\
+\hline
+del Vado Vírseda (2023) & \cite{delvado2023itt} & Búsqueda sistemática (Scopus) \\
+\hline
+Spigariol et al. (2023) & \cite{Spigariol2023Aprendiendo} & Búsqueda complementaria (repositorio SEDICI / actas CACIC) \\
+\hline
+Abad y Henz (2024) & \cite{Abad2024BeyondSICP} & Búsqueda complementaria (snowballing desde \cite{Cai2023VisualizingEnvironments}; preprint arXiv) \\
+\hline
+Stamenkovic y Jovanovic (2024) & \cite{Stamenkovic2024AWE} & Búsqueda sistemática (IEEE Xplore, Scopus) \\
+\hline
+\end{tabular}
+\caption{Estudios incluidos en la síntesis de antecedentes y su vía de identificación.}
+\label{tab:estudios-incluidos}
+\end{table}

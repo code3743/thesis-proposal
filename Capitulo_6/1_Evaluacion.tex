@@ -1,0 +1,78 @@
+\section{Metodología}
+
+La evaluación del prototipo se concibió como un estudio descriptivo orientado a caracterizar su usabilidad y su utilidad pedagógica percibida, combinando un enfoque cuantitativo mediante cuestionarios con escala Likert y un enfoque cualitativo mediante preguntas abiertas y una entrevista semiestructurada al docente responsable de la asignatura.
+
+\subsection{Diseño de los instrumentos}
+
+El instrumento aplicado a los estudiantes se compuso de dos cuestionarios administrados de forma consecutiva. El primero correspondió al cuestionario System Usability Scale (SUS), un instrumento estandarizado de diez ítems con escala Likert de cinco niveles, ampliamente utilizado para medir la usabilidad percibida de un sistema interactivo con independencia de su dominio de aplicación \cite{brooke1996sus}. Se optó por este instrumento en lugar de uno de elaboración propia porque su carácter estandarizado permite contrastar el puntaje obtenido por el prototipo frente al umbral de referencia y la escala de adjetivos reportados en la literatura, en lugar de depender de una interpretación sin respaldo empírico \cite{bangor2009determining}.
+
+El segundo cuestionario, de utilidad pedagógica, fue de elaboración propia, dado que no existe un instrumento estandarizado para medir la utilidad percibida de una herramienta de visualización frente a los indicadores de logro específicos de la asignatura FLP. Su diseño siguió una escala Likert de cinco niveles, análoga a la del SUS, y sus siete ítems se formularon a partir de los cinco indicadores de logro seleccionados en el Capítulo~\ref{cap3} como base conceptual del prototipo, de manera que cada ítem, o grupo de ítems, quedara anclado a un indicador concreto en lugar de medir una percepción genérica de utilidad. La correspondencia entre ítems e indicadores, junto con la ficha técnica completa de ambos cuestionarios, se documenta en el Anexo~\ref{annex:eval-instrumento}. El instrumento cerró con tres preguntas abiertas orientadas a recoger, en las propias palabras del estudiante, los aportes percibidos del prototipo y sus posibles mejoras.
+
+Se aplicó una entrevista semiestructurada al docente responsable de la asignatura en lugar de un cuestionario cerrado, dado que este formato cualitativo permite profundizar en las razones detrás de cada valoración y ajustar las preguntas de seguimiento según las respuestas del entrevistado \cite{seaman1999qualitative}. La entrevista cubrió la pertinencia de los conceptos representados en el prototipo, la viabilidad de incorporarlo como recurso de apoyo en las sesiones de clase y las observaciones del docente sobre el uso del prototipo por parte de los estudiantes durante la sesión de evaluación.
+
+\subsection{Muestra y procedimiento}
+
+La evaluación se realizó con un grupo de 12 estudiantes matriculados en la asignatura FLP durante el período de desarrollo del trabajo de grado, dentro del rango de 10 a 20 estudiantes establecido en el alcance del proyecto. La selección de los participantes fue de conveniencia, restringida a los estudiantes matriculados durante dicho período, ya que la evaluación exigía una interacción directa y supervisada con el prototipo en una sesión individual, a diferencia de la encuesta diagnóstica del Capítulo~\ref{cap3}, que pudo aplicarse de forma retrospectiva a cohortes anteriores. Esta restricción, junto con el tiempo disponible para el desarrollo del trabajo de grado, determinó un tamaño de muestra reducido y limitado a una única cohorte, cuyas implicaciones se discuten en el Capítulo~\ref{cap7}.
+
+Cada estudiante participó en una sesión individual en la que interactuó con el prototipo definiendo una gramática, visualizando el AST resultante y observando los cambios en el ambiente de ejecución durante la evaluación paso a paso de un programa, antes de responder el instrumento descrito en la sección anterior. La valoración del docente responsable se recogió mediante la entrevista semiestructurada, aplicada de forma independiente a las sesiones con los estudiantes.
+
+\section{Resultados}
+
+\subsection{Usabilidad (SUS)}
+
+La Tabla~\ref{tab:sus-resultados} resume los puntajes obtenidos mediante el cuestionario SUS aplicado a los 12 estudiantes.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{Resultados del cuestionario SUS ($n = 12$)}
+\label{tab:sus-resultados}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Estadístico} & \textbf{Valor} \\
+\hline
+Puntaje promedio & 82.7 \\
+\hline
+Desviación estándar & 7.9 \\
+\hline
+Puntaje mínimo & 70.0 \\
+\hline
+Puntaje máximo & 95.0 \\
+\hline
+Interpretación \cite{bangor2009determining} & Excelente \\
+\hline
+\end{tabular}
+\end{table}
+
+El puntaje promedio obtenido (82.7 sobre 100) se ubica en la categoría ``Excelente'' de la escala de adjetivos \cite{bangor2009determining} y por encima del umbral de referencia de 68 puntos que se considera aceptable para sistemas de uso general. Este resultado sugiere que la complejidad adicional que introduce el prototipo respecto a los recursos actuales de la asignatura no representa una barrera de usabilidad relevante para los estudiantes.
+
+\subsection{Utilidad pedagógica}
+
+La Tabla~\ref{tab:utilidad-pedagogica} presenta la distribución de respuestas para los siete ítems del cuestionario de utilidad pedagógica, diseñado a partir de los cinco indicadores de logro seleccionados en el Capítulo~\ref{cap3}.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Distribución de respuestas - cuestionario de utilidad pedagógica ($n = 12$)}
+\label{tab:utilidad-pedagogica}
+\begin{tabular}{>{\raggedright\arraybackslash}p{5.2cm} >{\centering\arraybackslash}p{1.1cm} >{\centering\arraybackslash}p{1.1cm} c >{\centering\arraybackslash}p{1.1cm} >{\centering\arraybackslash}p{1.1cm} c}
+\hline
+\textbf{Ítem} & \textbf{Tot. desac.} & \textbf{En desac.} & \textbf{Neutral} & \textbf{De acuerdo} & \textbf{Tot. acuerdo} & \textbf{\% Acuerdo} \\
+\hline
+P1. Visualización del AST y comprensión de la gramática BNF & 0.0\,\% & 0.0\,\% & 8.3\,\% & 41.7\,\% & 50.0\,\% & \textbf{91.7\,\%} \\
+P2. Visualización del ambiente y comprensión del estado & 0.0\,\% & 0.0\,\% & 16.7\,\% & 50.0\,\% & 33.3\,\% & \textbf{83.3\,\%} \\
+P3. Claridad en la distinción ligadura/asignación & 0.0\,\% & 8.3\,\% & 25.0\,\% & 50.0\,\% & 16.7\,\% & \textbf{66.7\,\%} \\
+P4. Utilidad frente a usar solo Racket y EOPL & 0.0\,\% & 0.0\,\% & 8.3\,\% & 33.3\,\% & 58.3\,\% & \textbf{91.7\,\%} \\
+P5. Claridad de la ejecución paso a paso & 0.0\,\% & 0.0\,\% & 0.0\,\% & 41.7\,\% & 58.3\,\% & \textbf{100.0\,\%} \\
+P6. Utilidad de la biblioteca de ejemplos & 0.0\,\% & 8.3\,\% & 16.7\,\% & 41.7\,\% & 33.3\,\% & \textbf{75.0\,\%} \\
+P7. Recomendaría el prototipo a futuros estudiantes & 0.0\,\% & 0.0\,\% & 8.3\,\% & 25.0\,\% & 66.7\,\% & \textbf{91.7\,\%} \\
+\hline
+\end{tabular}
+\end{table}
+
+Los resultados muestran una percepción positiva y consistente en los ítems relacionados con las funcionalidades centrales del prototipo: la visualización del AST (P1), la ejecución paso a paso (P5) y la comparación frente al uso exclusivo de Racket y EOPL (P4) concentran los niveles de acuerdo más altos, y el 91.7\,\% de los estudiantes recomendaría el prototipo a futuros cursantes de la asignatura (P7). El ítem con menor nivel de acuerdo corresponde a la distinción entre ligadura y asignación de variables (P3, 66.7\,\%). Este resultado es consistente con la naturaleza conceptualmente sutil de esta distinción, señalada en el Capítulo~\ref{cap3}, y sugiere que la visualización del ambiente, aunque útil, no resulta suficiente por sí sola para resolver esta dificultad específica.
+
+\subsection{Hallazgos cualitativos}
+
+En las preguntas abiertas del instrumento, la mayoría de los estudiantes destacó la posibilidad de observar el ambiente de ejecución y el AST de forma simultánea como el aporte más valioso del prototipo frente a la experiencia previa con Racket y EOPL, mientras que un grupo menor sugirió incorporar retroalimentación adicional sobre errores de sintaxis en la definición de la gramática. En la entrevista, el docente responsable valoró positivamente la pertinencia de los conceptos representados y la viabilidad de incorporar el prototipo como recurso de apoyo dentro de las sesiones de clase.
