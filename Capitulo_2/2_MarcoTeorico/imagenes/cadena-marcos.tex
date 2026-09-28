@@ -1,0 +1,15 @@
+\begin{tikzpicture}[
+    node distance=0.4cm and 1.4cm,
+    F/.style={draw=SteelBlue, fill=SteelBlue!10, font=\small\ttfamily,
+              inner sep=5pt, minimum width=1.6cm, align=center},
+    L/.style={font=\scriptsize\itshape, text=gray!70}
+]
+    \node[F] (f1) {x $\mapsto$ 3};
+    \node[F, right=1.4cm of f1] (f2) {y $\mapsto$ 7};
+    \node[right=1.0cm of f2, font=\normalsize] (emp) {$\emptyset$};
+    \draw[->, >=Stealth, thick, gray!60] (f1) -- (f2);
+    \draw[->, >=Stealth, thick, gray!60] (f2) -- (emp);
+    \node[L, below=0.15cm of f1] {más reciente};
+    \node[L, below=0.15cm of f2] {anterior};
+    \node[L, below=0.15cm of emp] {vacío};
+\end{tikzpicture}
