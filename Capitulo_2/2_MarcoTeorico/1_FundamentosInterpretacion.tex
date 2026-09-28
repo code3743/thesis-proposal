@@ -23,6 +23,7 @@ En el modelo de EOPL, el AST se representa mediante un tipo de datos algebraico 
 \centering
 \input{Capitulo_2/2_MarcoTeorico/imagenes/ast-diff.tex}
 \caption{AST de \texttt{(diff 3 (diff 1 2))}: cada producción BNF origina un constructor del tipo de datos.}
+\scriptsize \textbf{Fuente:} Elaboración propia
 \label{fig:ast-diff}
 \end{figure}
 
@@ -36,6 +37,7 @@ Durante la evaluación, el intérprete mantiene un ambiente de ejecución que as
 \centering
 \input{Capitulo_2/2_MarcoTeorico/imagenes/cadena-marcos.tex}
 \caption{Cadena de marcos tras \texttt{(extend-env 'x 3 (extend-env 'y 7 (empty-env)))}. \texttt{apply-env} recorre de izquierda a derecha.}
+\scriptsize \textbf{Fuente:} Elaboración propia
 \label{fig:cadena-marcos}
 \end{figure}
 
@@ -45,6 +47,7 @@ A partir del Capítulo 4 de EOPL, el modelo introduce las referencias implícita
 \centering
 \input{Capitulo_2/2_MarcoTeorico/imagenes/implicit-refs.tex}
 \caption{Comparación entre el modelo sin \textsc{implicit-refs}, donde el ambiente almacena directamente el valor, y el modelo con \textsc{implicit-refs}, donde el ambiente almacena una referencia hacia una celda mutable en el \textit{store}.}
+\scriptsize \textbf{Fuente:} Elaboración propia
 \label{fig:implicit-refs}
 \end{figure}
 

@@ -5,10 +5,10 @@ El código fuente del prototipo se encuentra alojado en el repositorio público 
 La estructura del proyecto sigue la convención del \textit{App Router}\footnote{El \textit{App Router} es el sistema de enrutamiento de Next.js basado en el sistema de archivos introducido en la versión 13. Organiza las rutas, los componentes de servidor y la lógica de la API dentro del directorio \texttt{app/}, permitiendo mezclar componentes de servidor y de cliente en la misma aplicación.} de Next.js \cite{nextjs}, con los siguientes directorios principales:
 
 \begin{itemize}
-  \item \texttt{app/api/run/}: contiene la ruta de API encargada de gestionar la ejecución del intérprete Racket, junto con los archivos \texttt{.rkt} de instrumentación en tiempo de ejecución (\texttt{\_runner.rkt}, \texttt{\_tracking.rkt} y \texttt{\_stream-parser.rkt}).
-  \item \texttt{app/components/}: agrupa los componentes de la interfaz de usuario, entre ellos el orquestador \texttt{PlaygroundLayout}, el visualizador de árbol \texttt{ASTViewer}, el panel de ambiente \texttt{EnvironmentPanel}, la consola \texttt{ConsoleOutput}, el editor \texttt{EditorPanel} y los modales auxiliares.
-  \item \texttt{app/lib/}: contiene los módulos del pipeline de gramática, los generadores de código Racket y las utilidades del playground.
-  \item \texttt{app/services/}: incluye el cliente HTTP que comunica la capa cliente con la ruta de API.
-  \item \texttt{app/types/}: centraliza las definiciones de tipos TypeScript compartidas entre módulos.
+  \item \texttt{app/\allowbreak api/\allowbreak run/}: contiene la ruta de API encargada de gestionar la ejecución del intérprete Racket, junto con los archivos \texttt{.rkt} de instrumentación en tiempo de ejecución (\texttt{\_runner.rkt}, \texttt{\_tracking.rkt} y \texttt{\_stream-parser.rkt}).
+  \item \texttt{app/\allowbreak components/}: agrupa los componentes de la interfaz de usuario, entre ellos el orquestador \texttt{Playground\allowbreak Layout}, el visualizador de árbol \texttt{AST\allowbreak Viewer}, el panel de ambiente \texttt{Environment\allowbreak Panel}, la consola \texttt{Console\allowbreak Output}, el editor \texttt{Editor\allowbreak Panel} y los modales auxiliares.
+  \item \texttt{app/\allowbreak lib/}: contiene los módulos del pipeline de gramática, los generadores de código Racket y las utilidades del playground.
+  \item \texttt{app/\allowbreak services/}: incluye el cliente HTTP que comunica la capa cliente con la ruta de API.
+  \item \texttt{app/\allowbreak types/}: centraliza las definiciones de tipos TypeScript compartidas entre módulos.
   \item \texttt{examples/}: almacena las plantillas de programas predefinidos cargadas en el renderizado inicial del servidor.
 \end{itemize}
