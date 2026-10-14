@@ -67,3 +67,7 @@ logs/
 %OUTDIR%/
 
 main.pdf
+# ============================
+#  Claude Code local config
+# ============================
+.claude/
