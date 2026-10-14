@@ -1,4 +1,4 @@
-Una vez implementado el prototipo, se planificó su evaluación con estudiantes de la asignatura FLP con el propósito de determinar en qué medida la herramienta resulta utilizable y si los estudiantes perciben que contribuye a la comprensión de los conceptos que motivaron su desarrollo. La evaluación se orientó a dos dimensiones complementarias: la usabilidad, entendida como la facilidad con la que el estudiante interactúa con el sistema, y la utilidad pedagógica percibida, entendida como la valoración que hace el estudiante del aporte del prototipo frente a los indicadores de logro seleccionados en el Capítulo~\ref{cap3}.
+Una vez implementado el prototipo, se realizó su evaluación con estudiantes de la Universidad del Valle sede Tuluá con el propósito de determinar en qué medida la herramienta resulta utilizable y si los estudiantes perciben que contribuye a la comprensión de los conceptos que motivaron su desarrollo. La evaluación se orientó a dos dimensiones complementarias: la usabilidad, entendida como la facilidad con la que el estudiante interactúa con el sistema, y la utilidad pedagógica percibida, entendida como la valoración que hace el estudiante del aporte del prototipo frente a los indicadores de logro seleccionados en el Capítulo~\ref{cap3}.
 
 Ambas dimensiones deben analizarse de forma conjunta, ya que una herramienta con una utilidad conceptual alta puede resultar poco aprovechable si su interfaz introduce una carga adicional al estudiante, mientras que una interfaz de uso sencillo no garantiza, por sí sola, un aporte al aprendizaje. Esta distinción cobra especial relevancia en el contexto de la asignatura, donde el diagnóstico identificó que la sintaxis de Racket actúa como una fuente de carga cognitiva extrínseca que desplaza la atención de los estudiantes de la semántica de los lenguajes hacia la resolución de errores sintácticos \cite{sweller2024cognitive}.
 
@@ -24,23 +24,50 @@ Finalmente, el instrumento cierra con tres preguntas abiertas que indagan por la
 
 \subsection{Selección de la población}
 
-La población objetivo corresponde a los estudiantes matriculados en la asignatura FLP en la Universidad del Valle sede Tuluá durante el período de desarrollo del trabajo de grado. A diferencia de la encuesta diagnóstica del Capítulo~\ref{cap3}, que se aplicó de forma retrospectiva a estudiantes de distintas cohortes, la evaluación exige que el participante interactúe directamente con el prototipo antes de responder el instrumento, por lo que la convocatoria se restringió a quienes cursan actualmente la asignatura y tienen presentes los contenidos evaluados.
+La población objetivo estuvo conformada por estudiantes de la Universidad del Valle sede Tuluá con una relación directa con los contenidos de FLP, en dos condiciones distintas: quienes cursaban la asignatura al momento de la evaluación y quienes ya la habían cursado. A diferencia de la encuesta diagnóstica del Capítulo~\ref{cap3}, que se aplicó de forma retrospectiva a estudiantes de distintas cohortes, la evaluación exige que el participante interactúe directamente con el prototipo antes de responder el instrumento, por lo que la convocatoria se realizó mediante sesiones presenciales con grupos completos.
 
-La selección de los participantes fue por conveniencia y la participación fue voluntaria. El tamaño de muestra previsto se ubica entre 10 y 20 estudiantes, conforme al alcance definido para el trabajo de grado. Si bien este tamaño no permite generalizar los resultados a la población de estudiantes de la asignatura, resulta adecuado para un estudio descriptivo de usabilidad, en el que el objetivo es caracterizar la experiencia de uso de un prototipo y no estimar parámetros poblacionales.
+Las sesiones se llevaron a cabo en tres grupos. El primero y el tercero correspondieron a la asignatura Infraestructuras Paralelas y Distribuidas (código 750023C), grupos 50 y 51, que según el plan de estudios del programa se ofrece en sexto semestre, es decir, con posterioridad a FLP. Por esta razón, la mayoría de los estudiantes de estos grupos ya había cursado FLP, y su valoración del prototipo corresponde a una mirada retrospectiva sobre los contenidos. No obstante, algunos estudiantes adelantaron Infraestructuras Paralelas y Distribuidas respecto al orden del plan, por lo que no puede asumirse que todos los participantes de estos grupos hubieran aprobado FLP. El segundo grupo correspondió a estudiantes que cursaban FLP, grupo 50, y aportó la perspectiva de quienes estaban abordando los contenidos durante el semestre. La Tabla~\ref{tabla:sesiones_evaluacion} resume las tres sesiones.
+
+\begin{table}[H]
+  \centering
+  \caption{Sesiones de evaluación del prototipo ($n = 63$)}
+  \label{tabla:sesiones_evaluacion}
+  \footnotesize
+  \begin{tabular}{c l l l c}
+    \hline
+    \textbf{Sesión} & \textbf{Fecha y jornada} & \textbf{Asignatura y grupo} & \textbf{Relación con FLP} & \textbf{$n$} \\
+    \hline
+    A & 8 de octubre de 2026 & Infraestructuras Paralelas y Distribuidas, grupo 50 & Mayoría ya la cursó & 18 \\
+    B & 13 de octubre de 2026, mañana & FLP, grupo 50 & La cursa actualmente & 18 \\
+    C & 13 de octubre de 2026, tarde & Infraestructuras Paralelas y Distribuidas, grupo 51 & Mayoría ya la cursó & 27 \\
+    \hline
+    & & & \textbf{Total} & \textbf{63} \\
+    \hline
+  \end{tabular}
+
+  \vskip 4pt
+  \footnotesize\textit{Fuente: elaboración propia.}
+\end{table}
+
+\FloatBarrier
+
+La selección de los participantes fue por conveniencia y la participación fue voluntaria. El tamaño de muestra previsto inicialmente se ubicaba entre 10 y 20 estudiantes, conforme al alcance definido para el trabajo de grado; sin embargo, la disponibilidad de los tres grupos permitió obtener 63 respuestas. Si bien este tamaño no permite generalizar los resultados a la población de estudiantes de la asignatura, resulta adecuado para un estudio descriptivo de usabilidad, en el que el objetivo es caracterizar la experiencia de uso de un prototipo y no estimar parámetros poblacionales. Dado que el formulario es anónimo y no indaga por el grupo, las respuestas se asignaron a cada sesión a partir de su marca temporal. Tampoco se preguntó si el participante había cursado FLP, por lo que la distinción entre quienes la cursaban y quienes ya la habían cursado se basa en la asignatura en la que se aplicó cada sesión y en el semestre reportado.
 
 Con el fin de garantizar un tratamiento ético de la información, el formulario inicia con un consentimiento informado en el que se explica el propósito del estudio, el carácter voluntario y anónimo de la participación y la ausencia de efectos sobre la calificación de la asignatura. La información recolectada se utiliza exclusivamente con fines académicos, conforme a lo dispuesto en la Ley 1581 de 2012 sobre protección de datos personales \cite{colombia2012ley1581}. El texto completo del consentimiento se presenta en el Anexo~\ref{annex:eval-consentimiento}.
 
 \subsection{Procedimiento de aplicación}
 
-La evaluación se desarrolla en una sesión en la que cada estudiante interactúa con las tres funcionalidades núcleo del prototipo. En primer lugar, el estudiante define o selecciona una gramática en notación BNF, ya sea construyéndola desde cero o partiendo de uno de los casos de la biblioteca de ejemplos predefinidos. A continuación, ingresa un programa y visualiza el AST generado a partir de la gramática, y finalmente ejecuta el programa paso a paso mientras observa la evolución del ambiente de ejecución.
+Cada sesión tuvo una duración aproximada de 30 minutos e inició con una presentación breve del prototipo y del propósito de la evaluación, seguida de una guía de la interfaz que describió sus áreas principales. Posteriormente, cada estudiante interactuó con las tres funcionalidades núcleo del prototipo. En primer lugar, definió o seleccionó una gramática en notación BNF, ya sea construyéndola desde cero o partiendo de uno de los casos de la biblioteca de ejemplos predefinidos. A continuación, ingresó un programa y visualizó el AST generado a partir de la gramática, y finalmente ejecutó el programa paso a paso mientras observaba la evolución del ambiente de ejecución.
 
-El instrumento se responde inmediatamente después de esta interacción, de modo que la valoración del estudiante se base en una experiencia reciente con el prototipo y no en una impresión general de la herramienta. Aplicar el instrumento al final de la sesión, y no durante ella, evita interrumpir la exploración del prototipo e impide que las preguntas orienten la forma en que el estudiante interactúa con este.
+El instrumento se respondió inmediatamente después de esta interacción, de modo que la valoración del estudiante se basara en una experiencia reciente con el prototipo y no en una impresión general de la herramienta. Aplicar el instrumento al final de la sesión, y no durante ella, evita interrumpir la exploración del prototipo e impide que las preguntas orienten la forma en que el estudiante interactúa con este. Es importante advertir que la presentación y la guía de la interfaz constituyen un acompañamiento inicial que no necesariamente estará disponible cuando el estudiante use el prototipo de forma autónoma, aspecto que se retoma al interpretar los resultados de usabilidad.
 
 \subsection{Plan de análisis}
 
-El puntaje SUS de cada participante se calcula conforme al procedimiento definido por el instrumento. Para los ítems impares se resta uno a la respuesta registrada, para los ítems pares se resta la respuesta registrada de cinco, y la suma de los diez valores resultantes se multiplica por 2.5, obteniendo un puntaje entre 0 y 100 \cite{brooke1996sus}. A partir de los puntajes individuales se obtienen el promedio, la desviación estándar y los valores mínimo y máximo, y el promedio se interpreta con base en la escala de adjetivos de referencia y el umbral de 68 puntos reportado en la literatura \cite{bangor2009determining}.
+El puntaje SUS de cada participante se calcula conforme al procedimiento definido por el instrumento. Para los ítems impares se resta uno a la respuesta registrada, para los ítems pares se resta la respuesta registrada de cinco, y la suma de los diez valores resultantes se multiplica por 2.5, obteniendo un puntaje entre 0 y 100 \cite{brooke1996sus}. A partir de los puntajes individuales se obtienen el promedio, su intervalo de confianza del 95\,\%, la desviación estándar y los valores mínimo y máximo. El análisis se realiza de forma global, considerando a los 63 participantes como un único conjunto, dado que el tamaño de cada sesión no justifica comparaciones estadísticas entre grupos.
 
-Las respuestas del cuestionario de utilidad pedagógica se analizan mediante la distribución porcentual de cada nivel de la escala por ítem, agrupando los niveles de acuerdo y de desacuerdo, siguiendo el mismo formato empleado en el análisis de la encuesta diagnóstica. Antes del análisis, el puntaje del ítem P8 se invierte restando la respuesta registrada de seis, y la consistencia interna del bloque se estima mediante el coeficiente alfa de Cronbach \cite{cronbach1951coefficient}. Este cálculo permite verificar si los ítems de elaboración propia miden de forma coherente una misma dimensión antes de interpretar sus resultados de manera conjunta.
+La interpretación del promedio recurre a dos referentes complementarios. El primero es la escala de adjetivos de Bangor et al., que asocia el puntaje SUS medio con la valoración verbal que los usuarios otorgaron a los sistemas evaluados: Poor (35.7), OK (50.9), Good (71.4) y Excellent (85.5) \cite{bangor2009determining}. El segundo es el puntaje de 68, que corresponde al promedio de la distribución de puntajes SUS reportada en estudios previos y se emplea como referencia de usabilidad promedio \cite{sauro2016quantifying}. Además, se examina el aporte de cada ítem al puntaje y se verifica la presencia de patrones de respuesta uniformes, que podrían indicar una lectura poco atenta del instrumento, mediante un análisis de sensibilidad que recalcula el promedio sin dichos casos.
+
+Las respuestas del cuestionario de utilidad pedagógica se analizan mediante la distribución porcentual de cada nivel de la escala por ítem, agrupando los niveles de acuerdo y de desacuerdo, siguiendo el mismo formato empleado en el análisis de la encuesta diagnóstica. Antes del análisis, el puntaje del ítem P8 se invierte restando la respuesta registrada de seis, y la consistencia interna del bloque se estima mediante el coeficiente alfa de Cronbach \cite{cronbach1951coefficient}. Este cálculo permite verificar si los ítems de elaboración propia miden de forma coherente una misma dimensión antes de interpretar sus resultados de manera conjunta. El coeficiente se reporta con y sin el ítem P8, de modo que pueda valorarse su aporte a la consistencia del bloque.
 
 Las respuestas a las preguntas abiertas se someten a un análisis temático, en el que se agrupan los comentarios recurrentes en categorías, del mismo modo que en el análisis cualitativo de la encuesta diagnóstica. Estas categorías se contrastan con los resultados cuantitativos para identificar coincidencias o tensiones entre la valoración numérica de los estudiantes y sus observaciones escritas.
 
@@ -68,3 +95,147 @@ La distinción entre ligadura y asignación, junto con los conceptos de alcance 
 \subsection{Herramientas de trabajo como fuente de carga adicional}
 
 La literatura también reconoce que las herramientas empleadas durante el aprendizaje pueden constituir una fuente de dificultad independiente del contenido. Cuando el estudiante debe coordinar información dispersa entre varios archivos y la consola, o descifrar una sintaxis poco familiar, los recursos cognitivos disponibles para la comprensión del contenido disminuyen \cite{sweller2024cognitive, zagami2023}. En el caso de los lenguajes con notación basada en paréntesis, la estructura visual plana del código puede obstaculizar la comprensión de su semántica \cite{gordon2024linguistics}. Asimismo, la efectividad de una herramienta de visualización depende del grado en que su representación corresponde al modelo conceptual que el estudiante debe construir \cite{Sorva2013}. Estas limitaciones sirven como referencia para interpretar los ítems P4, P6 y P7, que valoran el prototipo como recurso de apoyo frente a las herramientas empleadas actualmente en la asignatura.
+
+\section{Resultados}
+\label{sec:eval-resultados}
+
+\subsection{Caracterización de los participantes}
+
+Participaron 63 estudiantes, 18 en la sesión A, 18 en la sesión B y 27 en la sesión C (Tabla~\ref{tabla:sesiones_evaluacion}). Por semestre, 45 reportaron cursar sexto, 7 quinto, 5 séptimo, 5 octavo y 1 noveno. La concentración en sexto semestre es coherente con la composición de los grupos de Infraestructuras Paralelas y Distribuidas, mientras que los siete estudiantes de quinto semestre corresponden al grupo de FLP. En cuanto a la experiencia previa, 34 participantes (54.0\,\%) habían usado Racket antes de la asignatura y 13 (20.6\,\%) habían utilizado el prototipo antes de la sesión de evaluación. Los puntajes SUS promedio de las tres sesiones fueron similares (72.4, 72.8 y 70.8), por lo que el análisis global no oculta diferencias apreciables entre grupos.
+
+\subsection{Usabilidad percibida}
+
+El puntaje SUS promedio fue de 71.8 puntos (DE = 14.1; mediana = 72.5; mínimo = 35.0; máximo = 100.0), con un intervalo de confianza del 95\,\% entre 68.3 y 75.3. El promedio supera el umbral de 68 puntos reportado como referencia de usabilidad promedio \cite{sauro2016quantifying} y se sitúa prácticamente sobre el valor asociado al adjetivo \textit{Good} (71.4), por encima del asociado a \textit{OK} (50.9) y por debajo del asociado a \textit{Excellent} (85.5) \cite{bangor2009determining}. Es importante observar que el límite inferior del intervalo de confianza se ubica apenas por encima de 68, por lo que el resultado respalda una usabilidad aceptable, pero no una usabilidad sobresaliente.
+
+Al examinar la distribución individual, 40 participantes (63.5\,\%) obtuvieron un puntaje igual o superior a 68. Según los valores de la escala de adjetivos, 7 participantes (11.1\,\%) obtuvieron un puntaje inferior a 50.9, 20 (31.7\,\%) se ubicaron entre 50.9 y 71.4, 30 (47.6\,\%) entre 71.4 y 85.5, y 6 (9.5\,\%) alcanzaron 85.5 o más. La dispersión (DE = 14.1) indica que la experiencia no fue homogénea, y que cerca de uno de cada nueve participantes la valoró por debajo del nivel que los usuarios describen como \textit{OK}.
+
+Dos participantes respondieron los diez ítems con el mismo valor (todos 5 y todos 3), un patrón poco plausible dado que el instrumento alterna afirmaciones positivas y negativas. Al excluirlos, el promedio se mantiene en 72.5, de modo que la conclusión no depende de estos casos.
+
+La Tabla~\ref{tabla:sus_items} presenta el aporte de cada ítem. Los mejores resultados se observan en la integración de las funciones (ítem 5: 84.1\,\% de acuerdo), la ausencia de inconsistencias (ítem 6: 77.8\,\% de desacuerdo) y el carácter poco engorroso del sistema (ítem 8: 76.2\,\% de desacuerdo). Los resultados más bajos corresponden a la facilidad de uso (ítem 3), en el que solo el 54.0\,\% estuvo de acuerdo, y a la cantidad de aprendizaje previo requerido (ítem 10), en el que únicamente el 44.4\,\% estuvo en desacuerdo con haber necesitado aprender muchas cosas. Ambos ítems apuntan a una curva de entrada que no es trivial, aspecto que concuerda con los comentarios abiertos analizados más adelante.
+
+\begin{table}[H]
+  \centering
+  \caption{Resultados por ítem del cuestionario SUS ($n = 63$)}
+  \label{tabla:sus_items}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{>{\raggedright\arraybackslash}p{6.6cm} c c c c}
+    \hline
+    \textbf{Ítem} & \textbf{Media (1--5)} & \textbf{Aporte (0--4)} & \textbf{\% Acuerdo} & \textbf{\% Desacuerdo} \\
+    \hline
+    1. Usaría el sistema con frecuencia & 4.10 & 3.10 & 79.4\,\% & 6.3\,\% \\
+    2. Innecesariamente complejo & 2.19 & 2.81 & 11.1\,\% & 68.3\,\% \\
+    3. Fácil de usar & 3.54 & 2.54 & 54.0\,\% & 15.9\,\% \\
+    4. Necesitaría apoyo técnico & 2.48 & 2.52 & 14.3\,\% & 58.7\,\% \\
+    5. Funciones bien integradas & 4.24 & 3.24 & 84.1\,\% & 3.2\,\% \\
+    6. Demasiada inconsistencia & 1.83 & 3.17 & 4.8\,\% & 77.8\,\% \\
+    7. Se aprende rápidamente & 3.95 & 2.95 & 66.7\,\% & 6.3\,\% \\
+    8. Engorroso de usar & 1.92 & 3.08 & 9.5\,\% & 76.2\,\% \\
+    9. Me sentí seguro/a & 3.98 & 2.98 & 76.2\,\% & 6.3\,\% \\
+    10. Necesité aprender muchas cosas & 2.67 & 2.33 & 20.6\,\% & 44.4\,\% \\
+    \hline
+  \end{tabular}
+
+  \vskip 4pt
+  \footnotesize\textit{Nota: el aporte corresponde a la contribución promedio del ítem al puntaje SUS antes de multiplicar por 2.5 (respuesta $-$ 1 en ítems impares y 5 $-$ respuesta en ítems pares). Fuente: elaboración propia.}
+\end{table}
+
+\FloatBarrier
+
+\subsection{Utilidad pedagógica percibida}
+
+La Tabla~\ref{tabla:utilidad_items} presenta la distribución de respuestas del cuestionario de utilidad pedagógica. Los siete ítems formulados en sentido positivo (P1 a P7) concentran entre el 90.5\,\% y el 93.7\,\% de acuerdo, con medias entre 4.40 y 4.57 y desviaciones estándar cercanas a 0.65. Ningún participante estuvo en desacuerdo con P1, P2, P3, P4, P5 y P7, y solo dos (3.2\,\%) lo estuvieron con P6. El promedio individual de los ítems P1 a P7 fue de 4.49 (DE = 0.52), y 56 de los 63 participantes (88.9\,\%) obtuvieron un promedio igual o superior a 4, sin que ninguno obtuviera un promedio inferior a 3.
+
+Los resultados por indicador son muy similares entre sí. La visualización del AST como representación de la relación entre la gramática y la estructura jerárquica (P1) obtuvo 90.5\,\% de acuerdo, la visualización del ambiente para explorar estado y ligaduras (P2) obtuvo 92.1\,\%, la ejecución paso a paso (P5) obtuvo 92.1\,\% y la diferenciación visual entre ligadura y asignación (P3) obtuvo 90.5\,\%, aunque con la media más baja del bloque (4.40) y la mayor proporción de respuestas en el nivel 4 en lugar del 5. En cuanto a la valoración general, el prototipo fue considerado un complemento de utilidad para el trabajo con Racket y EOPL por el 93.7\,\% (P4), y como recurso de apoyo para FLP por el 92.1\,\% (P7). La biblioteca de ejemplos (P6) fue valorada positivamente por el 90.5\,\%.
+
+\begin{table}[H]
+  \centering
+  \caption{Distribución de respuestas - cuestionario de utilidad pedagógica ($n = 63$)}
+  \label{tabla:utilidad_items}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{>{\raggedright\arraybackslash}p{4.2cm} c c c c c c c c}
+    \hline
+    \textbf{Ítem} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{Media} & \textbf{\% Acuerdo} & \textbf{\% Desacuerdo} \\
+    \hline
+    P1. AST y relación BNF--jerarquía & 0.0\,\% & 0.0\,\% & 9.5\,\% & 30.2\,\% & 60.3\,\% & 4.51 & \textbf{90.5\,\%} & 0.0\,\% \\
+    P2. Ambiente: estado y ligaduras & 0.0\,\% & 0.0\,\% & 7.9\,\% & 34.9\,\% & 57.1\,\% & 4.49 & \textbf{92.1\,\%} & 0.0\,\% \\
+    P3. Ligadura frente a asignación & 0.0\,\% & 0.0\,\% & 9.5\,\% & 41.3\,\% & 49.2\,\% & 4.40 & \textbf{90.5\,\%} & 0.0\,\% \\
+    P4. Complemento de Racket y EOPL & 0.0\,\% & 0.0\,\% & 6.3\,\% & 30.2\,\% & 63.5\,\% & 4.57 & \textbf{93.7\,\%} & 0.0\,\% \\
+    P5. Ejecución paso a paso & 0.0\,\% & 0.0\,\% & 7.9\,\% & 39.7\,\% & 52.4\,\% & 4.44 & \textbf{92.1\,\%} & 0.0\,\% \\
+    P6. Biblioteca de ejemplos & 0.0\,\% & 3.2\,\% & 6.3\,\% & 30.2\,\% & 60.3\,\% & 4.48 & \textbf{90.5\,\%} & 3.2\,\% \\
+    P7. Recurso de apoyo para FLP & 0.0\,\% & 0.0\,\% & 7.9\,\% & 30.2\,\% & 61.9\,\% & 4.54 & \textbf{92.1\,\%} & 0.0\,\% \\
+    P8. Poca utilidad (sin invertir) & 34.9\,\% & 17.5\,\% & 15.9\,\% & 12.7\,\% & 19.0\,\% & 2.63 & 31.7\,\% & 52.4\,\% \\
+    \hline
+  \end{tabular}
+
+  \vskip 4pt
+  \footnotesize\textit{Nota: las columnas 1 a 5 corresponden a los niveles de la escala, de totalmente en desacuerdo a totalmente de acuerdo. Los porcentajes de P8 se presentan sin invertir. Fuente: elaboración propia.}
+\end{table}
+
+\FloatBarrier
+
+\subsection{Comportamiento del ítem de control P8}
+
+El ítem P8, redactado en sentido inverso, no se comportó como se esperaba. Si los participantes lo hubieran interpretado como estaba redactado, quienes valoran positivamente el prototipo en P1 a P7 habrían manifestado desacuerdo con la afirmación de que este tiene poca utilidad. Sin embargo, 20 participantes (31.7\,\%) estuvieron de acuerdo o totalmente de acuerdo con P8, y los 20 estuvieron además de acuerdo o totalmente de acuerdo con P7, que afirma lo contrario. Estos participantes obtuvieron un promedio de 4.61 en P1 a P7, y 11 de los 12 que marcaron el nivel 5 en P8 marcaron 4 o 5 en todos los demás ítems del bloque. La correlación entre P8 y el promedio de P1 a P7 fue prácticamente nula ($r = -0.03$), cuando la coherencia del instrumento exigiría una correlación negativa marcada.
+
+La consistencia interna refuerza esta lectura. El coeficiente alfa de Cronbach de los ítems P1 a P7 fue de 0.896, mientras que al incorporar P8 con su puntaje invertido descendió a 0.753, y sin invertirlo fue de 0.737. En ninguno de los dos tratamientos el ítem contribuye a la coherencia del bloque. A esto se suma que ninguno de los participantes que respondieron P8 con acuerdo y escribieron comentarios (14 de los 20) expresó una valoración negativa del prototipo, ya que todos destacaron la utilidad del AST, de los ambientes, de la ayuda, del diseño o del prototipo en general.
+
+El conjunto de estas evidencias es más consistente con una lectura inadvertida de la redacción inversa, que con una valoración real de baja utilidad. Con base en lo anterior, se infiere que P8 no fue comprendido en el sentido en que fue formulado por una parte de los participantes, aunque esta interpretación no puede comprobarse con los datos disponibles, pues el instrumento no incluyó una pregunta que permitiera verificar la comprensión del ítem. En consecuencia, P8 se reporta en la Tabla~\ref{tabla:utilidad_items}, pero se excluye del indicador compuesto de utilidad pedagógica, que se construye con P1 a P7, y se registra como una limitación del instrumento en la Sección~\ref{sec:eval-limitaciones}. El mismo fenómeno podría haber afectado a los ítems negativos del SUS, como sugieren los dos participantes con respuestas uniformes.
+
+\subsection{Resultados cualitativos}
+
+Las preguntas abiertas fueron respondidas por 48 participantes (la primera), 46 (la segunda) y 39 (la tercera), lo que significa que 15 participantes no escribieron ningún comentario.
+
+\paragraph{Funcionalidades percibidas como más útiles.} Las menciones se concentraron en las dos funcionalidades centrales del prototipo: la visualización del AST (21 comentarios) y la visualización del ambiente de ejecución (22 comentarios), y 9 participantes mencionaron ambas. Varios comentarios las relacionan con una dificultad previa del estudiante. Uno de ellos señaló que \textit{``en el momento de entender los AST, ya que esto fue algo que se me dificulto bastante el semestre pasado en general, en el prototipo me parece que me muestra de una forma mas sencilla''}, mientras que otro indicó que \textit{``la parte de los ambientes [...] se me dificulta a veces realizarlos a mano a penas comenzando con el tema''}. Un tercero describió que los árboles son \textit{``una de las cosas más difíciles de entender y la forma en que el sistema los dibuja ayuda mucho a entender su flujo''}. En menor medida se destacaron la biblioteca de ejemplos (5 comentarios), la sección de ayuda (4 comentarios) y la interfaz o el diseño visual (cuatro comentarios).
+
+\paragraph{Mejoras sugeridas.} De los 46 comentarios a la segunda pregunta, 14 formularon propuestas concretas y los restantes manifestaron que no faltaba nada, que el prototipo estaba completo o no formularon una mejora. Siete propuestas se relacionan con la orientación al usuario: incorporar un tutorial, explicar mejor el funcionamiento, hacerlo más intuitivo o brindar una guía para principiantes. Un participante lo expresó como \textit{``qué fuera más intuitiva; sin una guía no sé qué hacer''}, y otro afirmó que \textit{``se necesita tener conocimientos de la asignatura para hacer uso de este prototipo''}. Cuatro propuestas se refieren a la interfaz y a la visualización, como poder minimizar los paneles del AST y del ambiente, reducir la saturación visual, ajustar la posición del campo de entrada y mejorar la visualización del paso a paso. Las tres restantes sugirieron nuevas funcionalidades: subir información propia, incluir ejercicios y añadir un asistente conversacional.
+
+\paragraph{Conceptos que no se comprendieron o que generaron confusión.} Ninguno de los 39 participantes que respondieron la tercera pregunta identificó un concepto de la asignatura que el prototipo dificultara o confundiera. Las dos observaciones críticas se refirieron nuevamente al uso del prototipo y no a los contenidos: una calificó el sistema como poco intuitivo y otra propuso un video introductorio sobre su funcionamiento básico. Uno de los participantes indicó además que aún no había probado el prototipo por completo.
+
+\subsection{Ajustes realizados al prototipo}
+\label{sec:eval-ajustes}
+
+La implementación descrita en el Capítulo~\ref{cap5} corresponde a la versión del prototipo que se presentó a los estudiantes durante las sesiones de evaluación, y se conserva como el registro del desarrollo realizado. A partir de las recomendaciones recogidas en las preguntas abiertas se aplicaron dos ajustes posteriores, ambos en la capa de presentación de la interfaz y orientados a las dificultades de uso que los estudiantes reportaron.
+
+El primer ajuste permite expandir a pantalla completa los paneles del AST y del ambiente de ejecución. Su motivo es que estos paneles constituyen las funcionalidades que los estudiantes señalaron como más útiles (21 y 22 comentarios, respectivamente), pero compartían el espacio de la pantalla con el editor y la consola, lo que se manifestó en la propuesta de poder minimizarlos o maximizarlos y en los comentarios sobre la saturación de la interfaz. Ampliar el panel facilita la exploración de árboles y ambientes extensos.
+
+El segundo ajuste agrupa la entrada y la salida en el panel de consola, de modo que este funcione como un entorno interactivo de lectura, evaluación e impresión (REPL), similar al de Python, Racket o Node. Su motivo es que un participante señaló que el campo de entrada quedaba muy abajo, y que otros manifestaron no saber cómo empezar a usar el sistema sin una guía. Un formato conocido para quienes ya han trabajado con intérpretes interactivos reduce la cantidad de aprendizaje previo, que fue uno de los aspectos más débiles del SUS (ítem 10), y mantiene juntos el ingreso de la expresión y su resultado.
+
+Estos ajustes no modifican las funcionalidades núcleo evaluadas ni el flujo de ejecución descrito en el Capítulo~\ref{cap5}, y se aplicaron con posterioridad a las sesiones, por lo que no se contrastaron con los estudiantes. En consecuencia, los puntajes reportados corresponden a la versión evaluada, y las propuestas restantes, en particular las relacionadas con la orientación inicial del usuario, quedan como trabajo futuro.
+
+\section{Contraste con la literatura y con el diagnóstico}
+\label{sec:eval-contraste}
+
+Los resultados se contrastan a continuación con las limitaciones de aprendizaje documentadas en la Sección~\ref{sec:eval-literatura}. Dado que los instrumentos miden la percepción de los estudiantes, el contraste no permite afirmar que el prototipo haya modificado su comprensión de los conceptos, sino determinar si dicha percepción es coherente con las dificultades reportadas y con las estrategias que la literatura propone para atenderlas.
+
+\paragraph{De la gramática a la estructura jerárquica.} La literatura señala que los estudiantes tienen dificultades para relacionar una gramática con el árbol que esta produce y que presentar ambas representaciones de forma dinámica y sincronizada favorece su comprensión \cite{jovanovic2021comvis, Stamenkovic2024AWE, delvado2023itt}. El 90.5\,\% de acuerdo en P1 y las 21 menciones espontáneas del AST como la funcionalidad más útil son coherentes con esta estrategia. Resulta especialmente relevante que varios estudiantes asocien el aporte del prototipo con una dificultad que ellos mismos habían experimentado en el semestre previo, lo que sitúa el resultado en el mismo terreno que las limitaciones descritas.
+
+\paragraph{Ambientes de ejecución y estado.} La literatura describe la dificultad de los estudiantes para construir un modelo mental de lo que ocurre durante la ejecución y plantea que visualizar la evolución de los ambientes paso a paso reduce la opacidad de la máquina nocional \cite{sorva2013notional, Cai2023VisualizingEnvironments, Abad2024BeyondSICP}. La valoración de P2 y P5 (92.1\,\% en ambos) y las 22 menciones de la visualización del ambiente son consistentes con este planteamiento, y el comentario sobre la dificultad de construir ambientes a mano coincide con el 77.8\,\% de estudiantes que, en el diagnóstico del Capítulo~\ref{cap3}, reportó dificultades con conceptos abstractos como los entornos y el estado.
+
+\paragraph{Ligadura, asignación y alcance.} El 90.5\,\% de acuerdo en P3 indica que los estudiantes perciben que la representación del prototipo permite diferenciar la ligadura de la asignación. Sin embargo, este resultado debe interpretarse con cautela. Fisler et al. encontraron que las concepciones erróneas sobre alcance y mutación persisten incluso en estudiantes avanzados y que los avances son parciales \cite{fisler2017scope}, de modo que una percepción favorable de la representación no equivale a una corrección de dichas concepciones. Además, P3 obtuvo la media más baja del bloque y ningún comentario abierto se refirió explícitamente a esta distinción, por lo que la evidencia recogida para este indicador es más débil que la de los demás.
+
+\paragraph{Herramientas de trabajo como recurso de apoyo.} En el diagnóstico, solo el 19.4\,\% de los estudiantes consideró que Racket y EOPL facilitaron su comprensión y el 94.5\,\% manifestó que recursos adicionales habrían mejorado su aprendizaje. Frente a ello, el 93.7\,\% valoró el prototipo como complemento útil (P4) y el 92.1\,\% como recurso de apoyo para la asignatura (P7). Estas cifras provienen de poblaciones, instrumentos y momentos distintos, por lo que no son comparables en sentido estadístico, pero muestran que el prototipo es percibido como el tipo de recurso que los estudiantes echaban de menos. Esta lectura se alinea además con la disposición de 76.2\,\% de los estudiantes del estudio de Henao Gallego a utilizar una herramienta especializada \cite{henao2026recomendacion}. Por otra parte, el comentario que describe el prototipo como más cómodo que el propio entorno de DrRacket es coherente con la hipótesis de que reducir la carga extrínseca de la sintaxis libera recursos para la comprensión semántica \cite{sweller2024cognitive, gordon2024linguistics}, aunque el instrumento no midió carga cognitiva y no permite confirmarla.
+
+\paragraph{Tensión entre utilidad y facilidad de uso.} El contraste más relevante entre los dos cuestionarios es que la utilidad pedagógica percibida fue muy alta y homogénea (media de 4.49 en P1 a P7), mientras que la usabilidad fue buena pero heterogénea (SUS = 71.8; DE = 14.1), con los ítems de facilidad de uso y de aprendizaje previo como los más débiles. Los comentarios abiertos confirman esta diferencia, pues las críticas se dirigen a la orientación inicial y no al contenido. En términos del planteamiento inicial del capítulo, la herramienta resulta valiosa para los estudiantes, pero su entrada no es trivial, y ello es relevante en un sentido práctico, ya que las sesiones contaron con una presentación breve y una guía de la interfaz que no estarían presentes en un uso autónomo.
+
+\section{Limitaciones del estudio}
+\label{sec:eval-limitaciones}
+
+Los resultados deben interpretarse considerando las siguientes limitaciones:
+
+\begin{itemize}
+    \item \textbf{Muestra por conveniencia y heterogénea.} Los 63 participantes provienen de tres grupos seleccionados por disponibilidad, y combinan estudiantes que cursaban FLP con estudiantes que ya la habían cursado, sin que el instrumento registrara esta condición. Por ello no es posible separar el efecto de la experiencia previa con la asignatura, ni generalizar los resultados.
+    \item \textbf{Percepción en lugar de aprendizaje.} El cuestionario de utilidad mide la valoración de los estudiantes y no su desempeño. No se aplicó una prueba de conocimientos antes y después de la sesión, por lo que no puede afirmarse una mejora en la comprensión.
+    \item \textbf{Efecto de techo.} Los ítems P1 a P7 concentran las respuestas en los niveles 4 y 5, con casi ausencia de respuestas en los niveles inferiores, lo que limita la capacidad del instrumento para discriminar entre participantes y para identificar aspectos débiles del prototipo.
+    \item \textbf{Instrumento de utilidad no validado.} El cuestionario de utilidad es de elaboración propia. Aunque los ítems P1 a P7 presentan una consistencia interna alta (α = 0.896), no se realizó un análisis de validez de constructo.
+    \item \textbf{Ítem de control no comprendido.} P8 no se comportó como ítem inverso, y su interpretación como lectura inadvertida es una inferencia, no un hecho comprobado. Su exclusión del indicador compuesto evita sesgarlo, pero revela que el mecanismo de control no cumplió su función.
+    \item \textbf{Acompañamiento durante la sesión.} Las sesiones incluyeron una presentación breve y una guía de la interfaz, y duraron aproximadamente 30 minutos. Los resultados de usabilidad reflejan, por tanto, un uso inicial acompañado y no un uso autónomo ni sostenido en el tiempo.
+    \item \textbf{Experiencia previa con el prototipo y deseabilidad social.} Trece participantes habían usado el prototipo previamente, y al tratarse de una evaluación realizada por los desarrolladores en sesiones grupales, no puede descartarse cierta tendencia a valoraciones favorables.
+    \item \textbf{Ajustes posteriores sin evaluar.} Los cambios en los paneles de AST y ambiente y en la consola (Sección~\ref{sec:eval-ajustes}) se realizaron después de las sesiones y no fueron evaluados con estudiantes, por lo que los resultados corresponden a la versión previa del prototipo.
+    \item \textbf{Análisis descriptivo.} El análisis se limitó a estadísticos descriptivos globales, sin pruebas de hipótesis ni comparaciones entre sesiones, dado el tamaño de cada grupo.
+\end{itemize}
+
+\section{Síntesis de la evaluación}
+
+La evaluación con 63 estudiantes indica que el prototipo FLP Viewer presenta una usabilidad buena (SUS = 71.8), superior al promedio de referencia, y una utilidad pedagógica percibida muy alta (90.5\,\% a 93.7\,\% de acuerdo en los ítems P1 a P7), concentrada en la visualización del AST y del ambiente de ejecución. Los estudiantes no identificaron conceptos que el prototipo dificultara, y sus críticas se dirigieron a la orientación inicial para usarlo, de manera que un tutorial o una guía integrada constituyen la mejora más recurrente. A partir de las recomendaciones se ajustaron los paneles de visualización, que ahora pueden expandirse a pantalla completa, y la consola, que agrupa la entrada y la salida como un REPL. Estos resultados son coherentes con las dificultades y estrategias documentadas en la literatura, con la salvedad de que se basan en percepciones, y de que la evidencia disponible para la distinción entre ligadura y asignación es más débil que para los demás indicadores.
