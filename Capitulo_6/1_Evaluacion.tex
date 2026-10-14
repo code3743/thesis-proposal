@@ -33,7 +33,9 @@ Las sesiones se llevaron a cabo en tres grupos. El primero y el tercero correspo
   \caption{Sesiones de evaluación del prototipo ($n = 63$)}
   \label{tabla:sesiones_evaluacion}
   \footnotesize
-  \begin{tabular}{c l l l c}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabularx}{\textwidth}{c >{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.6cm} c}
     \hline
     \textbf{Sesión} & \textbf{Fecha y jornada} & \textbf{Asignatura y grupo} & \textbf{Relación con FLP} & \textbf{$n$} \\
     \hline
@@ -41,9 +43,9 @@ Las sesiones se llevaron a cabo en tres grupos. El primero y el tercero correspo
     B & 13 de octubre de 2026, mañana & FLP, grupo 50 & La cursa actualmente & 18 \\
     C & 13 de octubre de 2026, tarde & Infraestructuras Paralelas y Distribuidas, grupo 51 & Mayoría ya la cursó & 27 \\
     \hline
-    & & & \textbf{Total} & \textbf{63} \\
+    \multicolumn{4}{r}{\textbf{Total}} & \textbf{63} \\
     \hline
-  \end{tabular}
+  \end{tabularx}
 
   \vskip 4pt
   \footnotesize\textit{Fuente: elaboración propia.}
@@ -51,19 +53,26 @@ Las sesiones se llevaron a cabo en tres grupos. El primero y el tercero correspo
 
 \FloatBarrier
 
-La selección de los participantes fue por conveniencia y la participación fue voluntaria. El tamaño de muestra previsto inicialmente se ubicaba entre 10 y 20 estudiantes, conforme al alcance definido para el trabajo de grado; sin embargo, la disponibilidad de los tres grupos permitió obtener 63 respuestas. Si bien este tamaño no permite generalizar los resultados a la población de estudiantes de la asignatura, resulta adecuado para un estudio descriptivo de usabilidad, en el que el objetivo es caracterizar la experiencia de uso de un prototipo y no estimar parámetros poblacionales. Dado que el formulario es anónimo y no indaga por el grupo, las respuestas se asignaron a cada sesión a partir de su marca temporal. Tampoco se preguntó si el participante había cursado FLP, por lo que la distinción entre quienes la cursaban y quienes ya la habían cursado se basa en la asignatura en la que se aplicó cada sesión y en el semestre reportado.
+La selección de los participantes fue por conveniencia y la participación fue voluntaria. El tamaño de muestra previsto inicialmente se ubicaba entre 40 y 60 estudiantes, conforme al alcance definido para el trabajo de grado, y la disponibilidad de los tres grupos permitió alcanzar 63 respuestas. Este número supera el intervalo previsto y proporciona una base sólida para un estudio descriptivo de usabilidad, cuyo objetivo es caracterizar la experiencia de uso del prototipo con un volumen de participantes poco frecuente en evaluaciones de este tipo. Dado que el formulario es anónimo y no indaga por el grupo, las respuestas se asignaron a cada sesión a partir de su marca temporal. Tampoco se preguntó si el participante había cursado FLP, por lo que la distinción entre quienes la cursaban y quienes ya la habían cursado se basa en la asignatura en la que se aplicó cada sesión y en el semestre reportado.
 
 Con el fin de garantizar un tratamiento ético de la información, el formulario inicia con un consentimiento informado en el que se explica el propósito del estudio, el carácter voluntario y anónimo de la participación y la ausencia de efectos sobre la calificación de la asignatura. La información recolectada se utiliza exclusivamente con fines académicos, conforme a lo dispuesto en la Ley 1581 de 2012 sobre protección de datos personales \cite{colombia2012ley1581}. El texto completo del consentimiento se presenta en el Anexo~\ref{annex:eval-consentimiento}.
 
 \subsection{Procedimiento de aplicación}
 
-Cada sesión tuvo una duración aproximada de 30 minutos e inició con una presentación breve del prototipo y del propósito de la evaluación, seguida de una guía de la interfaz que describió sus áreas principales. Posteriormente, cada estudiante interactuó con las tres funcionalidades núcleo del prototipo. En primer lugar, definió o seleccionó una gramática en notación BNF, ya sea construyéndola desde cero o partiendo de uno de los casos de la biblioteca de ejemplos predefinidos. A continuación, ingresó un programa y visualizó el AST generado a partir de la gramática, y finalmente ejecutó el programa paso a paso mientras observaba la evolución del ambiente de ejecución.
+Cada sesión tuvo una duración aproximada de 30 minutos e inició con una presentación breve del prototipo y del propósito de la evaluación, seguida de una guía de la interfaz que describió sus áreas principales. Posteriormente, cada estudiante interactuó con las tres funcionalidades núcleo del prototipo. En primer lugar, definió o seleccionó una gramática en notación BNF, ya sea construyéndola desde cero o partiendo de uno de los casos de la biblioteca de ejemplos predefinidos. A continuación, ingresó un programa, visualizó el AST generado a partir de la gramática y, por último, siguió paso a paso su ejecución mientras observaba la evolución del ambiente.
 
 El instrumento se respondió inmediatamente después de esta interacción, de modo que la valoración del estudiante se basara en una experiencia reciente con el prototipo y no en una impresión general de la herramienta. Aplicar el instrumento al final de la sesión, y no durante ella, evita interrumpir la exploración del prototipo e impide que las preguntas orienten la forma en que el estudiante interactúa con este. Es importante advertir que la presentación y la guía de la interfaz constituyen un acompañamiento inicial que no necesariamente estará disponible cuando el estudiante use el prototipo de forma autónoma, aspecto que se retoma al interpretar los resultados de usabilidad.
 
 \subsection{Plan de análisis}
 
-El puntaje SUS de cada participante se calcula conforme al procedimiento definido por el instrumento. Para los ítems impares se resta uno a la respuesta registrada, para los ítems pares se resta la respuesta registrada de cinco, y la suma de los diez valores resultantes se multiplica por 2.5, obteniendo un puntaje entre 0 y 100 \cite{brooke1996sus}. A partir de los puntajes individuales se obtienen el promedio, su intervalo de confianza del 95\,\%, la desviación estándar y los valores mínimo y máximo. El análisis se realiza de forma global, considerando a los 63 participantes como un único conjunto, dado que el tamaño de cada sesión no justifica comparaciones estadísticas entre grupos.
+El puntaje SUS de cada participante se obtiene a partir de sus respuestas a los diez ítems, codificadas en la escala de 1 a 5. A cada ítem impar se le resta uno y a cada ítem par se le resta su valor de cinco, de modo que todas las contribuciones queden en el rango de 0 a 4 y orientadas en el mismo sentido positivo, con lo que se neutraliza la alternancia entre enunciados positivos y negativos. La suma de estas diez contribuciones se multiplica por 2.5 para escalar el resultado a un puntaje entre 0 y 100 \cite{brooke1996sus}, conforme a la Ecuación~\ref{eq:sus}:
+
+\begin{equation}
+  \mathrm{SUS} = 2.5 \left( \sum_{i \in \text{impares}} (r_i - 1) + \sum_{i \in \text{pares}} (5 - r_i) \right)
+  \label{eq:sus}
+\end{equation}
+
+donde $r_i \in \{1, \dots, 5\}$ es la respuesta registrada para el ítem $i$. Por ejemplo, un participante que respondiera 4 en los cinco ítems impares y 2 en los cinco pares aportaría $5\,(4-1) + 5\,(5-2) = 30$ puntos antes de escalar, equivalentes a un puntaje SUS de $30 \times 2.5 = 75$. A partir de los puntajes individuales se obtienen el promedio, su intervalo de confianza del 95\,\%, la desviación estándar y los valores mínimo y máximo. El análisis se realiza de forma global, considerando a los 63 participantes como un único conjunto, dado que el tamaño de cada sesión no justifica comparaciones estadísticas entre grupos.
 
 La interpretación del promedio recurre a dos referentes complementarios. El primero es la escala de adjetivos de Bangor et al., que asocia el puntaje SUS medio con la valoración verbal que los usuarios otorgaron a los sistemas evaluados: Poor (35.7), OK (50.9), Good (71.4) y Excellent (85.5) \cite{bangor2009determining}. El segundo es el puntaje de 68, que corresponde al promedio de la distribución de puntajes SUS reportada en estudios previos y se emplea como referencia de usabilidad promedio \cite{sauro2016quantifying}. Además, se examina el aporte de cada ítem al puntaje y se verifica la presencia de patrones de respuesta uniformes, que podrían indicar una lectura poco atenta del instrumento, mediante un análisis de sensibilidad que recalcula el promedio sin dichos casos.
 
@@ -105,7 +114,7 @@ Participaron 63 estudiantes, 18 en la sesión A, 18 en la sesión B y 27 en la s
 
 \subsection{Usabilidad percibida}
 
-El puntaje SUS promedio fue de 71.8 puntos (DE = 14.1; mediana = 72.5; mínimo = 35.0; máximo = 100.0), con un intervalo de confianza del 95\,\% entre 68.3 y 75.3. El promedio supera el umbral de 68 puntos reportado como referencia de usabilidad promedio \cite{sauro2016quantifying} y se sitúa prácticamente sobre el valor asociado al adjetivo \textit{Good} (71.4), por encima del asociado a \textit{OK} (50.9) y por debajo del asociado a \textit{Excellent} (85.5) \cite{bangor2009determining}. Es importante observar que el límite inferior del intervalo de confianza se ubica apenas por encima de 68, por lo que el resultado respalda una usabilidad aceptable, pero no una usabilidad sobresaliente.
+El puntaje SUS promedio fue de 71.8 puntos (DE = 14.1; mediana = 72.5; mínimo = 35.0; máximo = 100.0), con un intervalo de confianza del 95\,\% entre 68.3 y 75.3. El promedio supera el umbral de 68 puntos reportado como referencia de usabilidad promedio \cite{sauro2016quantifying} y se sitúa prácticamente sobre el valor asociado al adjetivo \textit{Good} (71.4), por encima del asociado a \textit{OK} (50.9) y por debajo del asociado a \textit{Excellent} (85.5) \cite{bangor2009determining}. Es importante observar que el límite inferior del intervalo de confianza se ubica apenas por encima de 68, por lo que el resultado respalda una usabilidad aceptable.
 
 Al examinar la distribución individual, 40 participantes (63.5\,\%) obtuvieron un puntaje igual o superior a 68. Según los valores de la escala de adjetivos, 7 participantes (11.1\,\%) obtuvieron un puntaje inferior a 50.9, 20 (31.7\,\%) se ubicaron entre 50.9 y 71.4, 30 (47.6\,\%) entre 71.4 y 85.5, y 6 (9.5\,\%) alcanzaron 85.5 o más. La dispersión (DE = 14.1) indica que la experiencia no fue homogénea, y que cerca de uno de cada nueve participantes la valoró por debajo del nivel que los usuarios describen como \textit{OK}.
 
