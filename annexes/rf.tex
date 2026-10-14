@@ -173,7 +173,7 @@
 \hline
 \textbf{Criterios de aceptación} &
 \begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
-    \item Al confirmar la gramática, el pipeline genera automáticamente los cuatro archivos del intérprete con los stubs de las funciones a implementar, cargándolos en el editor sin intervención adicional del usuario.
+    \item Al confirmar la gramática, el pipeline genera automáticamente los tres archivos del intérprete derivados de la especificación (\texttt{grammar.rkt}, \texttt{environment.rkt} y \texttt{main.rkt}) con los stubs de las funciones a implementar y los carga en el editor, junto con el archivo de utilidades \texttt{utils.rkt} de la plantilla base, sin intervención adicional del usuario.
     \item Las secciones de infraestructura técnica del intérprete están protegidas y no son modificables por el usuario.
     \item Las secciones de implementación están identificadas con comentarios \texttt{;; TODO} que orientan al estudiante sobre qué debe completar.
     \item El sistema genera un archivo \texttt{.zip} con todos los archivos del editor en su estado actual, incluyendo las modificaciones realizadas por el usuario.
