@@ -1,0 +1,49 @@
+\begin{tikzpicture}[
+    node distance=1.1cm and 0.9cm,
+    box/.style={
+        rectangle, rounded corners=4pt,
+        draw=SteelBlue, fill=SteelBlue!10,
+        text width=2.3cm, align=center,
+        minimum height=1.1cm,
+        font=\small, inner sep=4pt
+    },
+    file/.style={
+        rectangle, rounded corners=4pt,
+        draw=gray!60, fill=gray!8,
+        minimum width=2.6cm, minimum height=0.9cm,
+        align=center, font=\small\ttfamily, inner sep=4pt
+    },
+    arr/.style={->, >=Stealth, thick, draw=gray!60},
+    lbl/.style={font=\scriptsize\itshape, fill=white, inner sep=1pt}
+]
+    % Fila superior: especificación, análisis léxico y sintáctico
+    \node[box] (input) {Especificación\\léxica + BNF};
+    \node[box, right=of input] (lex)   {Análisis\\léxico};
+    \node[box, right=of lex]   (parse) {Análisis\\sintáctico};
+
+    % Representación intermedia, centrada bajo la fila superior
+    \node[box, below=1.5cm of lex] (ast) {Representación\\intermedia};
+
+    % Generación de código, centrada bajo la representación intermedia
+    \node[box, below=1.3cm of ast] (codegen) {Generación\\de código};
+
+    % Archivos Racket generados
+    \node[file, below=1.3cm of codegen] (envrkt)     {environment.rkt};
+    \node[file, left=1.0cm of envrkt]   (grammarrkt) {grammar.rkt};
+    \node[file, right=1.0cm of envrkt]  (mainrkt)    {main.rkt};
+
+    % Flechas fila superior
+    \draw[arr] (input) -- (lex);
+    \draw[arr] (lex)   -- node[above, lbl] {tokens} (parse);
+
+    % La sintaxis analizada produce la representación intermedia
+    \draw[arr] (parse.south) -- ++(0,-0.5) -| node[above, near start, lbl] {produce} (ast.north);
+
+    % La representación intermedia alimenta la generación de código
+    \draw[arr] (ast) -- (codegen);
+
+    % La generación de código produce los tres archivos Racket
+    \draw[arr] (codegen.south) -- (envrkt.north);
+    \draw[arr] (codegen.south) -- ++(0,-0.6) -| (grammarrkt.north);
+    \draw[arr] (codegen.south) -- ++(0,-0.6) -| (mainrkt.north);
+\end{tikzpicture}

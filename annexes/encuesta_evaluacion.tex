@@ -1,0 +1,127 @@
+\chapter{Instrumento de evaluación del prototipo}
+\label{annex:eval-instrumento}
+
+Este anexo documenta el instrumento aplicado durante la evaluación del prototipo FLP Viewer reportada en el Capítulo~\ref{cap6}, incluyendo la ficha técnica y los ítems de cada sección.
+
+\section{Ficha técnica}
+
+\begin{longtable}{|>{\bfseries}p{4cm}|p{10.5cm}|}
+\hline
+Instrumento dirigido a & Estudiantes matriculados en FLP que participaron en la sesión de evaluación del prototipo \\
+\hline
+Tamaño de muestra esperado & POR DEFINIR estudiantes, conforme al alcance definido para el trabajo de grado \\
+\hline
+Duración estimada & POR DEFINIR \\
+\hline
+Momento de aplicación & Inmediatamente después de que el estudiante interactuara con las tres funcionalidades núcleo del prototipo: edición de la gramática, visualización del AST y visualización del ambiente de ejecución \\
+\hline
+\caption{Ficha técnica del instrumento de evaluación}
+\label{tab:ficha-instrumento}
+\end{longtable}
+
+\section{Consentimiento informado}
+\label{annex:eval-consentimiento}
+
+\begin{quote}
+Esta encuesta hace parte de la evaluación del prototipo FLP Viewer, desarrollado como trabajo de grado del programa de Ingeniería de Sistemas por los estudiantes Jota Emilio López Ramírez y Esmeralda Rivas Guzmán. Su participación es voluntaria y anónima, no se solicitan datos que permitan identificarlo y sus respuestas no tienen ningún efecto sobre la calificación de la asignatura. La información recolectada será analizada y almacenada en hojas de cálculo que harán parte de los anexos del capitulo de Evaluación, y se utilizará exclusivamente con fines académicos, conforme a lo dispuesto en la Ley 1581 de 2012 sobre protección de datos personales \cite{colombia2012ley1581}. Al continuar y responder el formulario, usted manifiesta su consentimiento para participar en el estudio.
+\end{quote}
+
+\section{Sección A. Datos de contexto}
+
+\begin{enumerate}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item Semestre que cursa actualmente.
+    \item ¿Ha usado Racket antes de esta asignatura? Sí / No.
+    \item ¿Había usado el prototipo antes de participar en la evaluación? Sí / No.
+\end{enumerate}
+
+\section{Sección B. Escala de Usabilidad del Sistema (SUS)}
+
+Para cada afirmación de la Tabla~\ref{tab:sus-items}, el estudiante indicó su grado de acuerdo en una escala de cinco puntos, donde 1 corresponde a ``Totalmente en desacuerdo'' y 5 a ``Totalmente de acuerdo'' \cite{brooke1996sus}.
+
+\begin{longtable}{|c|p{12cm}|}
+\hline
+\textbf{\#} & \textbf{Afirmación} \\
+\hline
+1 & Creo que me gustaría usar este sistema con frecuencia. \\
+\hline
+2 & Encontré el sistema innecesariamente complejo. \\
+\hline
+3 & Pensé que el sistema era fácil de usar. \\
+\hline
+4 & Creo que necesitaría el apoyo de una persona con conocimientos técnicos para poder utilizar este sistema. \\
+\hline
+5 & Encontré que las distintas funciones de este sistema estaban bien integradas. \\
+\hline
+6 & Pensé que había demasiada inconsistencia en este sistema. \\
+\hline
+7 & Me imagino que la mayoría de las personas aprenderían a usar este sistema muy rápidamente. \\
+\hline
+8 & Encontré el sistema muy incómodo/engorroso de usar. \\
+\hline
+9 & Me sentí muy seguro/a utilizando el sistema. \\
+\hline
+10 & Necesité aprender muchas cosas antes de poder manejarme con este sistema. \\
+\hline
+\caption{Ítems del cuestionario SUS aplicado}
+\label{tab:sus-items}
+\end{longtable}
+
+El puntaje SUS se calculó de la siguiente manera: para los ítems impares (1, 3, 5, 7, 9), puntaje = respuesta $-$ 1; para los ítems pares (2, 4, 6, 8, 10), puntaje = 5 $-$ respuesta. Los diez puntajes se sumaron y el resultado se multiplicó por 2.5, obteniendo un valor entre 0 y 100. La interpretación de dicho valor siguió la escala de adjetivos de referencia (menor a 51: pobre; 51 a 67.9: aceptable; 68 a 80.3: bueno; mayor a 80.3: excelente) \cite{bangor2009determining}.
+
+\section{Sección C. Cuestionario de utilidad pedagógica}
+
+Para cada afirmación de la Tabla~\ref{tab:pedagogica-items}, el estudiante indicó su grado de acuerdo en la misma escala de cinco puntos utilizada en la Sección B.
+
+\begin{longtable}{|c|p{12cm}|}
+\hline
+\textbf{\#} & \textbf{Afirmación} \\
+\hline
+P1 & La visualización del AST ofrece una forma directa de representar la relación entre una gramática BNF y una estructura jerárquica. \\
+\hline
+P2 & La visualización del ambiente de ejecución resulta útil para explorar los conceptos de estado y ligaduras de variables. \\
+\hline
+P3 & La representación utilizada en el prototipo permite diferenciar visualmente entre ligadura y asignación de variables. \\
+\hline
+P4 & El prototipo constituye un complemento de utilidad para el trabajo realizado con Racket y EOPL. \\
+\hline
+P5 & La ejecución paso a paso ofrece una forma adecuada de observar el orden de evaluación de los programas ingresados. \\
+\hline
+P6 & La biblioteca de ejemplos predefinidos ofrece un punto de partida adecuado para explorar los conceptos antes de construir una gramática propia. \\
+\hline
+P7 & Considero que el prototipo tiene valor como recurso de apoyo para el estudio de los contenidos de la asignatura Fundamentos de interpretación y compilación de lenguajes de programación (FLP). \\
+\hline
+P8 & Las funcionalidades disponibles en el prototipo tienen poca utilidad como apoyo para el estudio de los conceptos abordados. \\
+\hline
+\caption{Ítems del cuestionario de utilidad pedagógica}
+\label{tab:pedagogica-items}
+\end{longtable}
+
+El ítem P8 está redactado en sentido inverso respecto de los demás ítems del bloque, como control de respuestas por aquiescencia, su puntaje se invierte (6 menos la respuesta registrada) antes del análisis. La fiabilidad interna del bloque se estimó mediante el coeficiente alfa de Cronbach \cite{cronbach1951coefficient}.
+
+La Tabla~\ref{tab:relacion-item-indicador} presenta la correspondencia entre cada ítem y el indicador de logro del microcurrículo de FLP (Anexo~\ref{annex:microcurriculum}) que orientó su formulación.
+
+\begin{longtable}{|c|p{10.5cm}|}
+\hline
+\textbf{Ítem} & \textbf{Indicador de logro relacionado} \\
+\hline
+P1 & IL 1.1.6 -- Construcción del AST a partir de una gramática BNF \\
+\hline
+P2, P5 & IL 1.2.6 -- Estado y ambientes de ejecución; IL 1.2.3 -- Construcción de intérpretes básicos \\
+\hline
+P3 & IL 1.2.7 -- Distinción entre ligadura y asignación de variables \\
+\hline
+P4, P6, P7 & Valoración general de la utilidad percibida del prototipo como recurso de apoyo \\
+\hline
+P8 & Ítem de control, redactado en sentido inverso; no se asocia a un indicador de logro específico \\
+\hline
+\caption{Relación entre los ítems del cuestionario de utilidad pedagógica y los indicadores de logro}
+\label{tab:relacion-item-indicador}
+\end{longtable}
+
+\section{Sección D. Preguntas abiertas}
+
+\begin{enumerate}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item ¿Qué parte del prototipo le resultó más útil para comprender los contenidos de la asignatura? ¿Por qué?
+    \item ¿Qué mejoraría o qué le faltó al prototipo?
+    \item ¿Hay algún concepto de la asignatura que el prototipo no le ayudó a comprender, o que le generó confusión adicional?
+\end{enumerate}

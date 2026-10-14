@@ -1,0 +1,15 @@
+\begin{tikzpicture}[
+    node distance=0.55cm and 1.6cm,
+    N/.style={rectangle, rounded corners=2pt, draw=SteelBlue, fill=SteelBlue!10,
+              font=\small\ttfamily, inner sep=4pt, minimum width=1.8cm, align=center}
+]
+    \node[N] (root) {diff-exp};
+    \node[N, below left=of root]  (c1)  {const-exp\\[1pt]{\footnotesize 3}};
+    \node[N, below right=of root] (mid) {diff-exp};
+    \node[N, below left=of mid]   (c2)  {const-exp\\[1pt]{\footnotesize 1}};
+    \node[N, below right=of mid]  (c3)  {const-exp\\[1pt]{\footnotesize 2}};
+    \draw[->, >=Stealth, gray!60] (root) -- (c1);
+    \draw[->, >=Stealth, gray!60] (root) -- (mid);
+    \draw[->, >=Stealth, gray!60] (mid)  -- (c2);
+    \draw[->, >=Stealth, gray!60] (mid)  -- (c3);
+\end{tikzpicture}

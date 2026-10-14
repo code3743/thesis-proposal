@@ -1,0 +1,17 @@
+\begin{tikzpicture}[
+    B/.style={draw=gray!60, fill=gray!8, font=\small\ttfamily,
+              inner sep=6pt, minimum width=3.2cm, align=center},
+    R/.style={draw=SteelBlue, fill=SteelBlue!10, font=\small\ttfamily,
+              inner sep=6pt, minimum width=3.2cm, align=center},
+    T/.style={font=\small\bfseries},
+    S/.style={font=\scriptsize\itshape, text=gray!70}
+]
+    \node[T] (lt) {sin \textsc{implicit-refs}};
+    \node[B, below=0.3cm of lt] (lenv) {env:\quad x $\mapsto$ \textbf{3}};
+
+    \node[T, right=4.5cm of lt] (rt) {con \textsc{implicit-refs}};
+    \node[B, below=0.3cm of rt] (renv) {env:\quad x $\mapsto$ ref$_1$};
+    \node[R, below=0.5cm of renv] (sto) {store:\; ref$_1$ $\mapsto$ \textbf{3}};
+    \draw[->, >=Stealth, thick, SteelBlue] (renv) -- (sto);
+    \node[S, below=0.25cm of sto] {\texttt{(set x 5)} modifica \textit{store}, no \textit{env}};
+\end{tikzpicture}
