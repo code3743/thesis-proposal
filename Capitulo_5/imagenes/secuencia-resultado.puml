@@ -1,0 +1,43 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 220
+
+skinparam sequence {
+  ParticipantBackgroundColor White
+  ParticipantBorderColor Black
+  LifeLineBorderColor #888888
+  BoxBorderColor Black
+}
+
+actor Usuario
+
+box "Browser (Cliente)" #F1F6FD
+participant "ConsoleOutput" as CO
+participant "PlaygroundLayout\n(handleRun)" as PL
+participant "racket.ts\n(runTrace)" as RT
+end box
+
+RT -> PL : convertir pasos a\nestructuras tipadas\n(AST y ambientes)
+RT --> PL : resultado de la traza\n{ pasos, AST final,\nambientes, errores }
+
+alt stderr presente
+  PL -> CO : addLog(línea, 'error')
+else stepMode activo — resultado con > 1 paso
+  PL -> CO : addLog(steps[0].output)
+  PL -> PL : setAst(steps[0].ast)\nsetFrames(steps[0].environments)
+  PL -> PL : setPendingSteps(steps[1..n])
+  note over PL : El usuario avanza paso a paso\ncon el botón "→ Next step"
+else modo normal
+  loop por cada step
+    PL -> CO : addLog(step.output)
+  end
+  PL -> PL : setAst(lastStep.ast)\nsetFrames(lastStep.environments)
+end
+
+PL -> PL : marcar ejecución finalizada
+PL --> Usuario : muestra logs en consola
+PL --> Usuario : actualiza AST Viewer\n+ Environment Panel
+
+@enduml

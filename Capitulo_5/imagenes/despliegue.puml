@@ -1,0 +1,53 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam componentStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 40
+
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam component {
+  BackgroundColor #E7F3FC
+  BorderColor #3A78B5
+}
+skinparam artifact {
+  BackgroundColor #FCF6DC
+  BorderColor #A9832E
+}
+skinparam ArrowColor #303030
+skinparam ArrowFontColor #303030
+
+left to right direction
+
+actor "Usuario\n(Browser)" as usuario
+
+rectangle "Host / VM" as host {
+  rectangle "Red Docker (gestionada por Coolify)" as network {
+    component "«contenedor»\nTraefik\n(proxy de Coolify)" as traefik
+
+    rectangle "«contenedor»\nnode:25-bookworm-slim" as appcontainer {
+      rectangle "Artefactos (build stage: runner)" as artefactos {
+        artifact ".next/standalone\n(server.js)" as standalone
+        artifact ".next/static" as staticdir
+        artifact "_runner.rkt\n_tracking.rkt\n_stream-parser.rkt" as rktfiles
+      }
+      component "node server.js\n:3000 (internal)" as nodeserver
+      component "racket\n(/usr/bin/racket)" as racket
+    }
+  }
+}
+
+usuario --> traefik : HTTP/HTTPS
+traefik --> nodeserver : enruta dinámicamente\n→ app:3000
+nodeserver .left.> traefik : labels Docker\n(configurados por Coolify)
+standalone -down-> nodeserver : carga
+staticdir .down.> nodeserver : require
+nodeserver -right-> racket : spawn subprocess\n(con tiempo límite)
+
+artefactos -[hidden]down- nodeserver
+
+@enduml

@@ -1,0 +1,1 @@
+al crear commit, pr, no incluir coautores, ni uso de asistentes de escritura, ni referencias a herramientas de IA.
