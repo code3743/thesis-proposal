@@ -1,0 +1,47 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 220
+
+skinparam sequence {
+  ParticipantBackgroundColor White
+  ParticipantBorderColor Black
+  LifeLineBorderColor #888888
+  BoxBorderColor Black
+}
+
+actor Usuario
+
+box "Browser (Cliente)" #F1F6FD
+participant "ConsoleOutput" as CO
+participant "PlaygroundLayout\n(handleRun)" as PL
+participant "racket.ts\n(runTrace)" as RT
+end box
+
+box "Contenedor: app :3000" #EAFBEF
+participant "POST /api/run\n(route.ts)" as API
+participant "_runner.rkt\n+ archivos .rkt" as RKT
+end box
+
+Usuario -> CO : escribe expresión\n+ Enter / botón Run
+CO -> PL : onSubmit()
+PL -> PL : registrar expresión en consola\niniciar control de cancelación\nmarcar ejecución en progreso
+PL -> RT : runTrace(files, expr, signal)
+RT -> API : POST /api/run\n{ files[], testInput }
+
+API -> API : crear directorio temporal aislado
+loop por cada archivo del editor
+  API -> API : inyectar módulos de rastreo\nen environment.rkt y main.rkt
+  API -> API : escribir archivo en\ndirectorio temporal
+end
+API -> API : copiar ejecutor principal al\ndirectorio temporal
+API -> RKT : invocar proceso Racket\ncon expresión y tiempo límite (15 s)
+RKT -> RKT : cargar gramática,\nambiente e intérprete
+RKT -> RKT : evaluar expresión\ncapturar AST, ambiente y\nresultado por cada paso de\nreducción
+RKT --> API : resultado serializado\n[ { ast, output,\nenvironments }, ... ]
+API -> API : deserializar pasos de evaluación\nnormalizar mensajes de error
+API -> API : eliminar directorio temporal
+API --> RT : 200 OK\n{ stdout, stderr, error,\nsteps[] }
+
+@enduml

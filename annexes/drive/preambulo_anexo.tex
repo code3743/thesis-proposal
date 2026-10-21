@@ -1,0 +1,91 @@
+% Preámbulo compartido para los anexos publicados de forma independiente (Drive).
+% Reproduce los paquetes y definiciones relevantes de main.tex para que cada
+% anexo compile como documento autónomo, resolviendo las referencias cruzadas
+% al documento principal mediante el paquete xr.
+
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{2715}{\texttimes}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{26A0}{\ensuremath{\triangle}}
+\usepackage[spanish,es-noshorthands]{babel}
+
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{rotating}
+\usepackage{colortbl}
+
+\usepackage{url}
+
+\usepackage{xcolor}
+\definecolor{naranja}{rgb}{1,0.5,0}
+\definecolor{rojo}{rgb}{1,0,0}
+\definecolor{SteelBlue}{rgb}{0.3,0.5,0.7}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{claregreen}{RGB}{4,180,95}
+
+\usepackage{listingsutf8}
+\lstset{
+  basicstyle=\footnotesize,
+  numberstyle=\footnotesize,
+  numbersep=4pt,
+  backgroundcolor=\color{white},
+  breaklines=true,
+  breakatwhitespace=false,
+  title=\lstname,
+  extendedchars=false,
+  inputencoding=utf8,
+}
+
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,babel}
+
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{parskip}
+\usepackage{placeins}
+\usepackage{footmisc}
+\usepackage{gensymb}
+
+\bibliographystyle{ieeetr}
+
+\usepackage[bookmarks=true, linkcolor=black, citecolor=black,
+            colorlinks=true, urlcolor=black]{hyperref}
+
+% Resolución de referencias cruzadas al documento principal (capítulos,
+% secciones, tablas y otros anexos citados desde este anexo).
+\usepackage{xr}
+\externaldocument{main}
+
+% Encabezado/pie que identifica el documento como anexo del trabajo de grado.
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\footnotesize Anexo del trabajo de grado «FLP Viewer» --- Universidad del Valle, sede Tuluá \quad\textbar\quad \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\footnotesize Anexo del trabajo de grado «FLP Viewer» --- Universidad del Valle, sede Tuluá \quad\textbar\quad \thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% El encabezado de capítulo muestra únicamente el título (sin «Capítulo N»),
+% ya que cada anexo se publica como documento independiente.
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]{\normalfont\LARGE\bfseries}{}{0pt}{}
+\titlespacing*{\chapter}{0pt}{0pt}{18pt}
+
+\renewcommand{\tablename}{Tabla}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
